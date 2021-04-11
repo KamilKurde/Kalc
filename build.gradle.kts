@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+	java
 	kotlin("multiplatform") version "1.4.32"
 }
 
@@ -9,6 +10,10 @@ version = "1.0"
 
 repositories {
 	mavenCentral()
+}
+
+dependencies {
+	implementation(kotlin("stdlib-jdk8"))
 }
 
 kotlin {
@@ -34,7 +39,11 @@ kotlin {
 
 
 	sourceSets {
-		val commonMain by getting
+		val commonMain by getting {
+			dependencies {
+				implementation("com.ionspin.kotlin:bignum:0.2.8")
+			}
+		}
 		val commonTest by getting {
 			dependencies {
 				implementation(kotlin("test-common"))
@@ -42,19 +51,16 @@ kotlin {
 			}
 		}
 		val jvmMain by getting
+		val jvmTest by getting
 		val jsMain by getting
 		val nativeMain by getting
 	}
 }
-dependencies {
-	implementation(kotlin("stdlib-jdk8"))
-	implementation("com.ionspin.kotlin:bignum:0.2.8")
-}
-val compileKotlin: KotlinCompile by tasks
+/*val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
 	jvmTarget = "1.8"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
 	jvmTarget = "1.8"
-}
+}*/

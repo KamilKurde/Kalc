@@ -13,22 +13,37 @@ enum class LengthUnits
 	Picometers
 }
 
-class Length(
+data class LengthRange(val start: Length, val end: Length)
+{
+	operator fun contains(length: Length) =
+		length >= start && length <= end
+}
+
+// function to use when instantiating Lenght class
+fun length(
 	value: Number,
 	unit: LengthUnits = LengthUnits.Meters
+): Length
+{
+	val initValue = BigDecimal.parseString(value.toString())
+	return Length(
+		when (unit)
+		{
+			LengthUnits.Kilometers  -> initValue * 1_000
+			LengthUnits.Meters      -> initValue
+			LengthUnits.Decimeters  -> initValue / 10
+			LengthUnits.Centimeters -> initValue / 100
+			LengthUnits.Millimeters -> initValue / 1_000
+			LengthUnits.Nanometers  -> initValue / 1_000_000_000
+			LengthUnits.Picometers  -> initValue / 1_000_000_000_000L
+		}
+	)
+}
+
+data class Length(
+	var m: BigDecimal,
 )
 {
-	private val initValue = BigDecimal.parseString(value.toString())
-	var m: BigDecimal = when (unit)
-	{
-		LengthUnits.Kilometers  -> initValue * 1_000
-		LengthUnits.Meters      -> initValue
-		LengthUnits.Decimeters  -> initValue / 10
-		LengthUnits.Centimeters -> initValue / 100
-		LengthUnits.Millimeters -> initValue / 1_000
-		LengthUnits.Nanometers  -> initValue / 1_000_000_000
-		LengthUnits.Picometers  -> initValue / 1_000_000_000_000L
-	}
 	var km: BigDecimal
 		get() = m / 1000
 		set(value)
@@ -65,12 +80,71 @@ class Length(
 		{
 			m = value / 1_000_000_000_000L
 		}
+
+	operator fun unaryMinus() =
+		Length(-m)
+
+	operator fun plus(length: Length) =
+		Length(m + length.m)
+
+	operator fun minus(length: Length) =
+		Length(m - length.m)
+
+	operator fun times(number: Number) =
+		Length(BigDecimal.parseString(number.toString()) * m)
+
+	operator fun times(length: Length) =
+		Area(m * length.m)
+
+	operator fun div(number: Number) =
+		Length(m / BigDecimal.parseString(number.toString()))
+
+	operator fun rem(length: Length) =
+		Length(m % length.m)
+
+	operator fun rangeTo(length: Length) =
+		LengthRange(this, length)
+
+	operator fun plusAssign(length: Length)
+	{
+		m += length.m
+	}
+
+	operator fun minusAssign(length: Length)
+	{
+		m -= length.m
+	}
+
+	operator fun timesAssign(length: Length)
+	{
+		m *= length.m
+	}
+
+	operator fun divAssign(length: Length)
+	{
+		m /= length.m
+	}
+
+	operator fun remAssign(length: Length)
+	{
+		m %= length.m
+	}
+
+	override operator fun equals(other: Any?): Boolean
+	{
+		if (other == null || other !is Length)
+			return false
+		return m == other.m
+	}
+
+	operator fun compareTo(length: Length) =
+		pm.compareTo(length.pm)
 }
 
-val Number.km get() = Length(this, LengthUnits.Kilometers)
-val Number.m get() = Length(this)
-val Number.dm get() = Length(this, LengthUnits.Decimeters)
-val Number.cm get() = Length(this, LengthUnits.Centimeters)
-val Number.mm get() = Length(this, LengthUnits.Millimeters)
-val Number.nm get() = Length(this, LengthUnits.Nanometers)
-val Number.pm get() = Length(this, LengthUnits.Picometers)
+val Number.km get() = length(this, LengthUnits.Kilometers)
+val Number.m get() = length(this)
+val Number.dm get() = length(this, LengthUnits.Decimeters)
+val Number.cm get() = length(this, LengthUnits.Centimeters)
+val Number.mm get() = length(this, LengthUnits.Millimeters)
+val Number.nm get() = length(this, LengthUnits.Nanometers)
+val Number.pm get() = length(this, LengthUnits.Picometers)

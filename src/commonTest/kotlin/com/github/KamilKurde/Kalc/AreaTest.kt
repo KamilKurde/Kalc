@@ -4,20 +4,20 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class LengthTest
+class AreaTest
 {
-	private val marathon = length(42195)
+	private val pool = length(50) * (length(2.5) * 10)
 
 	@Test
 	fun conversionTest()
 	{
-		assertEquals(marathon, 42.195.km)
+		assertEquals(pool, 0.001250000.km2)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(marathon > 1.km)
-		assertEquals(marathon, 421950.dm)
+		assertTrue(pool < 1.km2)
+		assertEquals(pool, 12500000.cm2)
 	}
 }

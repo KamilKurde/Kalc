@@ -29,13 +29,13 @@ fun length(
 	return Length(
 		when (unit)
 		{
-			LengthUnits.Kilometers  -> initValue * 1_000
+			LengthUnits.Kilometers  -> initValue * Multipliers.kilo
 			LengthUnits.Meters      -> initValue
-			LengthUnits.Decimeters  -> initValue / 10
-			LengthUnits.Centimeters -> initValue / 100
-			LengthUnits.Millimeters -> initValue / 1_000
-			LengthUnits.Nanometers  -> initValue / 1_000_000_000
-			LengthUnits.Picometers  -> initValue / 1_000_000_000_000L
+			LengthUnits.Decimeters  -> initValue * Multipliers.deci
+			LengthUnits.Centimeters -> initValue * Multipliers.centi
+			LengthUnits.Millimeters -> initValue * Multipliers.milli
+			LengthUnits.Nanometers  -> initValue * Multipliers.nano
+			LengthUnits.Picometers  -> initValue * Multipliers.pico
 		}
 	)
 }
@@ -45,40 +45,40 @@ data class Length(
 )
 {
 	var km: BigDecimal
-		get() = m / 1000
+		get() = m / Multipliers.kilo
 		set(value)
 		{
-			m = value * 1000
+			m = value * Multipliers.kilo
 		}
 	var dm: BigDecimal
-		get() = m * 10
+		get() = m / Multipliers.deci
 		set(value)
 		{
-			m = value / 10
+			m = value * Multipliers.deci
 		}
 	var cm: BigDecimal
-		get() = m * 100
+		get() = m / Multipliers.centi
 		set(value)
 		{
-			m = value / 100
+			m = value * Multipliers.centi
 		}
 	var mm: BigDecimal
-		get() = m * 1_000
+		get() = m / Multipliers.milli
 		set(value)
 		{
-			m = value / 1_000
+			m = value * Multipliers.milli
 		}
 	var nm: BigDecimal
-		get() = m * 1_000_000_000
+		get() = m / Multipliers.nano
 		set(value)
 		{
-			m = value / 1_000_000_000
+			m = value * Multipliers.nano
 		}
 	var pm: BigDecimal
-		get() = m * 1_000_000_000_000L
+		get() = m / Multipliers.pico
 		set(value)
 		{
-			m = value / 1_000_000_000_000L
+			m = value * Multipliers.pico
 		}
 
 	operator fun unaryMinus() =
@@ -90,11 +90,11 @@ data class Length(
 	operator fun minus(length: Length) =
 		Length(m - length.m)
 
-	operator fun times(number: Number) =
-		Length(BigDecimal.parseString(number.toString()) * m)
-
 	operator fun times(length: Length) =
 		Area(m * length.m)
+
+	operator fun times(number: Number) =
+		Length(BigDecimal.parseString(number.toString()) * m)
 
 	operator fun div(number: Number) =
 		Length(m / BigDecimal.parseString(number.toString()))
@@ -115,14 +115,14 @@ data class Length(
 		m -= length.m
 	}
 
-	operator fun timesAssign(length: Length)
+	operator fun timesAssign(number: Number)
 	{
-		m *= length.m
+		m *= BigDecimal.parseString(number.toString())
 	}
 
-	operator fun divAssign(length: Length)
+	operator fun divAssign(number: Number)
 	{
-		m /= length.m
+		m /= BigDecimal.parseString(number.toString())
 	}
 
 	operator fun remAssign(length: Length)

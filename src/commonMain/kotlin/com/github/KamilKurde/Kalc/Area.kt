@@ -29,13 +29,13 @@ fun area(
 	return Area(
 		when (unit)
 		{
-			AreaUnits.Kilometers2  -> initValue * 1_000_000
+			AreaUnits.Kilometers2  -> initValue * Multipliers.kilo2
 			AreaUnits.Meters2      -> initValue
-			AreaUnits.Decimeters2  -> initValue / 100
-			AreaUnits.Centimeters2 -> initValue / 10_000
-			AreaUnits.Millimeters2 -> initValue / 1_000_000
-			AreaUnits.Nanometers2  -> initValue / BigDecimal.parseString("1000000000000000000")
-			AreaUnits.Picometers2  -> initValue / BigDecimal.parseString("1000000000000000000000000")
+			AreaUnits.Decimeters2  -> initValue * Multipliers.deci2
+			AreaUnits.Centimeters2 -> initValue * Multipliers.centi2
+			AreaUnits.Millimeters2 -> initValue * Multipliers.milli2
+			AreaUnits.Nanometers2  -> initValue * Multipliers.nano2
+			AreaUnits.Picometers2  -> initValue * Multipliers.pico2
 		}
 	)
 }
@@ -45,40 +45,40 @@ data class Area(
 )
 {
 	var km2: BigDecimal
-		get() = m2 / 1_000_000
+		get() = m2 / Multipliers.kilo2
 		set(value)
 		{
-			m2 = value * 1_000_000
+			m2 = value * Multipliers.kilo2
 		}
 	var dm2: BigDecimal
-		get() = m2 * 100
+		get() = m2 / Multipliers.deci2
 		set(value)
 		{
-			m2 = value / 100
+			m2 = value * Multipliers.deci2
 		}
 	var cm2: BigDecimal
-		get() = m2 * 10_000
+		get() = m2 / Multipliers.centi2
 		set(value)
 		{
-			m2 = value / 10_000
+			m2 = value * Multipliers.centi2
 		}
 	var mm2: BigDecimal
-		get() = m2 * 1_000_000
+		get() = m2 / Multipliers.milli2
 		set(value)
 		{
-			m2 = value / 1_000_000
+			m2 = value * Multipliers.milli2
 		}
 	var nm2: BigDecimal
-		get() = m2 * BigDecimal.parseString("1000000000000000000")
+		get() = m2 / Multipliers.nano2
 		set(value)
 		{
-			m2 = value / BigDecimal.parseString("1000000000000000000")
+			m2 = value * Multipliers.nano2
 		}
 	var pm2: BigDecimal
-		get() = m2 * BigDecimal.parseString("1000000000000000000000000")
+		get() = m2 / Multipliers.pico2
 		set(value)
 		{
-			m2 = value / BigDecimal.parseString("1000000000000000000000000")
+			m2 = value * Multipliers.pico2
 		}
 
 	operator fun unaryMinus() =
@@ -90,8 +90,14 @@ data class Area(
 	operator fun minus(area: Area) =
 		Area(m2 - area.m2)
 
+	operator fun times(length: Length) =
+		Volume(m2 * length.m)
+
 	operator fun times(number: Number) =
 		Area(BigDecimal.parseString(number.toString()) * m2)
+
+	operator fun div(area: Area) =
+		Length(m2 / area.m2)
 
 	operator fun div(number: Number) =
 		Area(m2 / BigDecimal.parseString(number.toString()))
@@ -112,14 +118,14 @@ data class Area(
 		m2 -= area.m2
 	}
 
-	operator fun timesAssign(area: Area)
+	operator fun timesAssign(number: Number)
 	{
-		m2 *= area.m2
+		m2 *= BigDecimal.parseString(number.toString())
 	}
 
-	operator fun divAssign(area: Area)
+	operator fun divAssign(number: Number)
 	{
-		m2 /= area.m2
+		m2 /= BigDecimal.parseString(number.toString())
 	}
 
 	operator fun remAssign(area: Area)

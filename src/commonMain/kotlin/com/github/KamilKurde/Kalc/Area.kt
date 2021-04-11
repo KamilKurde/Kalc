@@ -20,7 +20,7 @@ data class AreaRange(val start: Area, val end: Area)
 }
 
 // function to use when instantiating Area class
-fun area(
+fun Area(
 	value: Number,
 	unit: AreaUnits = AreaUnits.Meters2
 ): Area
@@ -94,16 +94,19 @@ data class Area(
 		Volume(m2 * length.m)
 
 	operator fun times(number: Number) =
-		Area(BigDecimal.parseString(number.toString()) * m2)
+		Area(BigDecimal.parseNumber(number) * m2)
 
 	operator fun div(area: Area) =
 		Length(m2 / area.m2)
 
 	operator fun div(number: Number) =
-		Area(m2 / BigDecimal.parseString(number.toString()))
+		Area(m2 / BigDecimal.parseNumber(number))
 
 	operator fun rem(area: Area) =
-		Area(m2 % area.m2)
+		m2 % area.m2
+
+	operator fun rem(number: Number) =
+		Area(m2 % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(area: Area) =
 		AreaRange(this, area)
@@ -120,17 +123,17 @@ data class Area(
 
 	operator fun timesAssign(number: Number)
 	{
-		m2 *= BigDecimal.parseString(number.toString())
+		m2 *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		m2 /= BigDecimal.parseString(number.toString())
+		m2 /= BigDecimal.parseNumber(number)
 	}
 
-	operator fun remAssign(area: Area)
+	operator fun remAssign(number: Number)
 	{
-		m2 %= area.m2
+		m2 %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
@@ -144,10 +147,10 @@ data class Area(
 		pm2.compareTo(area.pm2)
 }
 
-val Number.km2 get() = area(this, AreaUnits.Kilometers2)
-val Number.m2 get() = area(this)
-val Number.dm2 get() = area(this, AreaUnits.Decimeters2)
-val Number.cm2 get() = area(this, AreaUnits.Centimeters2)
-val Number.mm2 get() = area(this, AreaUnits.Millimeters2)
-val Number.nm2 get() = area(this, AreaUnits.Nanometers2)
-val Number.pm2 get() = area(this, AreaUnits.Picometers2)
+val Number.km2 get() = Area(this, AreaUnits.Kilometers2)
+val Number.m2 get() = Area(this)
+val Number.dm2 get() = Area(this, AreaUnits.Decimeters2)
+val Number.cm2 get() = Area(this, AreaUnits.Centimeters2)
+val Number.mm2 get() = Area(this, AreaUnits.Millimeters2)
+val Number.nm2 get() = Area(this, AreaUnits.Nanometers2)
+val Number.pm2 get() = Area(this, AreaUnits.Picometers2)

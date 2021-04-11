@@ -6,8 +6,8 @@ import kotlin.test.assertTrue
 
 class VolumeTest
 {
-	private val poolArea = length(50) * (length(2.5) * 10)
-	private val poolVolume = poolArea * length(2)
+	private val poolArea = Length(50) * (Length(2.5) * 10)
+	private val poolVolume = Length(2) * poolArea
 
 	@Test
 	fun conversionTest()
@@ -19,6 +19,6 @@ class VolumeTest
 	fun comparisonTest()
 	{
 		assertTrue(poolVolume > 1.barrel)
-		assertEquals(poolVolume, volume(2500))
+		assertEquals(poolVolume, Volume(2500))
 	}
 }

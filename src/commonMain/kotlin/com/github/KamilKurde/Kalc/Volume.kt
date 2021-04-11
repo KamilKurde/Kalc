@@ -18,7 +18,7 @@ data class VolumeRange(val start: Volume, val end: Volume)
 }
 
 // function to use when instantiating Lenght class
-fun volume(
+fun Volume(
 	value: Number,
 	unit: VolumeUnits = VolumeUnits.Meters3
 ): Volume
@@ -85,13 +85,16 @@ data class Volume(
 		Volume(m3 - volume.m3)
 
 	operator fun times(number: Number) =
-		Volume(BigDecimal.parseString(number.toString()) * m3)
+		Volume(BigDecimal.parseNumber(number) * m3)
 
 	operator fun div(number: Number) =
-		Volume(m3 / BigDecimal.parseString(number.toString()))
+		Volume(m3 / BigDecimal.parseNumber(number))
 
 	operator fun rem(volume: Volume) =
-		Volume(m3 % volume.m3)
+		m3 % volume.m3
+
+	operator fun rem(number: Number) =
+		Volume(m3 % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(volume: Volume) =
 		VolumeRange(this, volume)
@@ -108,17 +111,17 @@ data class Volume(
 
 	operator fun timesAssign(number: Number)
 	{
-		m3 *= BigDecimal.parseString(number.toString())
+		m3 *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		m3 /= BigDecimal.parseString(number.toString())
+		m3 /= BigDecimal.parseNumber(number)
 	}
 
-	operator fun remAssign(volume: Volume)
+	operator fun remAssign(number: Number)
 	{
-		m3 %= volume.m3
+		m3 %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
@@ -132,9 +135,9 @@ data class Volume(
 		cm3.compareTo(volume.cm3)
 }
 
-val Number.km3 get() = volume(this, VolumeUnits.Kilometers3)
-val Number.m3 get() = volume(this)
-val Number.barrel get() = volume(this, VolumeUnits.Barrels)
-val Number.liter get() = volume(this, VolumeUnits.Liters)
+val Number.km3 get() = Volume(this, VolumeUnits.Kilometers3)
+val Number.m3 get() = Volume(this)
+val Number.barrel get() = Volume(this, VolumeUnits.Barrels)
+val Number.liter get() = Volume(this, VolumeUnits.Liters)
 val Number.dm3 get() = this.liter
-val Number.cm3 get() = volume(this, VolumeUnits.Centimeters3)
+val Number.cm3 get() = Volume(this, VolumeUnits.Centimeters3)

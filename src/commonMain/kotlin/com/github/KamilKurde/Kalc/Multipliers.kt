@@ -7,6 +7,8 @@ object Multipliers
 	val kilo = BigDecimal.fromInt(1_000)
 	val kilo2 = kilo * kilo
 	val kilo3 = kilo2 * kilo
+	val minute = BigDecimal.fromInt(60)
+	val hour = BigDecimal.fromInt(60) * minute
 	val deci = BigDecimal.fromFloat(0.1f)
 	val deci2 = deci * deci
 	val deci3 = deci2 * deci

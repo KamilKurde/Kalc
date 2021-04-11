@@ -4,20 +4,17 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class LengthTest
+class TimeTest
 {
-	private val marathon = Length(42195)
-
 	@Test
 	fun conversionTest()
 	{
-		assertEquals(marathon, 42.195.km)
+		assertEquals(2.h, 120.min)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(marathon > 1.km)
-		assertEquals(marathon, 421950.dm)
+		assertTrue(1.h >= 59.min + 60.s)
 	}
 }

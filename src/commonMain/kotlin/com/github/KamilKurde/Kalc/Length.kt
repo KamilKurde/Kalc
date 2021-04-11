@@ -20,7 +20,7 @@ data class LengthRange(val start: Length, val end: Length)
 }
 
 // function to use when instantiating Lenght class
-fun length(
+fun Length(
 	value: Number,
 	unit: LengthUnits = LengthUnits.Meters
 ): Length
@@ -94,13 +94,22 @@ data class Length(
 		Area(m * length.m)
 
 	operator fun times(number: Number) =
-		Length(BigDecimal.parseString(number.toString()) * m)
+		Length(BigDecimal.parseNumber(number) * m)
+
+	operator fun times(area: Area) =
+		area * this
+
+	operator fun div(length: Length) =
+		m / length.m
 
 	operator fun div(number: Number) =
-		Length(m / BigDecimal.parseString(number.toString()))
+		Length(m / BigDecimal.parseNumber(number))
 
 	operator fun rem(length: Length) =
-		Length(m % length.m)
+		m % length.m
+
+	operator fun rem(number: Number) =
+		Length(m % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(length: Length) =
 		LengthRange(this, length)
@@ -117,17 +126,17 @@ data class Length(
 
 	operator fun timesAssign(number: Number)
 	{
-		m *= BigDecimal.parseString(number.toString())
+		m *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		m /= BigDecimal.parseString(number.toString())
+		m /= BigDecimal.parseNumber(number)
 	}
 
-	operator fun remAssign(length: Length)
+	operator fun remAssign(number: Number)
 	{
-		m %= length.m
+		m %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
@@ -141,10 +150,10 @@ data class Length(
 		pm.compareTo(length.pm)
 }
 
-val Number.km get() = length(this, LengthUnits.Kilometers)
-val Number.m get() = length(this)
-val Number.dm get() = length(this, LengthUnits.Decimeters)
-val Number.cm get() = length(this, LengthUnits.Centimeters)
-val Number.mm get() = length(this, LengthUnits.Millimeters)
-val Number.nm get() = length(this, LengthUnits.Nanometers)
-val Number.pm get() = length(this, LengthUnits.Picometers)
+val Number.km get() = Length(this, LengthUnits.Kilometers)
+val Number.m get() = Length(this)
+val Number.dm get() = Length(this, LengthUnits.Decimeters)
+val Number.cm get() = Length(this, LengthUnits.Centimeters)
+val Number.mm get() = Length(this, LengthUnits.Millimeters)
+val Number.nm get() = Length(this, LengthUnits.Nanometers)
+val Number.pm get() = Length(this, LengthUnits.Picometers)

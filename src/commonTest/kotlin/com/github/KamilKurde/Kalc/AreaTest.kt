@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 
 class AreaTest
 {
-	private val pool = length(50) * (length(2.5) * 10)
+	private val pool = Length(50) * (Length(2.5) * 10)
 
 	@Test
 	fun conversionTest()

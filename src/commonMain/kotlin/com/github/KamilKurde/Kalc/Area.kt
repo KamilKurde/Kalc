@@ -19,7 +19,7 @@ data class AreaRange(val start: Area, val end: Area)
 		area >= start && area <= end
 }
 
-// function to use when instantiating Lenght class
+// function to use when instantiating Area class
 fun area(
 	value: Number,
 	unit: AreaUnits = AreaUnits.Meters2

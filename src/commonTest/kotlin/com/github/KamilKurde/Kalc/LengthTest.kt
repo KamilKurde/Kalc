@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 
 class LengthTest
 {
-	private val marathon = Length(42195)
+	private val marathon = Distance(42195)
 
 	@Test
 	fun conversionTest()

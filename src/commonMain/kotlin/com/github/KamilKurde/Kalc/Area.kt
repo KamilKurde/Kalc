@@ -90,14 +90,14 @@ data class Area(
 	operator fun minus(area: Area) =
 		Area(m2 - area.m2)
 
-	operator fun times(length: Length) =
-		Volume(m2 * length.m)
+	operator fun times(distance: Distance) =
+		Volume(m2 * distance.m)
 
 	operator fun times(number: Number) =
 		Area(BigDecimal.parseNumber(number) * m2)
 
 	operator fun div(area: Area) =
-		Length(m2 / area.m2)
+		Distance(m2 / area.m2)
 
 	operator fun div(number: Number) =
 		Area(m2 / BigDecimal.parseNumber(number))

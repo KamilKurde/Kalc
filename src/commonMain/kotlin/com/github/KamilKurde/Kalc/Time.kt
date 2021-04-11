@@ -85,6 +85,9 @@ data class Time(
 	operator fun times(number: Number) =
 		Time(BigDecimal.parseNumber(number) * s)
 
+	operator fun times(speed: Speed) =
+		speed * this
+
 	operator fun div(time: Time) =
 		s / time.s
 

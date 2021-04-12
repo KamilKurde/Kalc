@@ -5,10 +5,11 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 enum class VolumeUnits
 {
 	Kilometers3,
+	Megalitres,
 	Meters3,
 	Barrels,
 	Liters,
-	Centimeters3
+	Milliliters
 }
 
 data class VolumeRange(val start: Volume, val end: Volume)
@@ -17,127 +18,141 @@ data class VolumeRange(val start: Volume, val end: Volume)
 		volume >= start && volume <= end
 }
 
-// function to use when instantiating Lenght class
+// function to use when instantiating Volume class
 fun Volume(
 	value: Number,
 	unit: VolumeUnits = VolumeUnits.Meters3
+) = Volume(BigDecimal.parseString(value.toString()), unit)
+
+fun Volume(
+	value: BigDecimal,
+	unit: VolumeUnits = VolumeUnits.Meters3
 ): Volume
 {
-	val initValue = BigDecimal.parseString(value.toString())
 	return Volume(
-		when (unit)
+		value * when (unit)
 		{
-			VolumeUnits.Kilometers3  -> initValue * Multipliers.kilo3
-			VolumeUnits.Meters3      -> initValue
-			VolumeUnits.Barrels      -> initValue * Multipliers.barrel
-			VolumeUnits.Liters       -> initValue * Multipliers.liter
-			VolumeUnits.Centimeters3 -> initValue * Multipliers.centi3
+			VolumeUnits.Kilometers3 -> Multipliers.kilo3
+			VolumeUnits.Megalitres  -> Multipliers.megaliter
+			VolumeUnits.Barrels     -> Multipliers.barrel
+			VolumeUnits.Liters      -> Multipliers.liter
+			VolumeUnits.Milliliters -> Multipliers.milli * Multipliers.liter
+			else                    -> BigDecimal.ONE
 		}
 	)
 }
 
 data class Volume(
-	var m3: BigDecimal,
+	var meters3: BigDecimal,
 )
 {
-	var km3: BigDecimal
-		get() = m3 / Multipliers.kilo3
+	var kilometers3: BigDecimal
+		get() = meters3 / Multipliers.kilo3
 		set(value)
 		{
-			m3 = value * Multipliers.kilo3
+			meters3 = value * Multipliers.kilo3
 		}
 
-	var barrel: BigDecimal
-		get() = m3 / Multipliers.barrel
+	var megalitres: BigDecimal
+		get() = liters / Multipliers.mega
 		set(value)
 		{
-			m3 = value * Multipliers.barrel
+			liters = value * Multipliers.mega
 		}
 
-	var liter: BigDecimal
-		get() = m3 / Multipliers.liter
+	var barrels: BigDecimal
+		get() = meters3 / Multipliers.barrel
 		set(value)
 		{
-			m3 = value * Multipliers.liter
+			meters3 = value * Multipliers.barrel
 		}
 
-	var dm3: BigDecimal
-		get() = liter
+	var liters: BigDecimal
+		get() = meters3 / Multipliers.liter
 		set(value)
 		{
-			liter = value
+			meters3 = value * Multipliers.liter
 		}
 
-	var cm3: BigDecimal
-		get() = m3 / Multipliers.centi3
+	var decimeters3: BigDecimal
+		get() = liters
 		set(value)
 		{
-			m3 = value * Multipliers.centi3
+			liters = value
+		}
+
+	var milliliters: BigDecimal
+		get() = liters / Multipliers.milli
+		set(value)
+		{
+			meters3 = value * Multipliers.milli
 		}
 
 	operator fun unaryMinus() =
-		Volume(-m3)
+		Volume(-meters3)
 
 	operator fun plus(volume: Volume) =
-		Volume(m3 + volume.m3)
+		Volume(meters3 + volume.meters3)
 
 	operator fun minus(volume: Volume) =
-		Volume(m3 - volume.m3)
+		Volume(meters3 - volume.meters3)
 
 	operator fun times(number: Number) =
-		Volume(BigDecimal.parseNumber(number) * m3)
+		Volume(BigDecimal.parseNumber(number) * meters3)
 
 	operator fun div(number: Number) =
-		Volume(m3 / BigDecimal.parseNumber(number))
+		Volume(meters3 / BigDecimal.parseNumber(number))
 
 	operator fun rem(volume: Volume) =
-		m3 % volume.m3
+		meters3 % volume.meters3
 
 	operator fun rem(number: Number) =
-		Volume(m3 % BigDecimal.parseNumber(number))
+		Volume(meters3 % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(volume: Volume) =
 		VolumeRange(this, volume)
 
 	operator fun plusAssign(volume: Volume)
 	{
-		m3 += volume.m3
+		meters3 += volume.meters3
 	}
 
 	operator fun minusAssign(volume: Volume)
 	{
-		m3 -= volume.m3
+		meters3 -= volume.meters3
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		m3 *= BigDecimal.parseNumber(number)
+		meters3 *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		m3 /= BigDecimal.parseNumber(number)
+		meters3 /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		m3 %= BigDecimal.parseNumber(number)
+		meters3 %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Volume)
 			return false
-		return m3 == other.m3
+		return meters3 == other.meters3
 	}
 
 	operator fun compareTo(volume: Volume) =
-		cm3.compareTo(volume.cm3)
+		milliliters.compareTo(volume.milliliters)
 }
 
-val Number.km3 get() = Volume(this, VolumeUnits.Kilometers3)
-val Number.m3 get() = Volume(this)
-val Number.barrel get() = Volume(this, VolumeUnits.Barrels)
-val Number.liter get() = Volume(this, VolumeUnits.Liters)
-val Number.dm3 get() = this.liter
-val Number.cm3 get() = Volume(this, VolumeUnits.Centimeters3)
+val Number.megalitres get() = Volume(this, VolumeUnits.Megalitres)
+val Number.kilometers3 get() = Volume(this, VolumeUnits.Kilometers3)
+val Number.meters3 get() = Volume(this)
+val Number.barrels get() = Volume(this, VolumeUnits.Barrels)
+val Number.liters get() = Volume(this, VolumeUnits.Liters)
+val Number.decimeters3 get() = this.liters
+val Number.milliliters get() = Volume(this, VolumeUnits.Milliliters)
+val Number.centimeters3 get() = this.milliliters

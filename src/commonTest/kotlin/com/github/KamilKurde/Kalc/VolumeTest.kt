@@ -12,13 +12,16 @@ class VolumeTest
 	@Test
 	fun conversionTest()
 	{
-		assertEquals(poolVolume, 2500.m3)
+		assertEquals(poolVolume, 2500.meters3)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(poolVolume > 1.barrel)
+		assertTrue(poolVolume > 1.barrels)
 		assertEquals(poolVolume, Volume(2500))
+		assertEquals(1.liters, 1000.centimeters3)
+		assertEquals(1.liters, 0.001.meters3)
+		assertEquals(1.megalitres, 1000.meters3)
 	}
 }

@@ -8,12 +8,12 @@ class SpeedTest
 	@Test
 	fun conversionTest()
 	{
-		assertTrue(3.6.kmph - 1.mps < 0.1.mps)
+		assertTrue(3.6.kilometersPerHour - 1.metersPerSecond < 0.1.metersPerSecond)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(1.knots >= 1.fps)
+		assertTrue(1.knots >= 1.feetPerSecond)
 	}
 }

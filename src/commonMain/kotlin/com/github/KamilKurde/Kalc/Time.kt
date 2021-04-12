@@ -4,6 +4,9 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 enum class TimeUnits
 {
+	Years,
+	Weeks,
+	Days,
 	Hours,
 	Minutes,
 	Seconds,
@@ -22,126 +25,136 @@ data class TimeRange(val start: Time, val end: Time)
 fun Time(
 	value: Number,
 	unit: TimeUnits = TimeUnits.Seconds
+) = Time(BigDecimal.parseNumber(value), unit)
+
+fun Time(
+	value: BigDecimal,
+	unit: TimeUnits = TimeUnits.Seconds
 ): Time
 {
-	val initValue = BigDecimal.parseString(value.toString())
 	return Time(
-		when (unit)
+		value * when (unit)
 		{
-			TimeUnits.Hours        -> initValue * Multipliers.hour
-			TimeUnits.Minutes      -> initValue * Multipliers.minute
-			TimeUnits.Seconds      -> initValue
-			TimeUnits.Milliseconds -> initValue * Multipliers.milli
-			TimeUnits.Nanoseconds  -> initValue * Multipliers.nano
-			TimeUnits.Picoseconds  -> initValue * Multipliers.pico
+			TimeUnits.Years        -> Multipliers.year
+			TimeUnits.Weeks        -> Multipliers.week
+			TimeUnits.Days         -> Multipliers.day
+			TimeUnits.Hours        -> Multipliers.hour
+			TimeUnits.Minutes      -> Multipliers.minute
+			TimeUnits.Milliseconds -> Multipliers.milli
+			TimeUnits.Nanoseconds  -> Multipliers.nano
+			TimeUnits.Picoseconds  -> Multipliers.pico
+			else                   -> BigDecimal.ONE
 		}
 	)
 }
 
 data class Time(
-	var s: BigDecimal,
+	var seconds: BigDecimal,
 )
 {
-	var h: BigDecimal
-		get() = s / Multipliers.hour
+	var hours: BigDecimal
+		get() = seconds / Multipliers.hour
 		set(value)
 		{
-			s = value * Multipliers.hour
+			seconds = value * Multipliers.hour
 		}
-	var min: BigDecimal
-		get() = s / Multipliers.minute
+	var minutes: BigDecimal
+		get() = seconds / Multipliers.minute
 		set(value)
 		{
-			s = value * Multipliers.minute
+			seconds = value * Multipliers.minute
 		}
-	var ms: BigDecimal
-		get() = s / Multipliers.milli
+	var milliseconds: BigDecimal
+		get() = seconds / Multipliers.milli
 		set(value)
 		{
-			s = value * Multipliers.milli
+			seconds = value * Multipliers.milli
 		}
-	var ns: BigDecimal
-		get() = s / Multipliers.nano
+	var nanoseconds: BigDecimal
+		get() = seconds / Multipliers.nano
 		set(value)
 		{
-			s = value * Multipliers.nano
+			seconds = value * Multipliers.nano
 		}
-	var ps: BigDecimal
-		get() = s / Multipliers.pico
+	var picoseconds: BigDecimal
+		get() = seconds / Multipliers.pico
 		set(value)
 		{
-			s = value * Multipliers.pico
+			seconds = value * Multipliers.pico
 		}
 
 	operator fun unaryMinus() =
-		Time(-s)
+		Time(-seconds)
 
 	operator fun plus(time: Time) =
-		Time(s + time.s)
+		Time(seconds + time.seconds)
 
 	operator fun minus(time: Time) =
-		Time(s - time.s)
+		Time(seconds - time.seconds)
 
 	operator fun times(number: Number) =
-		Time(BigDecimal.parseNumber(number) * s)
+		Time(BigDecimal.parseNumber(number) * seconds)
 
 	operator fun times(speed: Speed) =
 		speed * this
 
 	operator fun div(time: Time) =
-		s / time.s
+		seconds / time.seconds
 
 	operator fun div(number: Number) =
-		Time(s / BigDecimal.parseNumber(number))
+		Time(seconds / BigDecimal.parseNumber(number))
 
 	operator fun rem(time: Time) =
-		s % time.s
+		seconds % time.seconds
 
 	operator fun rem(number: Number) =
-		Time(s % BigDecimal.parseNumber(number))
+		Time(seconds % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(time: Time) =
 		TimeRange(this, time)
 
 	operator fun plusAssign(time: Time)
 	{
-		s += time.s
+		seconds += time.seconds
 	}
 
 	operator fun minusAssign(time: Time)
 	{
-		s -= time.s
+		seconds -= time.seconds
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		s *= BigDecimal.parseNumber(number)
+		seconds *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		s /= BigDecimal.parseNumber(number)
+		seconds /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		s %= BigDecimal.parseNumber(number)
+		seconds %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Time)
 			return false
-		return s == other.s
+		return seconds == other.seconds
 	}
 
 	operator fun compareTo(time: Time) =
-		ps.compareTo(time.ps)
+		picoseconds.compareTo(time.picoseconds)
 }
 
-val Number.h get() = Time(this, TimeUnits.Hours)
-val Number.min get() = Time(this, TimeUnits.Minutes)
-val Number.s get() = Time(this)
-val Number.ms get() = Time(this, TimeUnits.Milliseconds)
-val Number.ns get() = Time(this, TimeUnits.Nanoseconds)
-val Number.ps get() = Time(this, TimeUnits.Picoseconds)
+val Number.years get() = Time(this, TimeUnits.Years)
+val Number.weeks get() = Time(this, TimeUnits.Weeks)
+val Number.days get() = Time(this, TimeUnits.Days)
+val Number.hours get() = Time(this, TimeUnits.Hours)
+val Number.minutes get() = Time(this, TimeUnits.Minutes)
+val Number.seconds get() = Time(this)
+val Number.milliseconds get() = Time(this, TimeUnits.Milliseconds)
+val Number.nanoseconds get() = Time(this, TimeUnits.Nanoseconds)
+val Number.picoseconds get() = Time(this, TimeUnits.Picoseconds)

@@ -1,19 +1,17 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	java
 	kotlin("multiplatform") version "1.4.32"
 }
 
 group = "com.github.KamilKurde"
-version = "1.0"
+version = "0.1"
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation(kotlin("stdlib-jdk8"))
+	implementation(kotlin("stdlib"))
 }
 
 kotlin {

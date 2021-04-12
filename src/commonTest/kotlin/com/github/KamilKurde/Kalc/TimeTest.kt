@@ -9,12 +9,13 @@ class TimeTest
 	@Test
 	fun conversionTest()
 	{
-		assertEquals(2.h, 120.min)
+		assertEquals(2.hours, 120.minutes)
+		assertEquals(4.weeks, 28.days)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(1.h >= 59.min + 60.s)
+		assertTrue(1.hours >= 59.minutes + 60.seconds)
 	}
 }

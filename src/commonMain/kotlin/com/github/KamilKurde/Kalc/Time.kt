@@ -49,104 +49,104 @@ fun Time(
 }
 
 data class Time(
-	var seconds: BigDecimal,
+	var inSeconds: BigDecimal,
 )
 {
-	var hours: BigDecimal
-		get() = seconds / Multipliers.hour
+	var inHours: BigDecimal
+		get() = inSeconds / Multipliers.hour
 		set(value)
 		{
-			seconds = value * Multipliers.hour
+			inSeconds = value * Multipliers.hour
 		}
-	var minutes: BigDecimal
-		get() = seconds / Multipliers.minute
+	var inMinutes: BigDecimal
+		get() = inSeconds / Multipliers.minute
 		set(value)
 		{
-			seconds = value * Multipliers.minute
+			inSeconds = value * Multipliers.minute
 		}
-	var milliseconds: BigDecimal
-		get() = seconds / Multipliers.milli
+	var inMilliseconds: BigDecimal
+		get() = inSeconds / Multipliers.milli
 		set(value)
 		{
-			seconds = value * Multipliers.milli
+			inSeconds = value * Multipliers.milli
 		}
-	var nanoseconds: BigDecimal
-		get() = seconds / Multipliers.nano
+	var inNanoseconds: BigDecimal
+		get() = inSeconds / Multipliers.nano
 		set(value)
 		{
-			seconds = value * Multipliers.nano
+			inSeconds = value * Multipliers.nano
 		}
-	var picoseconds: BigDecimal
-		get() = seconds / Multipliers.pico
+	var inPicoseconds: BigDecimal
+		get() = inSeconds / Multipliers.pico
 		set(value)
 		{
-			seconds = value * Multipliers.pico
+			inSeconds = value * Multipliers.pico
 		}
 
 	operator fun unaryMinus() =
-		Time(-seconds)
+		Time(-inSeconds)
 
 	operator fun plus(time: Time) =
-		Time(seconds + time.seconds)
+		Time(inSeconds + time.inSeconds)
 
 	operator fun minus(time: Time) =
-		Time(seconds - time.seconds)
+		Time(inSeconds - time.inSeconds)
 
 	operator fun times(number: Number) =
-		Time(BigDecimal.parseNumber(number) * seconds)
+		Time(BigDecimal.parseNumber(number) * inSeconds)
 
 	operator fun times(speed: Speed) =
 		speed * this
 
 	operator fun div(time: Time) =
-		seconds / time.seconds
+		inSeconds / time.inSeconds
 
 	operator fun div(number: Number) =
-		Time(seconds / BigDecimal.parseNumber(number))
+		Time(inSeconds / BigDecimal.parseNumber(number))
 
 	operator fun rem(time: Time) =
-		seconds % time.seconds
+		inSeconds % time.inSeconds
 
 	operator fun rem(number: Number) =
-		Time(seconds % BigDecimal.parseNumber(number))
+		Time(inSeconds % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(time: Time) =
 		TimeRange(this, time)
 
 	operator fun plusAssign(time: Time)
 	{
-		seconds += time.seconds
+		inSeconds += time.inSeconds
 	}
 
 	operator fun minusAssign(time: Time)
 	{
-		seconds -= time.seconds
+		inSeconds -= time.inSeconds
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		seconds *= BigDecimal.parseNumber(number)
+		inSeconds *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		seconds /= BigDecimal.parseNumber(number)
+		inSeconds /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		seconds %= BigDecimal.parseNumber(number)
+		inSeconds %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Time)
 			return false
-		return seconds == other.seconds
+		return inSeconds == other.inSeconds
 	}
 
 	operator fun compareTo(time: Time) =
-		picoseconds.compareTo(time.picoseconds)
+		inPicoseconds.compareTo(time.inPicoseconds)
 }
 
 val Number.years get() = Time(this, TimeUnits.Years)

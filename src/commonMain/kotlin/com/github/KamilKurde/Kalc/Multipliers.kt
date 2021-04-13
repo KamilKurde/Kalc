@@ -36,7 +36,7 @@ object Multipliers
 	val barrel = BigDecimal.parseString("0.158987294928")
 	val deci3 = deci2 * deci
 	val liter = deci3
-	val megaliter = liter * mega
+	val megalitre = liter * mega
 
 	// Time
 	val minute = BigDecimal.fromInt(60)

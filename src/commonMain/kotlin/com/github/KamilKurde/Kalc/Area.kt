@@ -53,110 +53,110 @@ fun Area(
 }
 
 data class Area(
-	var meters2: BigDecimal,
+	var inMeters2: BigDecimal,
 )
 {
-	var kilometers2: BigDecimal
-		get() = meters2 / Multipliers.kilo2
+	var inKilometers2: BigDecimal
+		get() = inMeters2 / Multipliers.kilo2
 		set(value)
 		{
-			meters2 = value * Multipliers.kilo2
+			inMeters2 = value * Multipliers.kilo2
 		}
-	var decimeters2: BigDecimal
-		get() = meters2 / Multipliers.deci2
+	var inDecimeters2: BigDecimal
+		get() = inMeters2 / Multipliers.deci2
 		set(value)
 		{
-			meters2 = value * Multipliers.deci2
+			inMeters2 = value * Multipliers.deci2
 		}
-	var centimeters2: BigDecimal
-		get() = meters2 / Multipliers.centi2
+	var inCentimeters2: BigDecimal
+		get() = inMeters2 / Multipliers.centi2
 		set(value)
 		{
-			meters2 = value * Multipliers.centi2
+			inMeters2 = value * Multipliers.centi2
 		}
-	var millimeters2: BigDecimal
-		get() = meters2 / Multipliers.milli2
+	var inMillimeters2: BigDecimal
+		get() = inMeters2 / Multipliers.milli2
 		set(value)
 		{
-			meters2 = value * Multipliers.milli2
+			inMeters2 = value * Multipliers.milli2
 		}
-	var nanometers2: BigDecimal
-		get() = meters2 / Multipliers.nano2
+	var inNanometers2: BigDecimal
+		get() = inMeters2 / Multipliers.nano2
 		set(value)
 		{
-			meters2 = value * Multipliers.nano2
+			inMeters2 = value * Multipliers.nano2
 		}
-	var picometers2: BigDecimal
-		get() = meters2 / Multipliers.pico2
+	var inPicometers2: BigDecimal
+		get() = inMeters2 / Multipliers.pico2
 		set(value)
 		{
-			meters2 = value * Multipliers.pico2
+			inMeters2 = value * Multipliers.pico2
 		}
 
 	operator fun unaryMinus() =
-		Area(-meters2)
+		Area(-inMeters2)
 
 	operator fun plus(area: Area) =
-		Area(meters2 + area.meters2)
+		Area(inMeters2 + area.inMeters2)
 
 	operator fun minus(area: Area) =
-		Area(meters2 - area.meters2)
+		Area(inMeters2 - area.inMeters2)
 
 	operator fun times(distance: Distance) =
-		Volume(meters2 * distance.meters)
+		Volume(inMeters2 * distance.inMeters)
 
 	operator fun times(number: Number) =
-		Area(BigDecimal.parseNumber(number) * meters2)
+		Area(BigDecimal.parseNumber(number) * inMeters2)
 
 	operator fun div(area: Area) =
-		Distance(meters2 / area.meters2)
+		Distance(inMeters2 / area.inMeters2)
 
 	operator fun div(number: Number) =
-		Area(meters2 / BigDecimal.parseNumber(number))
+		Area(inMeters2 / BigDecimal.parseNumber(number))
 
 	operator fun rem(area: Area) =
-		meters2 % area.meters2
+		inMeters2 % area.inMeters2
 
 	operator fun rem(number: Number) =
-		Area(meters2 % BigDecimal.parseNumber(number))
+		Area(inMeters2 % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(area: Area) =
 		AreaRange(this, area)
 
 	operator fun plusAssign(area: Area)
 	{
-		meters2 += area.meters2
+		inMeters2 += area.inMeters2
 	}
 
 	operator fun minusAssign(area: Area)
 	{
-		meters2 -= area.meters2
+		inMeters2 -= area.inMeters2
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		meters2 *= BigDecimal.parseNumber(number)
+		inMeters2 *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		meters2 /= BigDecimal.parseNumber(number)
+		inMeters2 /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		meters2 %= BigDecimal.parseNumber(number)
+		inMeters2 %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Area)
 			return false
-		return meters2 == other.meters2
+		return inMeters2 == other.inMeters2
 	}
 
 	operator fun compareTo(area: Area) =
-		picometers2.compareTo(area.picometers2)
+		inPicometers2.compareTo(area.inPicometers2)
 }
 
 val Number.mile2 get() = Area(this, AreaUnits.Mile2)

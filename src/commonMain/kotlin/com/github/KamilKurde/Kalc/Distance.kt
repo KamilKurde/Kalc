@@ -53,143 +53,143 @@ fun Distance(
 }
 
 data class Distance(
-	var meters: BigDecimal,
+	var inMeters: BigDecimal,
 )
 {
-	var miles: BigDecimal
-		get() = meters / Multipliers.mile
+	var inMiles: BigDecimal
+		get() = inMeters / Multipliers.mile
 		set(value)
 		{
-			meters = value * Multipliers.mile
+			inMeters = value * Multipliers.mile
 		}
-	var kilometers: BigDecimal
-		get() = meters / Multipliers.kilo
+	var inKilometers: BigDecimal
+		get() = inMeters / Multipliers.kilo
 		set(value)
 		{
-			meters = value * Multipliers.kilo
+			inMeters = value * Multipliers.kilo
 		}
-	var yards: BigDecimal
-		get() = meters / Multipliers.yard
+	var inYards: BigDecimal
+		get() = inMeters / Multipliers.yard
 		set(value)
 		{
-			meters = value * Multipliers.yard
+			inMeters = value * Multipliers.yard
 		}
-	var feet: BigDecimal
-		get() = meters / Multipliers.foot
+	var inFeet: BigDecimal
+		get() = inMeters / Multipliers.foot
 		set(value)
 		{
-			meters = value * Multipliers.foot
+			inMeters = value * Multipliers.foot
 		}
-	var decimeters: BigDecimal
-		get() = meters / Multipliers.deci
+	var inDecimeters: BigDecimal
+		get() = inMeters / Multipliers.deci
 		set(value)
 		{
-			meters = value * Multipliers.deci
+			inMeters = value * Multipliers.deci
 		}
-	var inches: BigDecimal
-		get() = meters / Multipliers.inch
+	var inInches: BigDecimal
+		get() = inMeters / Multipliers.inch
 		set(value)
 		{
-			meters = value * Multipliers.inch
+			inMeters = value * Multipliers.inch
 		}
-	var centimeters: BigDecimal
-		get() = meters / Multipliers.centi
+	var inCentimeters: BigDecimal
+		get() = inMeters / Multipliers.centi
 		set(value)
 		{
-			meters = value * Multipliers.centi
+			inMeters = value * Multipliers.centi
 		}
-	var millimeters: BigDecimal
-		get() = meters / Multipliers.milli
+	var inMillimeters: BigDecimal
+		get() = inMeters / Multipliers.milli
 		set(value)
 		{
-			meters = value * Multipliers.milli
+			inMeters = value * Multipliers.milli
 		}
-	var nanometers: BigDecimal
-		get() = meters / Multipliers.nano
+	var inNanometers: BigDecimal
+		get() = inMeters / Multipliers.nano
 		set(value)
 		{
-			meters = value * Multipliers.nano
+			inMeters = value * Multipliers.nano
 		}
-	var picometers: BigDecimal
-		get() = meters / Multipliers.pico
+	var inPicometers: BigDecimal
+		get() = inMeters / Multipliers.pico
 		set(value)
 		{
-			meters = value * Multipliers.pico
+			inMeters = value * Multipliers.pico
 		}
 
 	operator fun unaryMinus() =
-		Distance(-meters)
+		Distance(-inMeters)
 
 	operator fun plus(distance: Distance) =
-		Distance(meters + distance.meters)
+		Distance(inMeters + distance.inMeters)
 
 	operator fun minus(distance: Distance) =
-		Distance(meters - distance.meters)
+		Distance(inMeters - distance.inMeters)
 
 	operator fun times(distance: Distance) =
-		Area(meters * distance.meters)
+		Area(inMeters * distance.inMeters)
 
 	operator fun times(number: Number) =
-		Distance(BigDecimal.parseNumber(number) * meters)
+		Distance(BigDecimal.parseNumber(number) * inMeters)
 
 	operator fun times(area: Area) =
 		area * this
 
 	operator fun div(distance: Distance) =
-		meters / distance.meters
+		inMeters / distance.inMeters
 
 	operator fun div(number: Number) =
-		Distance(meters / BigDecimal.parseNumber(number))
+		Distance(inMeters / BigDecimal.parseNumber(number))
 
 	operator fun div(time: Time) =
-		Speed(meters / time.seconds)
+		Speed(inMeters / time.inSeconds)
 
 	operator fun div(speed: Speed) =
-		Time(meters / speed.metersPerSecond)
+		Time(inMeters / speed.inMetersPerSecond)
 
 	operator fun rem(distance: Distance) =
-		meters % distance.meters
+		inMeters % distance.inMeters
 
 	operator fun rem(number: Number) =
-		Distance(meters % BigDecimal.parseNumber(number))
+		Distance(inMeters % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(distance: Distance) =
 		DistanceRange(this, distance)
 
 	operator fun plusAssign(distance: Distance)
 	{
-		meters += distance.meters
+		inMeters += distance.inMeters
 	}
 
 	operator fun minusAssign(distance: Distance)
 	{
-		meters -= distance.meters
+		inMeters -= distance.inMeters
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		meters *= BigDecimal.parseNumber(number)
+		inMeters *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		meters /= BigDecimal.parseNumber(number)
+		inMeters /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		meters %= BigDecimal.parseNumber(number)
+		inMeters %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Distance)
 			return false
-		return meters == other.meters
+		return inMeters == other.inMeters
 	}
 
 	operator fun compareTo(distance: Distance) =
-		picometers.compareTo(distance.picometers)
+		inPicometers.compareTo(distance.inPicometers)
 }
 
 val Number.miles get() = Distance(this, DistanceUnits.Miles)

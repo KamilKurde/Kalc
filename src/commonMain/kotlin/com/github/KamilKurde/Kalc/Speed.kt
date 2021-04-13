@@ -41,98 +41,98 @@ fun Speed(
 }
 
 data class Speed(
-	var metersPerSecond: BigDecimal,
+	var inMetersPerSecond: BigDecimal,
 )
 {
-	var kilometersPerHour: BigDecimal
-		get() = metersPerSecond / Multipliers.kmph
+	var inKilometersPerHour: BigDecimal
+		get() = inMetersPerSecond / Multipliers.kmph
 		set(value)
 		{
-			metersPerSecond = value * Multipliers.kmph
+			inMetersPerSecond = value * Multipliers.kmph
 		}
-	var milesPerHour: BigDecimal
-		get() = metersPerSecond / Multipliers.mph
+	var inMilesPerHour: BigDecimal
+		get() = inMetersPerSecond / Multipliers.mph
 		set(value)
 		{
-			metersPerSecond = value * Multipliers.mph
+			inMetersPerSecond = value * Multipliers.mph
 		}
-	var knots: BigDecimal
-		get() = metersPerSecond / Multipliers.knot
+	var inKnots: BigDecimal
+		get() = inMetersPerSecond / Multipliers.knot
 		set(value)
 		{
-			metersPerSecond = value * Multipliers.knot
+			inMetersPerSecond = value * Multipliers.knot
 		}
-	var feetPerSecond: BigDecimal
-		get() = BigDecimal.parseNumber(metersPerSecond.toString().toDouble() / Multipliers.fps.toString().toDouble())
+	var inFeetPerSecond: BigDecimal
+		get() = BigDecimal.parseNumber(inMetersPerSecond.toString().toDouble() / Multipliers.fps.toString().toDouble())
 		set(value)
 		{
-			metersPerSecond = value * Multipliers.fps
+			inMetersPerSecond = value * Multipliers.fps
 		}
 
 	operator fun unaryMinus() =
-		Speed(-metersPerSecond)
+		Speed(-inMetersPerSecond)
 
 	operator fun plus(speed: Speed) =
-		Speed(metersPerSecond + speed.metersPerSecond)
+		Speed(inMetersPerSecond + speed.inMetersPerSecond)
 
 	operator fun minus(speed: Speed) =
-		Speed(metersPerSecond - speed.metersPerSecond)
+		Speed(inMetersPerSecond - speed.inMetersPerSecond)
 
 	operator fun times(number: Number) =
-		Speed(BigDecimal.parseNumber(number) * metersPerSecond)
+		Speed(BigDecimal.parseNumber(number) * inMetersPerSecond)
 
 	operator fun times(time: Time) =
-		Distance(metersPerSecond * time.seconds)
+		Distance(inMetersPerSecond * time.inSeconds)
 
 	operator fun div(speed: Speed) =
-		metersPerSecond / speed.metersPerSecond
+		inMetersPerSecond / speed.inMetersPerSecond
 
 	operator fun div(number: Number) =
-		Speed(metersPerSecond / BigDecimal.parseNumber(number))
+		Speed(inMetersPerSecond / BigDecimal.parseNumber(number))
 
 	operator fun rem(speed: Speed) =
-		metersPerSecond % speed.metersPerSecond
+		inMetersPerSecond % speed.inMetersPerSecond
 
 	operator fun rem(number: Number) =
-		Speed(metersPerSecond % BigDecimal.parseNumber(number))
+		Speed(inMetersPerSecond % BigDecimal.parseNumber(number))
 
 	operator fun rangeTo(speed: Speed) =
 		SpeedRange(this, speed)
 
 	operator fun plusAssign(distance: Distance)
 	{
-		metersPerSecond += distance.meters
+		inMetersPerSecond += distance.inMeters
 	}
 
 	operator fun minusAssign(distance: Distance)
 	{
-		metersPerSecond -= distance.meters
+		inMetersPerSecond -= distance.inMeters
 	}
 
 	operator fun timesAssign(number: Number)
 	{
-		metersPerSecond *= BigDecimal.parseNumber(number)
+		inMetersPerSecond *= BigDecimal.parseNumber(number)
 	}
 
 	operator fun divAssign(number: Number)
 	{
-		metersPerSecond /= BigDecimal.parseNumber(number)
+		inMetersPerSecond /= BigDecimal.parseNumber(number)
 	}
 
 	operator fun remAssign(number: Number)
 	{
-		metersPerSecond %= BigDecimal.parseNumber(number)
+		inMetersPerSecond %= BigDecimal.parseNumber(number)
 	}
 
 	override operator fun equals(other: Any?): Boolean
 	{
 		if (other == null || other !is Speed)
 			return false
-		return metersPerSecond == other.metersPerSecond
+		return inMetersPerSecond == other.inMetersPerSecond
 	}
 
 	operator fun compareTo(speed: Speed) =
-		feetPerSecond.compareTo(speed.feetPerSecond)
+		inFeetPerSecond.compareTo(speed.inFeetPerSecond)
 }
 
 val Number.metersPerSecond get() = Speed(this)

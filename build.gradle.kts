@@ -20,10 +20,13 @@ kotlin {
 			kotlinOptions.jvmTarget = "1.6"
 		}
 	}
-	js(BOTH) {
+	js(IR) {
 		browser {
-
+			testTask {
+				enabled = false
+			}
 		}
+		binaries.executable()
 	}
 	val hostOs = System.getProperty("os.name")
 	val isMingwX64 = hostOs.startsWith("Windows")
@@ -49,7 +52,6 @@ kotlin {
 			}
 		}
 		val jvmMain by getting
-		val jvmTest by getting
 		val jsMain by getting
 		val nativeMain by getting
 	}

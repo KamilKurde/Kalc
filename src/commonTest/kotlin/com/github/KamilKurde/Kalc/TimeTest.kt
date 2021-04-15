@@ -1,5 +1,6 @@
 package com.github.KamilKurde.Kalc
 
+import com.github.KamilKurde.Kalc.units.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

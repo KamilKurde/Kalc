@@ -1,5 +1,7 @@
-package com.github.KamilKurde.Kalc
+package com.github.KamilKurde.Kalc.units
 
+import com.github.KamilKurde.Kalc.Multipliers
+import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 enum class TimeUnits
@@ -25,7 +27,7 @@ data class TimeRange(val start: Time, val end: Time)
 fun Time(
 	value: Number,
 	unit: TimeUnits = TimeUnits.Seconds
-) = Time(BigDecimal.parseNumber(value), unit)
+) = com.github.KamilKurde.Kalc.units.Time(BigDecimal.parseNumber(value), unit)
 
 fun Time(
 	value: BigDecimal,
@@ -48,7 +50,7 @@ fun Time(
 	)
 }
 
-data class Time(
+class Time(
 	var inSeconds: BigDecimal,
 )
 {

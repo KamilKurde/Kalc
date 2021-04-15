@@ -1,5 +1,7 @@
-package com.github.KamilKurde.Kalc
+package com.github.KamilKurde.Kalc.units
 
+import com.github.KamilKurde.Kalc.Multipliers
+import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 enum class AreaUnits
@@ -52,7 +54,7 @@ fun Area(
 	)
 }
 
-data class Area(
+class Area(
 	var inMeters2: BigDecimal,
 )
 {

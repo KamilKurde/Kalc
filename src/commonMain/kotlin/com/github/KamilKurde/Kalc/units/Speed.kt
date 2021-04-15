@@ -1,5 +1,7 @@
-package com.github.KamilKurde.Kalc
+package com.github.KamilKurde.Kalc.units
 
+import com.github.KamilKurde.Kalc.Multipliers
+import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 enum class SpeedUnits
@@ -21,7 +23,7 @@ data class SpeedRange(val start: Speed, val end: Speed)
 fun Speed(
 	value: Number,
 	unit: SpeedUnits = SpeedUnits.MetersPerSecond
-) = Speed(BigDecimal.parseNumber(value), unit)
+) = com.github.KamilKurde.Kalc.units.Speed(BigDecimal.parseNumber(value), unit)
 
 fun Speed(
 	value: BigDecimal,
@@ -40,7 +42,7 @@ fun Speed(
 	)
 }
 
-data class Speed(
+class Speed(
 	var inMetersPerSecond: BigDecimal,
 )
 {

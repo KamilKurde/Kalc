@@ -5,21 +5,19 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class DistanceTest
+class MassTest
 {
-	private val marathon = Distance(42195)
-
 	@Test
 	fun conversionTest()
 	{
-		assertEquals(marathon, 42.195.kilometers)
+		assertEquals(1.pounds, 16.ounces)
 	}
 
 	@Test
 	fun comparisonTest()
 	{
-		assertTrue(marathon > 1.kilometers)
-		assertEquals(marathon, 421950.decimeters)
-		assertEquals(1.miles, 5280.feet)
+		assertTrue(1.kilograms > 35.ounces)
+		assertTrue(69.slugs > 1.tones)
+		assertEquals(1.tones, 1_000.kilograms)
 	}
 }

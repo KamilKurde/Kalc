@@ -1,4 +1,4 @@
-package com.github.KamilKurde.Kalc
+package com.github.KamilKurde.Kalc.functions
 
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 

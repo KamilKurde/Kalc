@@ -1,52 +1,13 @@
-package com.github.KamilKurde.Kalc.units
+package com.github.KamilKurde.Kalc.units.volume
 
+import com.github.KamilKurde.Kalc.Kalc
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
-enum class VolumeUnits
-{
-	Kilometers3,
-	Megalitres,
-	Meters3,
-	Barrels,
-	Liters,
-	Milliliters
-}
-
-data class VolumeRange(val start: Volume, val end: Volume)
-{
-	operator fun contains(volume: Volume) =
-		volume >= start && volume <= end
-}
-
-// function to use when instantiating Volume class
-fun Volume(
-	value: Number,
-	unit: VolumeUnits = VolumeUnits.Meters3
-) = Volume(BigDecimal.parseString(value.toString()), unit)
-
-fun Volume(
-	value: BigDecimal,
-	unit: VolumeUnits = VolumeUnits.Meters3
-): Volume
-{
-	return Volume(
-		value * when (unit)
-		{
-			VolumeUnits.Kilometers3 -> Multipliers.kilo3
-			VolumeUnits.Megalitres  -> Multipliers.megalitre
-			VolumeUnits.Barrels     -> Multipliers.barrel
-			VolumeUnits.Liters      -> Multipliers.liter
-			VolumeUnits.Milliliters -> Multipliers.milli * Multipliers.liter
-			else                    -> BigDecimal.ONE
-		}
-	)
-}
-
-class Volume(
+data class Volume(
 	var inMeters3: BigDecimal,
-)
+): Kalc()
 {
 	var inKilometers3: BigDecimal
 		get() = inMeters3 / Multipliers.kilo3
@@ -139,22 +100,8 @@ class Volume(
 		inMeters3 %= BigDecimal.parseNumber(number)
 	}
 
-	override operator fun equals(other: Any?): Boolean
-	{
-		if (other == null || other !is Volume)
-			return false
-		return inMeters3 == other.inMeters3
-	}
-
 	operator fun compareTo(volume: Volume) =
 		inMilliliters.compareTo(volume.inMilliliters)
-}
 
-val Number.megalitres get() = Volume(this, VolumeUnits.Megalitres)
-val Number.kilometers3 get() = Volume(this, VolumeUnits.Kilometers3)
-val Number.meters3 get() = Volume(this)
-val Number.barrels get() = Volume(this, VolumeUnits.Barrels)
-val Number.liters get() = Volume(this, VolumeUnits.Liters)
-val Number.decimeters3 get() = this.liters
-val Number.milliliters get() = Volume(this, VolumeUnits.Milliliters)
-val Number.centimeters3 get() = this.milliliters
+	override fun toString() = readableString(component1())
+}

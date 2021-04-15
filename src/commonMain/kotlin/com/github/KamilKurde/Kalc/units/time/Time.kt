@@ -1,58 +1,14 @@
-package com.github.KamilKurde.Kalc.units
+package com.github.KamilKurde.Kalc.units.time
 
+import com.github.KamilKurde.Kalc.Kalc
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
+import com.github.KamilKurde.Kalc.units.speed.Speed
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
-enum class TimeUnits
-{
-	Years,
-	Weeks,
-	Days,
-	Hours,
-	Minutes,
-	Seconds,
-	Milliseconds,
-	Nanoseconds,
-	Picoseconds
-}
-
-data class TimeRange(val start: Time, val end: Time)
-{
-	operator fun contains(time: Time) =
-		time >= start && time <= end
-}
-
-// function to use when instantiating Lenght class
-fun Time(
-	value: Number,
-	unit: TimeUnits = TimeUnits.Seconds
-) = com.github.KamilKurde.Kalc.units.Time(BigDecimal.parseNumber(value), unit)
-
-fun Time(
-	value: BigDecimal,
-	unit: TimeUnits = TimeUnits.Seconds
-): Time
-{
-	return Time(
-		value * when (unit)
-		{
-			TimeUnits.Years        -> Multipliers.year
-			TimeUnits.Weeks        -> Multipliers.week
-			TimeUnits.Days         -> Multipliers.day
-			TimeUnits.Hours        -> Multipliers.hour
-			TimeUnits.Minutes      -> Multipliers.minute
-			TimeUnits.Milliseconds -> Multipliers.milli
-			TimeUnits.Nanoseconds  -> Multipliers.nano
-			TimeUnits.Picoseconds  -> Multipliers.pico
-			else                   -> BigDecimal.ONE
-		}
-	)
-}
-
-class Time(
+data class Time(
 	var inSeconds: BigDecimal,
-)
+): Kalc()
 {
 	var inHours: BigDecimal
 		get() = inSeconds / Multipliers.hour
@@ -140,23 +96,8 @@ class Time(
 		inSeconds %= BigDecimal.parseNumber(number)
 	}
 
-	override operator fun equals(other: Any?): Boolean
-	{
-		if (other == null || other !is Time)
-			return false
-		return inSeconds == other.inSeconds
-	}
-
 	operator fun compareTo(time: Time) =
 		inPicoseconds.compareTo(time.inPicoseconds)
-}
 
-val Number.years get() = Time(this, TimeUnits.Years)
-val Number.weeks get() = Time(this, TimeUnits.Weeks)
-val Number.days get() = Time(this, TimeUnits.Days)
-val Number.hours get() = Time(this, TimeUnits.Hours)
-val Number.minutes get() = Time(this, TimeUnits.Minutes)
-val Number.seconds get() = Time(this)
-val Number.milliseconds get() = Time(this, TimeUnits.Milliseconds)
-val Number.nanoseconds get() = Time(this, TimeUnits.Nanoseconds)
-val Number.picoseconds get() = Time(this, TimeUnits.Picoseconds)
+	override fun toString() = readableString(component1())
+}

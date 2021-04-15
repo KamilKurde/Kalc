@@ -1,50 +1,15 @@
-package com.github.KamilKurde.Kalc.units
+package com.github.KamilKurde.Kalc.units.speed
 
+import com.github.KamilKurde.Kalc.Kalc
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
+import com.github.KamilKurde.Kalc.units.time.Time
+import com.github.KamilKurde.Kalc.units.distance.Distance
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
-enum class SpeedUnits
-{
-	MetersPerSecond,
-	KilometersPerHour,
-	MilesPerHour,
-	Knots,
-	FeetPerSecond
-}
-
-data class SpeedRange(val start: Speed, val end: Speed)
-{
-	operator fun contains(speed: Speed) =
-		speed >= start && speed <= end
-}
-
-// function to use when instantiating Lenght class
-fun Speed(
-	value: Number,
-	unit: SpeedUnits = SpeedUnits.MetersPerSecond
-) = com.github.KamilKurde.Kalc.units.Speed(BigDecimal.parseNumber(value), unit)
-
-fun Speed(
-	value: BigDecimal,
-	unit: SpeedUnits = SpeedUnits.MetersPerSecond
-): Speed
-{
-	return Speed(
-		value * when (unit)
-		{
-			SpeedUnits.KilometersPerHour -> Multipliers.kmph
-			SpeedUnits.MilesPerHour      -> Multipliers.mph
-			SpeedUnits.Knots             -> Multipliers.knot
-			SpeedUnits.FeetPerSecond     -> Multipliers.fps
-			else                         -> BigDecimal.ONE
-		}
-	)
-}
-
-class Speed(
+data class Speed(
 	var inMetersPerSecond: BigDecimal,
-)
+): Kalc()
 {
 	var inKilometersPerHour: BigDecimal
 		get() = inMetersPerSecond / Multipliers.kmph
@@ -126,19 +91,8 @@ class Speed(
 		inMetersPerSecond %= BigDecimal.parseNumber(number)
 	}
 
-	override operator fun equals(other: Any?): Boolean
-	{
-		if (other == null || other !is Speed)
-			return false
-		return inMetersPerSecond == other.inMetersPerSecond
-	}
-
 	operator fun compareTo(speed: Speed) =
 		inFeetPerSecond.compareTo(speed.inFeetPerSecond)
-}
 
-val Number.metersPerSecond get() = Speed(this)
-val Number.kilometersPerHour get() = Speed(this, SpeedUnits.KilometersPerHour)
-val Number.milesPerHour get() = Speed(this, SpeedUnits.MilesPerHour)
-val Number.knots get() = Speed(this, SpeedUnits.Knots)
-val Number.feetPerSecond get() = Speed(this, SpeedUnits.FeetPerSecond)
+	override fun toString() = readableString(component1())
+}

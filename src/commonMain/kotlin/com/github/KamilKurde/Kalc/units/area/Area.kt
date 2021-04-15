@@ -1,62 +1,15 @@
-package com.github.KamilKurde.Kalc.units
+package com.github.KamilKurde.Kalc.units.area
 
+import com.github.KamilKurde.Kalc.Kalc
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
+import com.github.KamilKurde.Kalc.units.distance.Distance
+import com.github.KamilKurde.Kalc.units.volume.Volume
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
-enum class AreaUnits
-{
-	Mile2,
-	Kilometers2,
-	Meters2,
-	Yard2,
-	Feet2,
-	Decimeters2,
-	Inch2,
-	Centimeters2,
-	Millimeters2,
-	Nanometers2,
-	Picometers2
-}
-
-data class AreaRange(val start: Area, val end: Area)
-{
-	operator fun contains(area: Area) =
-		area >= start && area <= end
-}
-
-// function to use when instantiating Area class
-fun Area(
-	value: Number,
-	unit: AreaUnits = AreaUnits.Meters2
-) = Area(BigDecimal.parseString(value.toString()), unit)
-
-fun Area(
-	value: BigDecimal,
-	unit: AreaUnits = AreaUnits.Meters2
-): Area
-{
-	return Area(
-		value * when (unit)
-		{
-			AreaUnits.Mile2        -> Multipliers.mile2
-			AreaUnits.Kilometers2  -> Multipliers.kilo2
-			AreaUnits.Yard2        -> Multipliers.yard2
-			AreaUnits.Feet2        -> Multipliers.foot2
-			AreaUnits.Decimeters2  -> Multipliers.deci2
-			AreaUnits.Inch2        -> Multipliers.inch2
-			AreaUnits.Centimeters2 -> Multipliers.centi2
-			AreaUnits.Millimeters2 -> Multipliers.milli2
-			AreaUnits.Nanometers2  -> Multipliers.nano2
-			AreaUnits.Picometers2  -> Multipliers.pico2
-			else                   -> BigDecimal.ONE
-		}
-	)
-}
-
-class Area(
-	var inMeters2: BigDecimal,
-)
+data class Area(
+	var inMeters2: BigDecimal
+): Kalc()
 {
 	var inKilometers2: BigDecimal
 		get() = inMeters2 / Multipliers.kilo2
@@ -150,25 +103,8 @@ class Area(
 		inMeters2 %= BigDecimal.parseNumber(number)
 	}
 
-	override operator fun equals(other: Any?): Boolean
-	{
-		if (other == null || other !is Area)
-			return false
-		return inMeters2 == other.inMeters2
-	}
-
 	operator fun compareTo(area: Area) =
 		inPicometers2.compareTo(area.inPicometers2)
-}
 
-val Number.mile2 get() = Area(this, AreaUnits.Mile2)
-val Number.kilometers2 get() = Area(this, AreaUnits.Kilometers2)
-val Number.meters2 get() = Area(this)
-val Number.yard2 get() = Area(this, AreaUnits.Yard2)
-val Number.feet2 get() = Area(this, AreaUnits.Feet2)
-val Number.decimeters2 get() = Area(this, AreaUnits.Decimeters2)
-val Number.inches2 get() = Area(this, AreaUnits.Inch2)
-val Number.centimeters2 get() = Area(this, AreaUnits.Centimeters2)
-val Number.millimeters2 get() = Area(this, AreaUnits.Millimeters2)
-val Number.nanometers2 get() = Area(this, AreaUnits.Nanometers2)
-val Number.picometers2 get() = Area(this, AreaUnits.Picometers2)
+	override fun toString() = readableString(component1())
+}

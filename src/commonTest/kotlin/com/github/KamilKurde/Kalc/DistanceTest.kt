@@ -1,6 +1,6 @@
 package com.github.KamilKurde.Kalc
 
-import com.github.KamilKurde.Kalc.units.*
+import com.github.KamilKurde.Kalc.units.distance.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

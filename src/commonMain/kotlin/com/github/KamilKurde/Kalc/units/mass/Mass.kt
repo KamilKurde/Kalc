@@ -1,53 +1,13 @@
-package com.github.KamilKurde.Kalc.units
+package com.github.KamilKurde.Kalc.units.mass
 
+import com.github.KamilKurde.Kalc.Kalc
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
-enum class MassUnits
-{
-	Tons,
-	Slugs,
-	Kilograms,
-	Pounds,
-	Ounces,
-	Decagrams,
-	Grams,
-	Milligrams,
-}
-
-data class MassRange(val start: Mass, val end: Mass)
-{
-	operator fun contains(mass: Mass) =
-		mass >= start && mass <= end
-}
-
-// function to use when instantiating Lenght class
-fun Mass(
-	value: Number,
-	unit: MassUnits = MassUnits.Grams
-) = Mass(BigDecimal.parseString(value.toString()), unit)
-
-fun Mass(
-	value: BigDecimal,
-	unit: MassUnits = MassUnits.Grams
-) = Mass(
-	value * when (unit)
-	{
-		MassUnits.Tons       -> Multipliers.mega
-		MassUnits.Slugs      -> Multipliers.slug
-		MassUnits.Kilograms  -> Multipliers.kilo
-		MassUnits.Pounds     -> Multipliers.pound
-		MassUnits.Ounces     -> Multipliers.ounce
-		MassUnits.Decagrams  -> Multipliers.deca
-		MassUnits.Milligrams -> Multipliers.milli
-		else                 -> BigDecimal.ONE
-	}
-)
-
-class Mass(
+data class Mass(
 	var inGrams: BigDecimal,
-)
+): Kalc()
 {
 	var inTones: BigDecimal
 		get() = inGrams / Multipliers.mega
@@ -150,22 +110,8 @@ class Mass(
 		inGrams %= BigDecimal.parseNumber(number)
 	}
 
-	override operator fun equals(other: Any?): Boolean
-	{
-		if (other == null || other !is Mass)
-			return false
-		return inGrams == other.inGrams
-	}
-
 	operator fun compareTo(mass: Mass) =
 		inMilligrams.compareTo(mass.inMilligrams)
-}
 
-val Number.tones get() = Mass(this, MassUnits.Tons)
-val Number.slugs get() = Mass(this, MassUnits.Slugs)
-val Number.kilograms get() = Mass(this, MassUnits.Kilograms)
-val Number.pounds get() = Mass(this, MassUnits.Pounds)
-val Number.ounces get() = Mass(this, MassUnits.Ounces)
-val Number.decagrams get() = Mass(this, MassUnits.Decagrams)
-val Number.grams get() = Mass(this, MassUnits.Grams)
-val Number.milligrams get() = Mass(this, MassUnits.Milligrams)
+	override fun toString() = readableString(component1())
+}

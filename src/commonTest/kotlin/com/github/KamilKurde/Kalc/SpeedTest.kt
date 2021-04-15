@@ -1,9 +1,9 @@
 package com.github.KamilKurde.Kalc
 
-import com.github.KamilKurde.Kalc.units.feetPerSecond
-import com.github.KamilKurde.Kalc.units.kilometersPerHour
-import com.github.KamilKurde.Kalc.units.knots
-import com.github.KamilKurde.Kalc.units.metersPerSecond
+import com.github.KamilKurde.Kalc.units.speed.feetPerSecond
+import com.github.KamilKurde.Kalc.units.speed.kilometersPerHour
+import com.github.KamilKurde.Kalc.units.speed.knots
+import com.github.KamilKurde.Kalc.units.speed.metersPerSecond
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

@@ -1,6 +1,7 @@
 package com.github.KamilKurde.Kalc
 
-import com.github.KamilKurde.Kalc.units.*
+import com.github.KamilKurde.Kalc.units.area.*
+import com.github.KamilKurde.Kalc.units.distance.Distance
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,8 +1,8 @@
 package com.github.KamilKurde.Kalc.units.distance
 
-import com.github.KamilKurde.Kalc.Kalc
+import com.github.KamilKurde.Kalc.Kalc.KalcInterface
+import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Multipliers
-import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.units.speed.Speed
 import com.github.KamilKurde.Kalc.units.time.Time
 import com.github.KamilKurde.Kalc.units.area.Area
@@ -10,7 +10,7 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Distance(
 	var inMeters: BigDecimal,
-): Kalc()
+): KalcType<Distance>(), KalcInterface
 {
 	var inMiles: BigDecimal
 		get() = inMeters / Multipliers.mile
@@ -73,29 +73,11 @@ data class Distance(
 			inMeters = value * Multipliers.pico
 		}
 
-	operator fun unaryMinus() =
-		Distance(-inMeters)
-
-	operator fun plus(distance: Distance) =
-		Distance(inMeters + distance.inMeters)
-
-	operator fun minus(distance: Distance) =
-		Distance(inMeters - distance.inMeters)
-
 	operator fun times(distance: Distance) =
 		Area(inMeters * distance.inMeters)
 
-	operator fun times(number: Number) =
-		Distance(BigDecimal.parseNumber(number) * inMeters)
-
 	operator fun times(area: Area) =
 		area * this
-
-	operator fun div(distance: Distance) =
-		inMeters / distance.inMeters
-
-	operator fun div(number: Number) =
-		Distance(inMeters / BigDecimal.parseNumber(number))
 
 	operator fun div(time: Time) =
 		Speed(inMeters / time.inSeconds)
@@ -103,42 +85,12 @@ data class Distance(
 	operator fun div(speed: Speed) =
 		Time(inMeters / speed.inMetersPerSecond)
 
-	operator fun rem(distance: Distance) =
-		inMeters % distance.inMeters
-
-	operator fun rem(number: Number) =
-		Distance(inMeters % BigDecimal.parseNumber(number))
-
-	operator fun rangeTo(distance: Distance) =
-		DistanceRange(this, distance)
-
-	operator fun plusAssign(distance: Distance)
+	override fun setComponent1(value: BigDecimal)
 	{
-		inMeters += distance.inMeters
+		inMeters = value
 	}
 
-	operator fun minusAssign(distance: Distance)
-	{
-		inMeters -= distance.inMeters
-	}
+	override fun t(value: BigDecimal): Distance = Distance(value)
 
-	operator fun timesAssign(number: Number)
-	{
-		inMeters *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		inMeters /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		inMeters %= BigDecimal.parseNumber(number)
-	}
-
-	operator fun compareTo(distance: Distance) =
-		inPicometers.compareTo(distance.inPicometers)
-
-	override fun toString() = readableString(component1())
+	override fun toString() = super.toString()
 }

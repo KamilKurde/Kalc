@@ -1,6 +1,7 @@
 package com.github.KamilKurde.Kalc.units.time
 
-import com.github.KamilKurde.Kalc.Kalc
+import com.github.KamilKurde.Kalc.Kalc.KalcInterface
+import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.units.speed.Speed
@@ -8,7 +9,7 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Time(
 	var inSeconds: BigDecimal,
-): Kalc()
+): KalcType<Time>(), KalcInterface
 {
 	var inHours: BigDecimal
 		get() = inSeconds / Multipliers.hour
@@ -41,63 +42,15 @@ data class Time(
 			inSeconds = value * Multipliers.pico
 		}
 
-	operator fun unaryMinus() =
-		Time(-inSeconds)
-
-	operator fun plus(time: Time) =
-		Time(inSeconds + time.inSeconds)
-
-	operator fun minus(time: Time) =
-		Time(inSeconds - time.inSeconds)
-
-	operator fun times(number: Number) =
-		Time(BigDecimal.parseNumber(number) * inSeconds)
-
 	operator fun times(speed: Speed) =
 		speed * this
 
-	operator fun div(time: Time) =
-		inSeconds / time.inSeconds
-
-	operator fun div(number: Number) =
-		Time(inSeconds / BigDecimal.parseNumber(number))
-
-	operator fun rem(time: Time) =
-		inSeconds % time.inSeconds
-
-	operator fun rem(number: Number) =
-		Time(inSeconds % BigDecimal.parseNumber(number))
-
-	operator fun rangeTo(time: Time) =
-		TimeRange(this, time)
-
-	operator fun plusAssign(time: Time)
+	override fun setComponent1(value: BigDecimal)
 	{
-		inSeconds += time.inSeconds
+		inSeconds = value
 	}
 
-	operator fun minusAssign(time: Time)
-	{
-		inSeconds -= time.inSeconds
-	}
+	override fun t(value: BigDecimal): Time = Time(value)
 
-	operator fun timesAssign(number: Number)
-	{
-		inSeconds *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		inSeconds /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		inSeconds %= BigDecimal.parseNumber(number)
-	}
-
-	operator fun compareTo(time: Time) =
-		inPicoseconds.compareTo(time.inPicoseconds)
-
-	override fun toString() = readableString(component1())
+	override fun toString() = super.toString()
 }

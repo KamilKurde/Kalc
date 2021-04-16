@@ -1,6 +1,7 @@
 package com.github.KamilKurde.Kalc.units.area
 
-import com.github.KamilKurde.Kalc.Kalc
+import com.github.KamilKurde.Kalc.Kalc.KalcInterface
+import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.units.distance.Distance
@@ -9,7 +10,7 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Area(
 	var inMeters2: BigDecimal
-): Kalc()
+): KalcType<Area>(), KalcInterface
 {
 	var inKilometers2: BigDecimal
 		get() = inMeters2 / Multipliers.kilo2
@@ -48,63 +49,15 @@ data class Area(
 			inMeters2 = value * Multipliers.pico2
 		}
 
-	operator fun unaryMinus() =
-		Area(-inMeters2)
-
-	operator fun plus(area: Area) =
-		Area(inMeters2 + area.inMeters2)
-
-	operator fun minus(area: Area) =
-		Area(inMeters2 - area.inMeters2)
-
 	operator fun times(distance: Distance) =
 		Volume(inMeters2 * distance.inMeters)
 
-	operator fun times(number: Number) =
-		Area(BigDecimal.parseNumber(number) * inMeters2)
-
-	operator fun div(area: Area) =
-		Distance(inMeters2 / area.inMeters2)
-
-	operator fun div(number: Number) =
-		Area(inMeters2 / BigDecimal.parseNumber(number))
-
-	operator fun rem(area: Area) =
-		inMeters2 % area.inMeters2
-
-	operator fun rem(number: Number) =
-		Area(inMeters2 % BigDecimal.parseNumber(number))
-
-	operator fun rangeTo(area: Area) =
-		AreaRange(this, area)
-
-	operator fun plusAssign(area: Area)
+	override fun setComponent1(value: BigDecimal)
 	{
-		inMeters2 += area.inMeters2
+		inMeters2 = value
 	}
 
-	operator fun minusAssign(area: Area)
-	{
-		inMeters2 -= area.inMeters2
-	}
+	override fun t(value: BigDecimal): Area = Area(value)
 
-	operator fun timesAssign(number: Number)
-	{
-		inMeters2 *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		inMeters2 /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		inMeters2 %= BigDecimal.parseNumber(number)
-	}
-
-	operator fun compareTo(area: Area) =
-		inPicometers2.compareTo(area.inPicometers2)
-
-	override fun toString() = readableString(component1())
+	override fun toString() = super.toString()
 }

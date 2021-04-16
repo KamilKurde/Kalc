@@ -1,13 +1,14 @@
 package com.github.KamilKurde.Kalc.units.volume
 
-import com.github.KamilKurde.Kalc.Kalc
+import com.github.KamilKurde.Kalc.Kalc.KalcInterface
+import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Volume(
 	var inMeters3: BigDecimal,
-): Kalc()
+): KalcType<Volume>(), KalcInterface
 {
 	var inKilometers3: BigDecimal
 		get() = inMeters3 / Multipliers.kilo3
@@ -51,57 +52,12 @@ data class Volume(
 			inMeters3 = value * Multipliers.milli
 		}
 
-	operator fun unaryMinus() =
-		Volume(-inMeters3)
-
-	operator fun plus(volume: Volume) =
-		Volume(inMeters3 + volume.inMeters3)
-
-	operator fun minus(volume: Volume) =
-		Volume(inMeters3 - volume.inMeters3)
-
-	operator fun times(number: Number) =
-		Volume(BigDecimal.parseNumber(number) * inMeters3)
-
-	operator fun div(number: Number) =
-		Volume(inMeters3 / BigDecimal.parseNumber(number))
-
-	operator fun rem(volume: Volume) =
-		inMeters3 % volume.inMeters3
-
-	operator fun rem(number: Number) =
-		Volume(inMeters3 % BigDecimal.parseNumber(number))
-
-	operator fun rangeTo(volume: Volume) =
-		VolumeRange(this, volume)
-
-	operator fun plusAssign(volume: Volume)
+	override fun setComponent1(value: BigDecimal)
 	{
-		inMeters3 += volume.inMeters3
+		inMeters3 = value
 	}
 
-	operator fun minusAssign(volume: Volume)
-	{
-		inMeters3 -= volume.inMeters3
-	}
+	override fun t(value: BigDecimal): Volume = Volume(value)
 
-	operator fun timesAssign(number: Number)
-	{
-		inMeters3 *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		inMeters3 /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		inMeters3 %= BigDecimal.parseNumber(number)
-	}
-
-	operator fun compareTo(volume: Volume) =
-		inMilliliters.compareTo(volume.inMilliliters)
-
-	override fun toString() = readableString(component1())
+	override fun toString() = super.toString()
 }

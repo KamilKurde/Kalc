@@ -21,6 +21,7 @@ class AreaTest
 	fun comparisonTest()
 	{
 		assertTrue(pool < 1.kilometers2)
+		assertTrue(pool in 1.centimeters2..1.kilometers2)
 		assertEquals(pool, 12500000.centimeters2)
 		assertEquals(1.mile2, 27_878_400.feet2)
 		assertEquals(1.mile2, Area(BigDecimal.parseString("2.589988110336"), AreaUnits.Kilometers2))

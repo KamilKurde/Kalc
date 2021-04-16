@@ -1,13 +1,13 @@
 package com.github.KamilKurde.Kalc.units.mass
 
-import com.github.KamilKurde.Kalc.Kalc
+import com.github.KamilKurde.Kalc.Kalc.KalcInterface
+import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Multipliers
-import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Mass(
 	var inGrams: BigDecimal,
-): Kalc()
+): KalcType<Mass>(), KalcInterface
 {
 	var inTones: BigDecimal
 		get() = inGrams / Multipliers.mega
@@ -58,60 +58,12 @@ data class Mass(
 			inGrams = value * Multipliers.milli
 		}
 
-	operator fun unaryMinus() =
-		Mass(-inGrams)
-
-	operator fun plus(mass: Mass) =
-		Mass(inGrams + mass.inGrams)
-
-	operator fun minus(mass: Mass) =
-		Mass(inGrams - mass.inGrams)
-
-	operator fun times(number: Number) =
-		Mass(BigDecimal.parseNumber(number) * inGrams)
-
-	operator fun div(mass: Mass) =
-		inGrams / mass.inGrams
-
-	operator fun div(number: Number) =
-		Mass(inGrams / BigDecimal.parseNumber(number))
-
-	operator fun rem(mass: Mass) =
-		inGrams % mass.inGrams
-
-	operator fun rem(number: Number) =
-		Mass(inGrams % BigDecimal.parseNumber(number))
-
-	operator fun rangeTo(mass: Mass) =
-		MassRange(this, mass)
-
-	operator fun plusAssign(mass: Mass)
+	override fun setComponent1(value: BigDecimal)
 	{
-		inGrams += mass.inGrams
+		inGrams = value
 	}
 
-	operator fun minusAssign(mass: Mass)
-	{
-		inGrams -= mass.inGrams
-	}
+	override fun t(value: BigDecimal): Mass = Mass(value)
 
-	operator fun timesAssign(number: Number)
-	{
-		inGrams *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		inGrams /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		inGrams %= BigDecimal.parseNumber(number)
-	}
-
-	operator fun compareTo(mass: Mass) =
-		inMilligrams.compareTo(mass.inMilligrams)
-
-	override fun toString() = readableString(component1())
+	override fun toString() = super.toString()
 }

@@ -1,10 +1,13 @@
 package com.github.KamilKurde.Kalc.units.speed
 
-enum class SpeedUnits
+import com.github.KamilKurde.Kalc.Multipliers
+import com.ionspin.kotlin.bignum.decimal.BigDecimal
+
+enum class SpeedUnits(val multiplier: BigDecimal)
 {
-	MetersPerSecond,
-	KilometersPerHour,
-	MilesPerHour,
-	Knots,
-	FeetPerSecond
+	MetersPerSecond(BigDecimal.ONE),
+	KilometersPerHour(Multipliers.kmph),
+	MilesPerHour(Multipliers.mph),
+	Knots(Multipliers.knot),
+	FeetPerSecond(Multipliers.fps)
 }

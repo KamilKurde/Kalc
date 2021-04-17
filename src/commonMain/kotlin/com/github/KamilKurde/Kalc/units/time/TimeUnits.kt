@@ -1,14 +1,17 @@
 package com.github.KamilKurde.Kalc.units.time
 
-enum class TimeUnits
+import com.github.KamilKurde.Kalc.Multipliers
+import com.ionspin.kotlin.bignum.decimal.BigDecimal
+
+enum class TimeUnits(val multiplier: BigDecimal)
 {
-	Years,
-	Weeks,
-	Days,
-	Hours,
-	Minutes,
-	Seconds,
-	Milliseconds,
-	Nanoseconds,
-	Picoseconds
+	Years(Multipliers.year),
+	Weeks(Multipliers.week),
+	Days(Multipliers.day),
+	Hours(Multipliers.hour),
+	Minutes(Multipliers.minute),
+	Seconds(BigDecimal.ONE),
+	Milliseconds(Multipliers.milli),
+	Nanoseconds(Multipliers.nano),
+	Picoseconds(Multipliers.pico)
 }

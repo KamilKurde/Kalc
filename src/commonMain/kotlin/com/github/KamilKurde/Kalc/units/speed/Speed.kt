@@ -1,7 +1,7 @@
 package com.github.KamilKurde.Kalc.units.speed
 
-import com.github.KamilKurde.Kalc.Kalc.KalcInterface
 import com.github.KamilKurde.Kalc.Kalc.KalcType
+import com.github.KamilKurde.Kalc.Kalc.UnitDelegate
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.units.time.Time
@@ -10,32 +10,12 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Speed(
 	var inMetersPerSecond: BigDecimal,
-): KalcType<Speed>(), KalcInterface
+): KalcType<Speed>()
 {
-	var inKilometersPerHour: BigDecimal
-		get() = inMetersPerSecond / Multipliers.kmph
-		set(value)
-		{
-			inMetersPerSecond = value * Multipliers.kmph
-		}
-	var inMilesPerHour: BigDecimal
-		get() = inMetersPerSecond / Multipliers.mph
-		set(value)
-		{
-			inMetersPerSecond = value * Multipliers.mph
-		}
-	var inKnots: BigDecimal
-		get() = inMetersPerSecond / Multipliers.knot
-		set(value)
-		{
-			inMetersPerSecond = value * Multipliers.knot
-		}
-	var inFeetPerSecond: BigDecimal
-		get() = BigDecimal.parseNumber(inMetersPerSecond.toString().toDouble() / Multipliers.fps.toString().toDouble())
-		set(value)
-		{
-			inMetersPerSecond = value * Multipliers.fps
-		}
+	var inKilometersPerHour by UnitDelegate(Multipliers.kmph)
+	var inMilesPerHour by UnitDelegate(Multipliers.mph)
+	var inKnots by UnitDelegate(Multipliers.knot)
+	var inFeetPerSecond by UnitDelegate(Multipliers.fps)
 
 	operator fun times(time: Time) =
 		Distance(inMetersPerSecond * time.inSeconds)
@@ -48,4 +28,14 @@ data class Speed(
 	override fun t(value: BigDecimal): Speed = Speed(value)
 
 	override fun toString() = super.toString()
+
+	constructor(
+		value: Number,
+		unit: SpeedUnits = SpeedUnits.MetersPerSecond
+	): this(BigDecimal.parseNumber(value), unit)
+
+	constructor(
+		value: BigDecimal,
+		unit: SpeedUnits = SpeedUnits.MetersPerSecond
+	): this(value * unit.multiplier)
 }

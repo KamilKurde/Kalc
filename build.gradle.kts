@@ -23,7 +23,10 @@ kotlin {
 	js(IR) {
 		browser {
 			testTask {
-				enabled = false
+				//enabled = false
+				useKarma {
+					useIe()
+				}
 			}
 		}
 		binaries.executable()
@@ -52,7 +55,19 @@ kotlin {
 			}
 		}
 		val jvmMain by getting
+		val jvmTest by getting {
+			dependencies {
+				implementation(kotlin("test-junit5"))
+				implementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+				runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+			}
+		}
 		val jsMain by getting
+		val jsTest by getting {
+			dependencies {
+				implementation(kotlin("test-js"))
+			}
+		}
 		val nativeMain by getting
 	}
 }

@@ -20,7 +20,7 @@ kotlin {
 			kotlinOptions.jvmTarget = "1.6"
 		}
 	}
-	js(IR) {
+	js(LEGACY) {
 		browser {
 			testTask {
 				//enabled = false
@@ -31,6 +31,7 @@ kotlin {
 		}
 		binaries.executable()
 	}
+
 	val hostOs = System.getProperty("os.name")
 	val isMingwX64 = hostOs.startsWith("Windows")
 	val nativeTarget = when

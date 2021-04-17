@@ -1,6 +1,5 @@
 package com.github.KamilKurde.Kalc.units.mass
 
-import com.github.KamilKurde.Kalc.Kalc.KalcInterface
 import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Kalc.UnitDelegate
 import com.github.KamilKurde.Kalc.Multipliers
@@ -9,7 +8,7 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 data class Mass(
 	var inGrams: BigDecimal,
-): KalcType<Mass>(), KalcInterface
+): KalcType<Mass>()
 {
 	var inTones by UnitDelegate(Multipliers.mega)
 	var inSlugs by UnitDelegate(Multipliers.slug)

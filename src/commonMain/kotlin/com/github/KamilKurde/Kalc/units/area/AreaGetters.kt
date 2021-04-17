@@ -1,6 +1,6 @@
 package com.github.KamilKurde.Kalc.units.area
 
-val Number.mile2 get() = Area(this, AreaUnits.Mile2)
+val Number.miles2 get() = Area(this, AreaUnits.Mile2)
 val Number.kilometers2 get() = Area(this, AreaUnits.Kilometers2)
 val Number.meters2 get() = Area(this)
 val Number.yard2 get() = Area(this, AreaUnits.Yard2)

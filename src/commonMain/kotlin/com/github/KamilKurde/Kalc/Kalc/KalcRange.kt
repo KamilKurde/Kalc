@@ -1,11 +1,9 @@
 package com.github.KamilKurde.Kalc.Kalc
 
-@Suppress("UNCHECKED_CAST")
-class KalcRange<T: KalcInterface>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T>).defaultStep()): Iterable<T>
+class KalcRange<T: KalcType<T>>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T>).defaultStep()): Iterable<T>
 {
 	init
 	{
-		require(start is KalcType<*> && end is KalcType<*>) { "\"start\" and \"end\" arguments must inherit from KalcType" }
 		require(end >= start) { "\"end\" must have higher value than \"start\"" }
 	}
 

@@ -10,5 +10,6 @@ enum class VolumeUnits(val multiplier: BigDecimal)
 	Meters3(BigDecimal.ONE),
 	Barrels(Multipliers.barrel),
 	Liters(Multipliers.liter),
+	Centimeters3(Multipliers.centi3),
 	Milliliters(Multipliers.milli * Multipliers.liter)
 }

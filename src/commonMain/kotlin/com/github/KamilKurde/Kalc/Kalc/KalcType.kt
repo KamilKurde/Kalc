@@ -4,18 +4,22 @@ import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.functions.readable
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
+// FOR USE ONLY ON CLASSES INHERITING AFTER KalcType
+interface KalcInterface
+{
+	fun component1(): BigDecimal
+
+	fun setComponent1(value: BigDecimal)
+
+	operator fun compareTo(other: KalcInterface) = this.component1().compareTo(other.component1())
+}
+
 @Suppress("UNCHECKED_CAST")
-abstract class KalcType<T: KalcType<T>>
+abstract class KalcType<T: KalcInterface>: KalcInterface
 {
 	abstract fun t(value: BigDecimal): T
 
 	fun defaultStep(): T = t(BigDecimal.ONE)
-
-	abstract fun component1(): BigDecimal
-
-	abstract fun setComponent1(value: BigDecimal)
-
-	operator fun compareTo(other: T) = this.component1().compareTo(other.component1())
 
 	operator fun rangeTo(other: T) =
 		KalcRange(this as T, other, true)

@@ -1,6 +1,7 @@
 package com.github.KamilKurde.Kalc.Kalc
 
-class KalcRange<T: KalcType<T>>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T>).defaultStep()): Iterable<T>
+@Suppress("UNCHECKED_CAST")
+class KalcRange<T: KalcInterface>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T>).defaultStep()): Iterable<T>
 {
 	init
 	{

@@ -6,14 +6,20 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 object Multipliers
 {
 	// Standard
-	val mega by lazy { BigDecimal.fromInt(1_000_000) }
-	val kilo by lazy { BigDecimal.fromInt(1_000) }
-	val deca by lazy { BigDecimal.fromInt(10) }
-	val deci by lazy { BigDecimal.fromFloat(0.1f) }
-	val centi by lazy { BigDecimal.fromFloat(0.01f) }
-	val milli by lazy { BigDecimal.fromFloat(0.001f) }
-	val nano by lazy { BigDecimal.parseString("0.000000001") }
 	val pico by lazy { BigDecimal.parseString("0.000000000001") }
+	val nano by lazy { BigDecimal.parseString("0.000000001") }
+	val milli by lazy { BigDecimal.fromFloat(0.001f) }
+	val centi by lazy { BigDecimal.fromFloat(0.01f) }
+	val deci by lazy { BigDecimal.fromFloat(0.1f) }
+	val deca by lazy { BigDecimal.fromInt(10) }
+	val kilo by lazy { BigDecimal.fromInt(1_000) }
+	val mega by lazy { kilo * kilo }
+	val giga by lazy { mega * kilo }
+	val tera by lazy { giga * kilo }
+	val peta by lazy { tera * kilo }
+	val eksa by lazy { peta * kilo }
+	val zetta by lazy { eksa * kilo }
+	val jotta by lazy { zetta * kilo }
 
 	// Distance
 	val inch by lazy { BigDecimal.parseNumber(25.4) * milli }
@@ -38,6 +44,7 @@ object Multipliers
 	val barrel by lazy { BigDecimal.parseString("0.158987294928") }
 	val deci3 by lazy { deci2 * deci }
 	val liter by lazy { deci3 }
+	val centi3 by lazy { centi2 * centi }
 	val megalitre by lazy { liter * mega }
 
 	// Time
@@ -57,4 +64,15 @@ object Multipliers
 	val ounce by lazy { BigDecimal.parseString("28.3495231") }
 	val pound by lazy { ounce * 16 }
 	val slug by lazy { BigDecimal.parseString("14.5939029") * kilo }
+
+	// Data
+	val byte by lazy { BigDecimal.parseNumber(8) }
+	val kibi by lazy { BigDecimal.parseNumber(1024) }
+	val mebi by lazy { kibi * kibi }
+	val gibi by lazy { mebi * kibi }
+	val tebi by lazy { gibi * kibi }
+	val pebi by lazy { tebi * kibi }
+	val eksbi by lazy { pebi * kibi }
+	val zebi by lazy { eksbi * kibi }
+	val jobi by lazy { zebi * kibi }
 }

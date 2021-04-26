@@ -66,7 +66,7 @@ object Multipliers
 	val slug by lazy { BigDecimal.parseString("14.5939029") * kilo }
 
 	// Data
-	val byte by lazy { BigDecimal.parseNumber(8) }
+	val bit by lazy { BigDecimal.ONE / BigDecimal.parseNumber(8) }
 	val kibi by lazy { BigDecimal.parseNumber(1024) }
 	val mebi by lazy { kibi * kibi }
 	val gibi by lazy { mebi * kibi }

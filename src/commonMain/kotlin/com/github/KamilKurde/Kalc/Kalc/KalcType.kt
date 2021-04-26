@@ -12,6 +12,8 @@ interface KalcInterface
 	fun setComponent1(value: BigDecimal)
 
 	operator fun compareTo(other: KalcInterface) = this.component1().compareTo(other.component1())
+
+	val isPositive: Boolean
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -26,6 +28,9 @@ abstract class KalcType<T: KalcInterface>: KalcInterface
 
 	infix fun until(other: T) =
 		KalcRange(this as T, other, false)
+
+	infix fun downTo(other: T) =
+		KalcRange(this as T, other, true, goingUp = false)
 
 	operator fun unaryMinus() = t(-component1())
 
@@ -54,4 +59,6 @@ abstract class KalcType<T: KalcInterface>: KalcInterface
 	operator fun remAssign(number: Number) = setComponent1(component1() % BigDecimal.parseNumber(number))
 
 	override fun toString() = this::class.simpleName + "(" + component1().readable() + ")"
+
+	override val isPositive get() = this.component1() >= BigDecimal.ZERO
 }

@@ -1,10 +1,17 @@
 package com.github.KamilKurde.Kalc.Kalc
 
-class KalcIterator<T: KalcInterface>(val range: KalcRange<T>, val step: T): Iterator<T>
+@Suppress("UNCHECKED_CAST")
+class KalcIterator<T: KalcInterface>(private val range: KalcRange<T>, private val step: T): Iterator<T>
 {
-	private var i = range.start as KalcType<T>
+	private var i = range.start as KalcType<T> - step
 
-	override fun hasNext(): Boolean = range.contains(i + step)
+	private fun incrementI(): T
+	{
+		i = i as KalcType<T> + step
+		return i
+	}
 
-	override fun next(): T = (i + step).also { i = (i + step) as KalcType<T> }
+	override fun hasNext(): Boolean = ((i as KalcType<T> + step) in range).also { println((i as KalcType<T> + step).toString() + " in range " + range.toString() + ": " + range.contains(i as KalcType<T> + step)) }
+
+	override fun next(): T = incrementI()
 }

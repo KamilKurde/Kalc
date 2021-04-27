@@ -1,10 +1,11 @@
 plugins {
 	java
 	kotlin("multiplatform") version "1.4.32"
+	`maven-publish`
 }
 
 group = "com.github.KamilKurde"
-version = "0.1"
+version = "0.1.0"
 
 repositories {
 	mavenCentral()

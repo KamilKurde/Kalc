@@ -5,13 +5,13 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 
 enum class TransferUnits(val multiplier: BigDecimal)
 {
-	JobibytesPerSecond(Multipliers.jobi),
+	JobibytesPerSecond(Multipliers.yobi),
 	JobibytesPerMinute(JobibytesPerSecond.multiplier * Multipliers.minute),
 	JobibytesPerHour(JobibytesPerSecond.multiplier * Multipliers.hour),
 
-	JottabytesPerSecond(Multipliers.jotta),
-	JottabytesPerMinute(JottabytesPerSecond.multiplier * Multipliers.minute),
-	JottabytesPerHour(JottabytesPerSecond.multiplier * Multipliers.hour),
+	YottabytesPerSecond(Multipliers.yotta),
+	YottabytesPerMinute(YottabytesPerSecond.multiplier * Multipliers.minute),
+	YottabytesPerHour(YottabytesPerSecond.multiplier * Multipliers.hour),
 
 	ZebibytesPerSecond(Multipliers.zebi),
 	ZebibytesPerMinute(ZebibytesPerSecond.multiplier * Multipliers.minute),
@@ -21,11 +21,11 @@ enum class TransferUnits(val multiplier: BigDecimal)
 	ZettabytesPerMinute(ZettabytesPerSecond.multiplier * Multipliers.minute),
 	ZettabytesPerHour(ZettabytesPerSecond.multiplier * Multipliers.hour),
 
-	EksbibytesPerSecond(Multipliers.eksbi),
+	EksbibytesPerSecond(Multipliers.exbi),
 	EksbibytesPerMinute(EksbibytesPerSecond.multiplier * Multipliers.minute),
 	EksbibytesPerHour(EksbibytesPerSecond.multiplier * Multipliers.hour),
 
-	EksabytesPerSecond(Multipliers.eksa),
+	EksabytesPerSecond(Multipliers.exa),
 	EksabytesPerMinute(EksabytesPerSecond.multiplier * Multipliers.minute),
 	EksabytesPerHour(EksabytesPerSecond.multiplier * Multipliers.hour),
 
@@ -73,13 +73,13 @@ enum class TransferUnits(val multiplier: BigDecimal)
 	BytesPerMinute(BytesPerSecond.multiplier * Multipliers.minute),
 	BytesPerHour(BytesPerSecond.multiplier * Multipliers.hour),
 
-	JobibitsPerSecond(Multipliers.jobi * Multipliers.bit),
+	JobibitsPerSecond(Multipliers.yobi * Multipliers.bit),
 	JobibitsPerMinute(JobibitsPerSecond.multiplier * Multipliers.minute),
 	JobibitsPerHour(JobibitsPerSecond.multiplier * Multipliers.hour),
 
-	JottabitsPerSecond(Multipliers.jotta * Multipliers.bit),
-	JottabitsPerMinute(JottabitsPerSecond.multiplier * Multipliers.minute),
-	JottabitsPerHour(JottabitsPerSecond.multiplier * Multipliers.hour),
+	yottabitsPerSecond(Multipliers.yotta * Multipliers.bit),
+	yottabitsPerMinute(yottabitsPerSecond.multiplier * Multipliers.minute),
+	yottabitsPerHour(yottabitsPerSecond.multiplier * Multipliers.hour),
 
 	ZebibitsPerSecond(Multipliers.zebi * Multipliers.bit),
 	ZebibitsPerMinute(ZebibitsPerSecond.multiplier * Multipliers.minute),
@@ -89,11 +89,11 @@ enum class TransferUnits(val multiplier: BigDecimal)
 	ZettabitsPerMinute(ZettabitsPerSecond.multiplier * Multipliers.minute),
 	ZettabitsPerHour(ZettabitsPerSecond.multiplier * Multipliers.hour),
 
-	EksbibitsPerSecond(Multipliers.eksbi * Multipliers.bit),
+	EksbibitsPerSecond(Multipliers.exbi * Multipliers.bit),
 	EksbibitsPerMinute(EksbibitsPerSecond.multiplier * Multipliers.minute),
 	EksbibitsPerHour(EksbibitsPerSecond.multiplier * Multipliers.hour),
 
-	EksabitsPerSecond(Multipliers.eksa * Multipliers.bit),
+	EksabitsPerSecond(Multipliers.exa * Multipliers.bit),
 	EksabitsPerMinute(EksabitsPerSecond.multiplier * Multipliers.minute),
 	EksabitsPerHour(EksabitsPerSecond.multiplier * Multipliers.hour),
 

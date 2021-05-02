@@ -17,9 +17,9 @@ object Multipliers
 	val giga by lazy { mega * kilo }
 	val tera by lazy { giga * kilo }
 	val peta by lazy { tera * kilo }
-	val eksa by lazy { peta * kilo }
-	val zetta by lazy { eksa * kilo }
-	val jotta by lazy { zetta * kilo }
+	val exa by lazy { peta * kilo }
+	val zetta by lazy { exa * kilo }
+	val yotta by lazy { zetta * kilo }
 
 	// Distance
 	val inch by lazy { BigDecimal.parseNumber(25.4) * milli }
@@ -72,7 +72,7 @@ object Multipliers
 	val gibi by lazy { mebi * kibi }
 	val tebi by lazy { gibi * kibi }
 	val pebi by lazy { tebi * kibi }
-	val eksbi by lazy { pebi * kibi }
-	val zebi by lazy { eksbi * kibi }
-	val jobi by lazy { zebi * kibi }
+	val exbi by lazy { pebi * kibi }
+	val zebi by lazy { exbi * kibi }
+	val yobi by lazy { zebi * kibi }
 }

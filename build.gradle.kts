@@ -64,7 +64,11 @@ kotlin {
 				runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 			}
 		}
-		val jsMain by getting
+		val jsMain by getting {
+			dependencies {
+				implementation(kotlin("stdlib-js"))
+			}
+		}
 		val jsTest by getting {
 			dependencies {
 				implementation(kotlin("test-js"))

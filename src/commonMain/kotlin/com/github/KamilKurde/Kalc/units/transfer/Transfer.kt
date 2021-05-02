@@ -13,9 +13,9 @@ data class Transfer(
 	val inJobibytesPerMinute by UnitDelegate(TransferUnits.JobibytesPerMinute.multiplier)
 	val inJobibytesPerHour by UnitDelegate(TransferUnits.JobibytesPerHour.multiplier)
 
-	val inJottabytesPerSecond by UnitDelegate(TransferUnits.JottabytesPerSecond.multiplier)
-	val inJottabytesPerMinute by UnitDelegate(TransferUnits.JottabytesPerMinute.multiplier)
-	val inJottabytesPerHour by UnitDelegate(TransferUnits.JottabytesPerHour.multiplier)
+	val inYottabytesPerSecond by UnitDelegate(TransferUnits.YottabytesPerSecond.multiplier)
+	val inYottabytesPerMinute by UnitDelegate(TransferUnits.YottabytesPerMinute.multiplier)
+	val inYottabytesPerHour by UnitDelegate(TransferUnits.YottabytesPerHour.multiplier)
 
 	val inZebibytesPerSecond by UnitDelegate(TransferUnits.ZebibytesPerSecond.multiplier)
 	val inZebibytesPerMinute by UnitDelegate(TransferUnits.ZebibytesPerMinute.multiplier)
@@ -80,9 +80,9 @@ data class Transfer(
 	val inJobibitsPerMinute by UnitDelegate(TransferUnits.JobibitsPerMinute.multiplier)
 	val inJobibitsPerHour by UnitDelegate(TransferUnits.JobibitsPerHour.multiplier)
 
-	val inJottabitsPerSecond by UnitDelegate(TransferUnits.JottabitsPerSecond.multiplier)
-	val inJottabitsPerMinute by UnitDelegate(TransferUnits.JottabitsPerMinute.multiplier)
-	val inJottabitsPerHour by UnitDelegate(TransferUnits.JottabitsPerHour.multiplier)
+	val inYottabitsPerSecond by UnitDelegate(TransferUnits.yottabitsPerSecond.multiplier)
+	val inYottabitsPerMinute by UnitDelegate(TransferUnits.yottabitsPerMinute.multiplier)
+	val inYottabitsPerHour by UnitDelegate(TransferUnits.yottabitsPerHour.multiplier)
 
 	val inZebibitsPerSecond by UnitDelegate(TransferUnits.ZebibitsPerSecond.multiplier)
 	val inZebibitsPerMinute by UnitDelegate(TransferUnits.ZebibitsPerMinute.multiplier)

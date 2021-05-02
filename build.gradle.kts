@@ -47,6 +47,7 @@ kotlin {
 	sourceSets {
 		val commonMain by getting {
 			dependencies {
+				implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
 				implementation("com.ionspin.kotlin:bignum:0.2.8")
 			}
 		}
@@ -56,11 +57,7 @@ kotlin {
 				implementation(kotlin("test-annotations-common"))
 			}
 		}
-		val jvmMain by getting {
-			dependencies {
-				implementation(kotlin("stdlib-jre8", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
-			}
-		}
+		val jvmMain by getting
 		val jvmTest by getting {
 			dependencies {
 				implementation(kotlin("test-junit5"))
@@ -78,10 +75,6 @@ kotlin {
 				implementation(kotlin("test-js"))
 			}
 		}
-		val nativeMain by getting {
-			dependencies {
-				implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
-			}
-		}
+		val nativeMain by getting
 	}
 }

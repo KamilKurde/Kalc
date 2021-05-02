@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-	implementation(kotlin("stdlib"))
+	implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
 }
 
 kotlin {
@@ -56,7 +56,11 @@ kotlin {
 				implementation(kotlin("test-annotations-common"))
 			}
 		}
-		val jvmMain by getting
+		val jvmMain by getting {
+			dependencies {
+				implementation(kotlin("stdlib-jre8", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+			}
+		}
 		val jvmTest by getting {
 			dependencies {
 				implementation(kotlin("test-junit5"))
@@ -66,7 +70,7 @@ kotlin {
 		}
 		val jsMain by getting {
 			dependencies {
-				implementation(kotlin("stdlib-js"))
+				implementation(kotlin("stdlib-js", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
 			}
 		}
 		val jsTest by getting {
@@ -74,6 +78,10 @@ kotlin {
 				implementation(kotlin("test-js"))
 			}
 		}
-		val nativeMain by getting
+		val nativeMain by getting {
+			dependencies {
+				implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+			}
+		}
 	}
 }

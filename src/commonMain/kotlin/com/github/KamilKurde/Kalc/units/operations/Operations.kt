@@ -4,7 +4,7 @@ import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Kalc.UnitDelegate
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
-import com.github.KamilKurde.Kalc.units.OperationSpeed.OperationSpeed
+import com.github.KamilKurde.Kalc.units.operationspeed.OperationSpeed
 import com.github.KamilKurde.Kalc.units.time.Time
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 

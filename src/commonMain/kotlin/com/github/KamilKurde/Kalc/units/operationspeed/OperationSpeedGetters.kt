@@ -1,6 +1,4 @@
-package com.github.KamilKurde.Kalc.units.operationSpeed
-
-import com.github.KamilKurde.Kalc.units.OperationSpeed.OperationSpeed
+package com.github.KamilKurde.Kalc.units.operationspeed
 
 val Number.YOPH get() = OperationSpeed(this, OperationSpeedUnits.YOPH)
 val Number.ZOPH get() = OperationSpeed(this, OperationSpeedUnits.ZOPH)

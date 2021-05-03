@@ -1,4 +1,4 @@
-package com.github.KamilKurde.Kalc.units.operationSpeed
+package com.github.KamilKurde.Kalc.units.operationspeed
 
 import com.github.KamilKurde.Kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal

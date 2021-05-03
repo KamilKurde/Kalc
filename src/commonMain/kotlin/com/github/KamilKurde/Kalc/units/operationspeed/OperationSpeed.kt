@@ -1,11 +1,10 @@
-package com.github.KamilKurde.Kalc.units.OperationSpeed
+package com.github.KamilKurde.Kalc.units.operationspeed
 
 import com.github.KamilKurde.Kalc.Kalc.KalcType
 import com.github.KamilKurde.Kalc.Kalc.UnitDelegate
 import com.github.KamilKurde.Kalc.Multipliers
 import com.github.KamilKurde.Kalc.functions.parseNumber
 import com.github.KamilKurde.Kalc.units.computations.Operations
-import com.github.KamilKurde.Kalc.units.operationSpeed.OperationSpeedUnits
 import com.github.KamilKurde.Kalc.units.time.Time
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 

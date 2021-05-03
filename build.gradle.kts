@@ -4,7 +4,7 @@ plugins {
 	`maven-publish`
 }
 
-group = "com.github.KamilKurde"
+group = "com.KamilKurde"
 version = "0.1.0"
 
 repositories {
@@ -47,7 +47,7 @@ kotlin {
 	sourceSets {
 		val commonMain by getting {
 			dependencies {
-				implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+				implementation(kotlin("stdlib"))
 				implementation("com.ionspin.kotlin:bignum:0.2.8")
 			}
 		}
@@ -67,7 +67,7 @@ kotlin {
 		}
 		val jsMain by getting {
 			dependencies {
-				implementation(kotlin("stdlib-js", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+				implementation(kotlin("stdlib-js"))
 			}
 		}
 		val jsTest by getting {
@@ -76,5 +76,14 @@ kotlin {
 			}
 		}
 		val nativeMain by getting
+		dependencies {
+			implementation(kotlin("stdlib"))
+		}
+		val nativeTest by getting
 	}
+}
+
+extensions.findByName("buildScan")?.withGroovyBuilder {
+	setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
+	setProperty("termsOfServiceAgree", "yes")
 }

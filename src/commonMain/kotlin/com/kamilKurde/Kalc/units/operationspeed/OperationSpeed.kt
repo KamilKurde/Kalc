@@ -5,7 +5,7 @@ import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
 import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
-import com.kamilKurde.kalc.units.computations.Operations
+import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
 
 data class OperationSpeed(

@@ -1,4 +1,4 @@
-package com.kamilKurde.kalc.units.computations
+package com.kamilKurde.kalc.units.operations
 
 import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal

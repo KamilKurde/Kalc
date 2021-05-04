@@ -1,7 +1,7 @@
 package com.kamilKurde.kalc.Kalc
 
 import com.kamilKurde.kalc.functions.getTime
-import com.kamilKurde.kalc.units.computations.Operations
+import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
 
 data class Benchmark(val duration: Time, val operations: Operations)

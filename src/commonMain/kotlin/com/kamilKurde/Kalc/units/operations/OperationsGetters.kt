@@ -1,4 +1,4 @@
-package com.kamilKurde.kalc.units.computations
+package com.kamilKurde.kalc.units.operations
 
 val Number.yottaOperations get() = Operations(this, OperationsUnits.YottaOperations)
 val Number.zettaOperations get() = Operations(this, OperationsUnits.ZettaOperations)

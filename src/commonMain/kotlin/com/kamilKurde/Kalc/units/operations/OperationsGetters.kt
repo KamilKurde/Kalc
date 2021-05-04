@@ -8,4 +8,4 @@ val Number.teraOperations get() = Operations(this, OperationsUnits.TeraOperation
 val Number.gigaOperations get() = Operations(this, OperationsUnits.GigaOperations)
 val Number.megaOperations get() = Operations(this, OperationsUnits.MegaOperations)
 val Number.kiloOperations get() = Operations(this, OperationsUnits.KiloOperationse)
-val Number.computations get() = Operations(this, OperationsUnits.Operations)
+val Number.operations get() = Operations(this, OperationsUnits.Operations)

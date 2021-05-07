@@ -25,7 +25,7 @@ data class Time(
 		inSeconds = value
 	}
 
-	override fun t(value: BigDecimal): Time = Time(value)
+	override fun getInstance(value: BigDecimal): Time = Time(value)
 
 	override fun toString() = super.toString()
 

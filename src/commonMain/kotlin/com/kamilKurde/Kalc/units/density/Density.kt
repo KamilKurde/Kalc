@@ -23,7 +23,7 @@ data class Density(
 
 	operator fun times(volume: Volume) = Mass(inGramsPerCentimeter3 * volume.inCentimeters3)
 
-	override fun t(value: BigDecimal): Density = Density(value)
+	override fun getInstance(value: BigDecimal): Density = Density(value)
 
 	override fun toString() = super.toString()
 

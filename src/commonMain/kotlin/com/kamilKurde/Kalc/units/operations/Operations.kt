@@ -32,7 +32,7 @@ data class Operations(
 		inOperations = value
 	}
 
-	override fun t(value: BigDecimal): Operations = Operations(value)
+	override fun getInstance(value: BigDecimal): Operations = Operations(value)
 
 	override fun toString() = super.toString()
 

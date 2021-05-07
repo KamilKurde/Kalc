@@ -54,7 +54,7 @@ data class Data(
 	operator fun div(time: Time) =
 		Transfer(inBytes / time.inSeconds)
 
-	override fun t(value: BigDecimal): Data = Data(value)
+	override fun getInstance(value: BigDecimal): Data = Data(value)
 
 	override fun toString() = super.toString()
 

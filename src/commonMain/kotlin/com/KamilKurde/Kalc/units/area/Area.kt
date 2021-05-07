@@ -27,7 +27,7 @@ data class Area(
 		inMeters2 = value
 	}
 
-	override fun t(value: BigDecimal): Area = Area(value)
+	override fun getInstance(value: BigDecimal): Area = Area(value)
 
 	override fun toString() = super.toString()
 

@@ -30,7 +30,7 @@ data class Mass(
 		inGrams = value
 	}
 
-	override fun t(value: BigDecimal): Mass = Mass(value)
+	override fun getInstance(value: BigDecimal): Mass = Mass(value)
 
 	override fun toString() = super.toString()
 

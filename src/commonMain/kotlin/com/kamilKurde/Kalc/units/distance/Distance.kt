@@ -41,7 +41,7 @@ data class Distance(
 		inMeters = value
 	}
 
-	override fun t(value: BigDecimal): Distance = Distance(value)
+	override fun getInstance(value: BigDecimal): Distance = Distance(value)
 
 	override fun toString() = super.toString()
 

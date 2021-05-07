@@ -26,7 +26,7 @@ data class Volume(
 		inMeters3 = value
 	}
 
-	override fun t(value: BigDecimal): Volume = Volume(value)
+	override fun getInstance(value: BigDecimal): Volume = Volume(value)
 
 	override fun toString() = super.toString()
 

@@ -149,7 +149,7 @@ data class Transfer(
 		inBytesPerSecond = value
 	}
 
-	override fun t(value: BigDecimal): Transfer = Transfer(value)
+	override fun getInstance(value: BigDecimal): Transfer = Transfer(value)
 
 	override fun toString() = super.toString()
 

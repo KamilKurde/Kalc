@@ -45,7 +45,7 @@ data class OperationSpeed(
 		inOPS = value
 	}
 
-	override fun t(value: BigDecimal): OperationSpeed = OperationSpeed(value)
+	override fun getInstance(value: BigDecimal): OperationSpeed = OperationSpeed(value)
 
 	override fun toString() = super.toString()
 

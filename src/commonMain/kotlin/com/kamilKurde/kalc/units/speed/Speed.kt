@@ -8,7 +8,7 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.time.Time
 
-data class Speed(
+class Speed(
 	var inMetersPerSecond: BigDecimal,
 ): KalcType<Speed>()
 {
@@ -20,14 +20,14 @@ data class Speed(
 	operator fun times(time: Time) =
 		Distance(inMetersPerSecond * time.inSeconds)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inMetersPerSecond = value
-	}
+	override var value
+		get() = inMetersPerSecond
+		set(value)
+		{
+			inMetersPerSecond = value
+		}
 
 	override fun getInstance(value: BigDecimal): Speed = Speed(value)
-
-	override fun toString() = super.toString()
 
 	constructor(
 		value: Number,

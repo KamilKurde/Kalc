@@ -8,7 +8,7 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.volume.Volume
 
-data class Area(
+class Area(
 	var inMeters2: BigDecimal
 ): KalcType<Area>()
 {
@@ -22,14 +22,14 @@ data class Area(
 	operator fun times(distance: Distance) =
 		Volume(inMeters2 * distance.inMeters)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inMeters2 = value
-	}
+	override var value
+		get() = inMeters2
+		set(value)
+		{
+			inMeters2 = value
+		}
 
 	override fun getInstance(value: BigDecimal): Area = Area(value)
-
-	override fun toString() = super.toString()
 
 	constructor(
 		value: Number,

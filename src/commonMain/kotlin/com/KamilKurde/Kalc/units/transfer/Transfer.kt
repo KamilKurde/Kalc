@@ -5,7 +5,7 @@ import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
 import com.kamilKurde.kalc.functions.parseNumber
 
-data class Transfer(
+class Transfer(
 	var inBytesPerSecond: BigDecimal,
 ): KalcType<Transfer>()
 {
@@ -144,14 +144,14 @@ data class Transfer(
 	val inBitsPerMinute by UnitDelegate(TransferUnits.BitsPerMinute.multiplier)
 	val inBitsPerHour by UnitDelegate(TransferUnits.BitsPerHour.multiplier)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inBytesPerSecond = value
-	}
+	override var value
+		get() = inBytesPerSecond
+		set(value)
+		{
+			inBytesPerSecond = value
+		}
 
 	override fun getInstance(value: BigDecimal): Transfer = Transfer(value)
-
-	override fun toString() = super.toString()
 
 	constructor(
 		value: Number,

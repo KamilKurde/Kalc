@@ -8,7 +8,7 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
 
-data class OperationSpeed(
+class OperationSpeed(
 	var inOPS: BigDecimal,
 ): KalcType<OperationSpeed>()
 {
@@ -40,14 +40,14 @@ data class OperationSpeed(
 	operator fun times(time: Time) =
 		Operations(inOPS * time.inSeconds)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inOPS = value
-	}
+	override var value
+		get() = inOPS
+		set(value)
+		{
+			inOPS = value
+		}
 
 	override fun getInstance(value: BigDecimal): OperationSpeed = OperationSpeed(value)
-
-	override fun toString() = super.toString()
 
 	constructor(
 		value: Number,

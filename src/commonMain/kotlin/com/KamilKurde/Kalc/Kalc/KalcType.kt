@@ -7,15 +7,13 @@ import com.kamilKurde.kalc.functions.readable
 @Suppress("UNCHECKED_CAST")
 abstract class KalcType<T> where T: KalcType<T>
 {
-	abstract fun component1(): BigDecimal
-
-	abstract fun setComponent1(value: BigDecimal)
+	abstract var value: BigDecimal
 
 	abstract fun getInstance(value: BigDecimal): T
 
-	operator fun compareTo(other: T) = this.component1().compareTo(other.component1())
+	operator fun compareTo(other: T) = this.value.compareTo(other.value)
 
-	val isPositive get() = this.component1() >= BigDecimal.ZERO
+	val isPositive get() = this.value >= BigDecimal.ZERO
 
 	fun defaultStep(): T = getInstance(BigDecimal.ONE)
 
@@ -28,31 +26,46 @@ abstract class KalcType<T> where T: KalcType<T>
 	infix fun downTo(other: T) =
 		KalcRange(this as T, other, true, goingUp = false)
 
-	operator fun unaryMinus() = getInstance(-component1())
+	operator fun unaryMinus() = getInstance(-value)
 
-	operator fun plus(other: T): T = getInstance(component1() + other.component1())
+	operator fun plus(other: T): T = getInstance(value + other.value)
 
-	operator fun minus(other: T): T = getInstance(component1() - other.component1())
+	operator fun minus(other: T): T = getInstance(value - other.value)
 
-	operator fun times(number: Number): T = getInstance(component1() * BigDecimal.parseNumber(number))
+	operator fun times(number: Number): T = getInstance(value * BigDecimal.parseNumber(number))
 
-	operator fun div(other: T) = component1() / other.component1()
+	operator fun div(other: T) = value / other.value
 
-	operator fun div(number: Number): T = getInstance(component1() / BigDecimal.parseNumber(number))
+	operator fun div(number: Number): T = getInstance(value / BigDecimal.parseNumber(number))
 
-	operator fun rem(other: T): BigDecimal = component1() % other.component1()
+	operator fun rem(other: T): BigDecimal = value % other.value
 
-	operator fun rem(number: Number): T = getInstance(component1() % BigDecimal.parseNumber(number))
+	operator fun rem(number: Number): T = getInstance(value % BigDecimal.parseNumber(number))
 
-	operator fun plusAssign(other: T) = setComponent1(component1() + other.component1())
+	operator fun plusAssign(other: T)
+	{
+		value += other.value
+	}
 
-	operator fun minusAssign(other: T) = setComponent1(component1() + other.component1())
+	operator fun minusAssign(other: T)
+	{
+		value += other.value
+	}
 
-	operator fun timesAssign(number: Number) = setComponent1(component1() * BigDecimal.parseNumber(number))
+	operator fun timesAssign(number: Number)
+	{
+		value *= BigDecimal.parseNumber(number)
+	}
 
-	operator fun divAssign(number: Number) = setComponent1(component1() / BigDecimal.parseNumber(number))
+	operator fun divAssign(number: Number)
+	{
+		value /= BigDecimal.parseNumber(number)
+	}
 
-	operator fun remAssign(number: Number) = setComponent1(component1() % BigDecimal.parseNumber(number))
+	operator fun remAssign(number: Number)
+	{
+		value %= BigDecimal.parseNumber(number)
+	}
 
-	override fun toString() = this::class.simpleName + "(" + component1().readable() + ")"
+	override fun toString() = this::class.simpleName + "(" + value.readable() + ")"
 }

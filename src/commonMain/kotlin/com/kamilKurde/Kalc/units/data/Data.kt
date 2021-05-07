@@ -8,7 +8,7 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Transfer
 import com.kamilKurde.kalc.units.time.Time
 
-data class Data(
+class Data(
 	var inBytes: BigDecimal
 ): KalcType<Data>()
 {
@@ -46,17 +46,17 @@ data class Data(
 	var inKibibits by UnitDelegate(Multipliers.kibi * Multipliers.bit)
 	var inKilobits by UnitDelegate(Multipliers.kilo * Multipliers.bit)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inBits = value
-	}
+	override var value
+		get() = inBytes
+		set(value)
+		{
+			inBytes = value
+		}
 
 	operator fun div(time: Time) =
 		Transfer(inBytes / time.inSeconds)
 
 	override fun getInstance(value: BigDecimal): Data = Data(value)
-
-	override fun toString() = super.toString()
 
 	constructor(
 		value: Number,

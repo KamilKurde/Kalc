@@ -8,7 +8,7 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.volume.Volume
 
-class Area(
+data class Area(
 	var inMeters2: BigDecimal
 ): KalcType<Area>()
 {

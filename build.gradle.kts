@@ -1,6 +1,6 @@
 plugins {
 	java
-	kotlin("multiplatform") version "1.5.0"
+	kotlin("multiplatform") version "1.4.32"
 	`maven-publish`
 }
 
@@ -18,7 +18,7 @@ dependencies {
 kotlin {
 	jvm {
 		compilations.all {
-			kotlinOptions.jvmTarget = "1.6"
+			kotlinOptions.jvmTarget = "1.8"
 		}
 	}
 	js(LEGACY) {

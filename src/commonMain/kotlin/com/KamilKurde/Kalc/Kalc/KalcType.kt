@@ -11,7 +11,7 @@ abstract class KalcType<T> where T: KalcType<T>
 
 	abstract fun getInstance(value: BigDecimal): T
 
-	operator fun compareTo(other: T) = this.value.compareTo(other.value)
+	operator fun compareTo(other: T) = value.compareTo(other.value)
 
 	val isPositive get() = this.value >= BigDecimal.ZERO
 
@@ -68,4 +68,13 @@ abstract class KalcType<T> where T: KalcType<T>
 	}
 
 	override fun toString() = this::class.simpleName + "(" + value.readable() + ")"
+
+	override fun equals(other: Any?): Boolean = try
+	{
+		value == (other as T).value
+	}
+	catch (e: Exception)
+	{
+		false
+	}
 }

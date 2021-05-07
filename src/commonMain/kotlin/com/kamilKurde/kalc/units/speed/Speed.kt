@@ -25,7 +25,7 @@ data class Speed(
 		inMetersPerSecond = value
 	}
 
-	override fun t(value: BigDecimal): Speed = Speed(value)
+	override fun getInstance(value: BigDecimal): Speed = Speed(value)
 
 	override fun toString() = super.toString()
 

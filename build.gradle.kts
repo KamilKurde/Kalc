@@ -1,6 +1,6 @@
 plugins {
 	java
-	kotlin("multiplatform") version "1.4.32"
+	kotlin("multiplatform") version "1.5.0"
 	`maven-publish`
 }
 

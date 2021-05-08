@@ -1,9 +1,10 @@
 package com.kamilKurde.kalc.units.data
 
-import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
+import com.kamilKurde.kalc.Multipliers
 
-enum class DataUnits(val multiplier: BigDecimal)
+enum class DataUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	Jobibyte(Multipliers.yobi),
 	Yottabyte(Multipliers.yotta),

@@ -8,9 +8,9 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operationspeed.OperationSpeed
 import com.kamilKurde.kalc.units.time.Time
 
-class Operations(
+data class Operations(
 	var inOperations: BigDecimal,
-): KalcType<Operations>()
+): KalcType<Operations, OperationsUnits>()
 {
 	var inYottaOperations by UnitDelegate(Multipliers.yotta)
 	var inZettaOperations by UnitDelegate(Multipliers.zetta)
@@ -27,14 +27,15 @@ class Operations(
 	operator fun div(operationSpeed: OperationSpeed) =
 		Time(inOperations / operationSpeed.inOPS)
 
-	override var value
-		get() = inOperations
-		set(value)
-		{
-			inOperations = value
-		}
-
 	override fun getInstance(value: BigDecimal): Operations = Operations(value)
+
+
+	override fun setComponent1(value: BigDecimal)
+	{
+		inOperations = value
+	}
+
+	override val defaultUnit get() = OperationsUnits.Operations
 
 	constructor(
 		value: Number,

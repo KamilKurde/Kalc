@@ -1,9 +1,10 @@
 package com.kamilKurde.kalc.units.volume
 
-import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
+import com.kamilKurde.kalc.Multipliers
 
-enum class VolumeUnits(val multiplier: BigDecimal)
+enum class VolumeUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	Kilometers3(Multipliers.kilo3),
 	Megalitres(Multipliers.megalitre),

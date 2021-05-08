@@ -1,6 +1,6 @@
 package com.kamilKurde.kalc.Kalc
 
-class KalcRange<T>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T>).defaultStep(), private val goingUp: Boolean = true): Iterable<T> where T: KalcType<T>
+class KalcRange<T, E>(val start: T, val end: T, val inclusive: Boolean, private val step: T = (start as KalcType<T, E>).defaultStep(), private val goingUp: Boolean = true): Iterable<T> where T: KalcType<T, E>, E: KalcEnum
 {
 	init
 	{
@@ -14,7 +14,7 @@ class KalcRange<T>(val start: T, val end: T, val inclusive: Boolean, private val
 		other >= downBound && (other < upperBound || if (inclusive) other == upperBound else false)
 
 	override fun iterator(): Iterator<T> =
-		KalcIterator(this, if (goingUp) step else -(step as KalcType<T>))
+		KalcIterator(this, if (goingUp) step else -(step as KalcType<T, E>))
 
 	infix fun step(step: T): Iterable<T> =
 		KalcRange(start, end, inclusive, step, goingUp)

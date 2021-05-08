@@ -8,9 +8,9 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.time.Time
 
-class Speed(
+data class Speed(
 	var inMetersPerSecond: BigDecimal,
-): KalcType<Speed>()
+): KalcType<Speed, SpeedUnits>()
 {
 	var inKilometersPerHour by UnitDelegate(Multipliers.kmph)
 	var inMilesPerHour by UnitDelegate(Multipliers.mph)
@@ -20,14 +20,14 @@ class Speed(
 	operator fun times(time: Time) =
 		Distance(inMetersPerSecond * time.inSeconds)
 
-	override var value
-		get() = inMetersPerSecond
-		set(value)
-		{
-			inMetersPerSecond = value
-		}
-
 	override fun getInstance(value: BigDecimal): Speed = Speed(value)
+
+	override fun setComponent1(value: BigDecimal)
+	{
+		inMetersPerSecond = value
+	}
+
+	override val defaultUnit get() = SpeedUnits.MetersPerSecond
 
 	constructor(
 		value: Number,

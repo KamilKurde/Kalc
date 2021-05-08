@@ -8,9 +8,9 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
 import com.kamilKurde.kalc.units.volume.Volume
 
-class Mass(
+data class Mass(
 	var inGrams: BigDecimal,
-): KalcType<Mass>()
+): KalcType<Mass, MassUnits>()
 {
 	var inTones by UnitDelegate(Multipliers.mega)
 	var inSlugs by UnitDelegate(Multipliers.slug)
@@ -25,14 +25,14 @@ class Mass(
 
 	operator fun div(density: Density) = Volume(inKilograms / density.inKilogramsPerMeter3)
 
-	override var value
-		get() = inGrams
-		set(value)
-		{
-			inGrams = value
-		}
-
 	override fun getInstance(value: BigDecimal): Mass = Mass(value)
+
+	override fun setComponent1(value: BigDecimal)
+	{
+		inGrams = value
+	}
+
+	override val defaultUnit get() = MassUnits.Grams
 
 	constructor(
 		value: Number,

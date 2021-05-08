@@ -7,9 +7,9 @@ import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
 
-class Volume(
+data class Volume(
 	var inMeters3: BigDecimal,
-): KalcType<Volume>()
+): KalcType<Volume, VolumeUnits>()
 {
 	var inKilometers3 by UnitDelegate(Multipliers.kilo3)
 	var inMegalitres by UnitDelegate(Multipliers.mega)
@@ -21,16 +21,14 @@ class Volume(
 
 	operator fun times(density: Density) = density.times(this)
 
-	override var value
-		get() = inMeters3
-		set(value)
-		{
-			inMeters3 = value
-		}
-
 	override fun getInstance(value: BigDecimal): Volume = Volume(value)
 
-	override fun toString() = super.toString()
+	override fun setComponent1(value: BigDecimal)
+	{
+		inMeters3 = value
+	}
+
+	override val defaultUnit get() = VolumeUnits.Meters3
 
 	constructor(
 		value: Number,

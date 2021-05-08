@@ -2,14 +2,23 @@ package com.kamilKurde.kalc.Kalc
 
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.functions.parseNumber
-import com.kamilKurde.kalc.functions.readable
 
 @Suppress("UNCHECKED_CAST")
-abstract class KalcType<T> where T: KalcType<T>
+abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 {
-	abstract var value: BigDecimal
+	protected abstract fun component1(): BigDecimal
+	protected abstract fun setComponent1(value: BigDecimal)
+	var value: BigDecimal
+		get() = component1()
+		set(value) = setComponent1(value)
+
+	protected abstract val defaultUnit: E
 
 	abstract fun getInstance(value: BigDecimal): T
+
+	fun getInstance(value: BigDecimal, unit: E) = getInstance(value * unit.multiplier)
+
+	fun asUnit(unit: E): BigDecimal = value * unit.multiplier
 
 	operator fun compareTo(other: T) = value.compareTo(other.value)
 
@@ -67,14 +76,10 @@ abstract class KalcType<T> where T: KalcType<T>
 		value %= BigDecimal.parseNumber(number)
 	}
 
-	override fun toString() = this::class.simpleName + "(" + value.readable() + ")"
+	operator fun get(asUnit: E) = asUnit(asUnit)
 
-	override fun equals(other: Any?): Boolean = try
+	operator fun set(inUnit: E, value: BigDecimal)
 	{
-		value == (other as T).value
-	}
-	catch (e: Exception)
-	{
-		false
+		this.value = value * inUnit.multiplier
 	}
 }

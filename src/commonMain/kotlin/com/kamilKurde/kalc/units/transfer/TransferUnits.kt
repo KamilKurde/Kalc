@@ -2,8 +2,9 @@ package com.kamilKurde.kalc.units.distance
 
 import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
 
-enum class TransferUnits(val multiplier: BigDecimal)
+enum class TransferUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	JobibytesPerSecond(Multipliers.yobi),
 	JobibytesPerMinute(JobibytesPerSecond.multiplier * Multipliers.minute),

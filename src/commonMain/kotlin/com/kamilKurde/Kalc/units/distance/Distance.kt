@@ -9,9 +9,9 @@ import com.kamilKurde.kalc.units.area.Area
 import com.kamilKurde.kalc.units.speed.Speed
 import com.kamilKurde.kalc.units.time.Time
 
-class Distance(
+data class Distance(
 	var inMeters: BigDecimal,
-): KalcType<Distance>()
+): KalcType<Distance, DistanceUnits>()
 {
 	var inMiles by UnitDelegate(Multipliers.mile)
 	var inKilometers by UnitDelegate(Multipliers.kilo)
@@ -36,14 +36,14 @@ class Distance(
 	operator fun div(speed: Speed) =
 		Time(inMeters / speed.inMetersPerSecond)
 
-	override var value
-		get() = inMeters
-		set(value)
-		{
-			inMeters = value
-		}
-
 	override fun getInstance(value: BigDecimal): Distance = Distance(value)
+
+	override fun setComponent1(value: BigDecimal)
+	{
+		inMeters = value
+	}
+
+	override val defaultUnit get() = DistanceUnits.Meters
 
 	constructor(
 		value: Number,

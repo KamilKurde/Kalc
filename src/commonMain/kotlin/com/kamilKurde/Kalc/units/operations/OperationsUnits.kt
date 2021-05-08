@@ -1,9 +1,10 @@
 package com.kamilKurde.kalc.units.operations
 
-import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
+import com.kamilKurde.kalc.Multipliers
 
-enum class OperationsUnits(val multiplier: BigDecimal)
+enum class OperationsUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	YottaOperations(Multipliers.yotta),
 	ZettaOperations(Multipliers.zetta),

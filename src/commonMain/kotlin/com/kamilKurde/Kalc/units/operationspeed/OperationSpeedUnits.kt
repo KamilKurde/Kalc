@@ -1,9 +1,10 @@
 package com.kamilKurde.kalc.units.operationspeed
 
-import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
+import com.kamilKurde.kalc.Multipliers
 
-enum class OperationSpeedUnits(val multiplier: BigDecimal)
+enum class OperationSpeedUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	YOPH(Multipliers.yotta * Multipliers.hour),
 	ZOPH(Multipliers.zetta * Multipliers.hour),

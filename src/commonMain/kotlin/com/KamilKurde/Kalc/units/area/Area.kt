@@ -10,7 +10,7 @@ import com.kamilKurde.kalc.units.volume.Volume
 
 data class Area(
 	var inMeters2: BigDecimal
-): KalcType<Area>()
+): KalcType<Area, AreaUnits>()
 {
 	var inKilometers2 by UnitDelegate(Multipliers.kilo2)
 	var inDecimeters2 by UnitDelegate(Multipliers.deci2)
@@ -21,13 +21,6 @@ data class Area(
 
 	operator fun times(distance: Distance) =
 		Volume(inMeters2 * distance.inMeters)
-
-	override var value
-		get() = inMeters2
-		set(value)
-		{
-			inMeters2 = value
-		}
 
 	override fun getInstance(value: BigDecimal): Area = Area(value)
 
@@ -40,4 +33,11 @@ data class Area(
 		value: BigDecimal,
 		unit: AreaUnits = AreaUnits.Meters2
 	): this(value * unit.multiplier)
+
+	override fun setComponent1(value: BigDecimal)
+	{
+		inMeters2 = value
+	}
+
+	override val defaultUnit get() = AreaUnits.Meters2
 }

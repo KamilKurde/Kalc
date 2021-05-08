@@ -25,5 +25,6 @@ class AreaTest
 		assertEquals(pool, 12500000.centimeters2)
 		assertEquals(1.miles2, 27_878_400.feet2)
 		assertEquals(1.miles2, Area(BigDecimal.parseString("2.589988110336"), AreaUnits.Kilometers2))
+		println(pool[AreaUnits.Feet2])
 	}
 }

@@ -1,9 +1,10 @@
 package com.kamilKurde.kalc.units.area
 
-import com.kamilKurde.kalc.Multipliers
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.kamilKurde.kalc.Kalc.KalcEnum
+import com.kamilKurde.kalc.Multipliers
 
-enum class AreaUnits(val multiplier: BigDecimal)
+enum class AreaUnits(override val multiplier: BigDecimal): KalcEnum
 {
 	Mile2(Multipliers.mile2),
 	Kilometers2(Multipliers.kilo2),

@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-	implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+	implementation(kotlin("stdlib"))
 }
 
 kotlin {

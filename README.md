@@ -7,10 +7,8 @@ Lightweight Kotlin library for operations on various units
 1. Clone this repository, and run publishToMavenLocal task
 2. In your target project add mavenLocal to repositories
 3. Add these dependencies to your target project:
-
-* "com.KamilKurde:Kalc:0.1"
-* "com.ionspin.kotlin:bignum:0.2.8"
-
+    * "com.KamilKurde:Kalc:0.1"
+    * "com.ionspin.kotlin:bignum:0.2.8"
 4. Sync gradle
 
 ## Supported operations
@@ -30,11 +28,11 @@ Lightweight Kotlin library for operations on various units
 ### Table
 
 |Number                   |Area                     |Data                     |Density                  |Distance                 |Mass                     |Operations               |OperationSpeed           |Speed                    |Time                     |Transfer                 |Volume                   |
- |:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|
+|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------------:|
 |Area                     |                         |                         |                         |     [*](a "Volume")     |                         |                         |                         |                         |                         |                         |                         |
 |Data                     |                         |                         |                         |                         |                         |                         |                         |                         |    [/](a "Transfer")    |                         |                         |
 |Density                  |                         |                         |                         |                         |                         |                         |                         |                         |                         |                         |      [*](a "Mass")      |
-|Distance                 |     [*](a "Volume")     |                         |      [*](a "Area")      |                         |                         |                         |                         |      [/](a "Time")      |     [/](a "Speed")      |                         |                         |
+|Distance                 |     [*](a "Volume")     |                         |                         |       [*](a "Area")     |                         |                         |                         |      [/](a "Time")      |     [/](a "Speed")      |                         |                         |
 |Mass                     |                         |                         |     [/](a "Volume")     |                         |                         |                         |                         |                         |                         |                         |    [/](a "Density")     |
 |Operations               |                         |                         |                         |                         |                         |                         |      [/](a "Time")      |                         | [/](a "OperationSpeed") |                         |                         |
 |OperationSpeed           |                         |                         |                         |                         |                         |                         |                         |                         |   [*](a "Operations")   |                         |                         |

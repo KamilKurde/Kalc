@@ -8,10 +8,12 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operationspeed.OperationSpeed
 import com.kamilKurde.kalc.units.time.Time
 
-data class Operations(
-	var inOperations: BigDecimal,
+class Operations internal constructor(
+	override var value: BigDecimal
 ): KalcType<Operations, OperationsUnits>()
 {
+	override val defaultUnit get() = OperationsUnits.Operations
+
 	var inYottaOperations by UnitDelegate(Multipliers.yotta)
 	var inZettaOperations by UnitDelegate(Multipliers.zetta)
 	var inExaOperations by UnitDelegate(Multipliers.exa)
@@ -20,6 +22,7 @@ data class Operations(
 	var inGigaOperations by UnitDelegate(Multipliers.giga)
 	var inMegaOperations by UnitDelegate(Multipliers.mega)
 	var inKiloOperations by UnitDelegate(Multipliers.kilo)
+	var inOperations by UnitDelegate(BigDecimal.ONE)
 
 	operator fun div(time: Time) =
 		OperationSpeed(inOperations / time.inSeconds)
@@ -28,14 +31,6 @@ data class Operations(
 		Time(inOperations / operationSpeed.inOPS)
 
 	override fun getInstance(value: BigDecimal): Operations = Operations(value)
-
-
-	override fun setComponent1(value: BigDecimal)
-	{
-		inOperations = value
-	}
-
-	override val defaultUnit get() = OperationsUnits.Operations
 
 	constructor(
 		value: Number,
@@ -46,4 +41,6 @@ data class Operations(
 		value: BigDecimal,
 		unit: OperationsUnits = OperationsUnits.Operations
 	): this(value * unit.multiplier)
+
+	override val enums get() = OperationsUnits.values()
 }

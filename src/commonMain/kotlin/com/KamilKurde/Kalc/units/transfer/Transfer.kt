@@ -5,10 +5,12 @@ import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
 import com.kamilKurde.kalc.functions.parseNumber
 
-data class Transfer(
-	var inBytesPerSecond: BigDecimal,
+class Transfer internal constructor(
+	override var value: BigDecimal
 ): KalcType<Transfer, TransferUnits>()
 {
+	override val defaultUnit get() = TransferUnits.BytesPerSecond
+
 	val inJobibytesPerSecond by UnitDelegate(TransferUnits.JobibytesPerSecond.multiplier)
 	val inJobibytesPerMinute by UnitDelegate(TransferUnits.JobibytesPerMinute.multiplier)
 	val inJobibytesPerHour by UnitDelegate(TransferUnits.JobibytesPerHour.multiplier)
@@ -73,6 +75,7 @@ data class Transfer(
 	val inKilobytesPerMinute by UnitDelegate(TransferUnits.KilobytesPerMinute.multiplier)
 	val inKilobytesPerHour by UnitDelegate(TransferUnits.KilobytesPerHour.multiplier)
 
+	var inBytesPerSecond by UnitDelegate(BigDecimal.ONE)
 	val inBytesPerMinute by UnitDelegate(TransferUnits.BytesPerMinute.multiplier)
 	val inBytesPerHour by UnitDelegate(TransferUnits.BytesPerHour.multiplier)
 
@@ -146,13 +149,6 @@ data class Transfer(
 
 	override fun getInstance(value: BigDecimal): Transfer = Transfer(value)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inBytesPerSecond = value
-	}
-
-	override val defaultUnit get() = TransferUnits.BytesPerSecond
-
 	constructor(
 		value: Number,
 		unit: TransferUnits = TransferUnits.BytesPerSecond
@@ -162,4 +158,6 @@ data class Transfer(
 		value: BigDecimal,
 		unit: TransferUnits = TransferUnits.BytesPerSecond
 	): this(value * unit.multiplier)
+
+	override val enums get() = TransferUnits.values()
 }

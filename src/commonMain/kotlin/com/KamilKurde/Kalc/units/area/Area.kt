@@ -8,11 +8,14 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.volume.Volume
 
-data class Area(
-	var inMeters2: BigDecimal
+class Area internal constructor(
+	override var value: BigDecimal,
 ): KalcType<Area, AreaUnits>()
 {
+	override val defaultUnit get() = AreaUnits.Meters2
+
 	var inKilometers2 by UnitDelegate(Multipliers.kilo2)
+	var inMeters2 by UnitDelegate(BigDecimal.ONE)
 	var inDecimeters2 by UnitDelegate(Multipliers.deci2)
 	var inCentimeters2 by UnitDelegate(Multipliers.centi2)
 	var inMillimeters2 by UnitDelegate(Multipliers.milli2)
@@ -34,10 +37,5 @@ data class Area(
 		unit: AreaUnits = AreaUnits.Meters2
 	): this(value * unit.multiplier)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inMeters2 = value
-	}
-
-	override val defaultUnit get() = AreaUnits.Meters2
+	override val enums get() = AreaUnits.values()
 }

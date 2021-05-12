@@ -7,12 +7,15 @@ import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.speed.Speed
 
-data class Time(
-	var inSeconds: BigDecimal,
+class Time internal constructor(
+	override var value: BigDecimal
 ): KalcType<Time, TimeUnits>()
 {
+	override val defaultUnit get() = TimeUnits.Seconds
+
 	var inHours by UnitDelegate(Multipliers.hour)
 	var inMinutes by UnitDelegate(Multipliers.minute)
+	var inSeconds by UnitDelegate(BigDecimal.ONE)
 	var inMilliseconds by UnitDelegate(Multipliers.milli)
 	var inNanoseconds by UnitDelegate(Multipliers.nano)
 	var inPicoseconds by UnitDelegate(Multipliers.pico)
@@ -21,13 +24,6 @@ data class Time(
 		speed * this
 
 	override fun getInstance(value: BigDecimal): Time = Time(value)
-
-	override fun setComponent1(value: BigDecimal)
-	{
-		inSeconds = value
-	}
-
-	override val defaultUnit get() = TimeUnits.Seconds
 
 	constructor(
 		value: Number,
@@ -38,4 +34,6 @@ data class Time(
 		value: BigDecimal,
 		unit: TimeUnits = TimeUnits.Seconds
 	): this(value * unit.multiplier)
+
+	override val enums get() = TimeUnits.values()
 }

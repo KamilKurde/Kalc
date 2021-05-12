@@ -8,10 +8,12 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Transfer
 import com.kamilKurde.kalc.units.time.Time
 
-data class Data(
-	var inBytes: BigDecimal
+class Data internal constructor(
+	override var value: BigDecimal
 ): KalcType<Data, DataUnits>()
 {
+	override val defaultUnit get() = DataUnits.Byte
+
 	var inYobibytes by UnitDelegate(Multipliers.yobi)
 	var inYottabytes by UnitDelegate(Multipliers.yotta)
 	var inZebibytes by UnitDelegate(Multipliers.zebi)
@@ -28,6 +30,7 @@ data class Data(
 	var inMegabytes by UnitDelegate(Multipliers.mega)
 	var inKibibytes by UnitDelegate(Multipliers.kibi)
 	var inKilobytes by UnitDelegate(Multipliers.kilo)
+	var inBytes by UnitDelegate(BigDecimal.ONE)
 	var inBits by UnitDelegate(Multipliers.bit * Multipliers.bit)
 	var inYobibits by UnitDelegate(Multipliers.yobi * Multipliers.bit)
 	var inYottabits by UnitDelegate(Multipliers.yotta * Multipliers.bit)
@@ -61,10 +64,5 @@ data class Data(
 		unit: DataUnits = DataUnits.Bit
 	): this(value * unit.multiplier)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inBytes = value
-	}
-
-	override val defaultUnit get() = DataUnits.Byte
+	override val enums get() = DataUnits.values()
 }

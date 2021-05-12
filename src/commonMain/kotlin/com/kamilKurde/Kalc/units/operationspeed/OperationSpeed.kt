@@ -8,10 +8,12 @@ import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
 
-data class OperationSpeed(
-	var inOPS: BigDecimal,
+class OperationSpeed internal constructor(
+	override var value: BigDecimal
 ): KalcType<OperationSpeed, OperationSpeedUnits>()
 {
+	override val defaultUnit get() = OperationSpeedUnits.OPS
+
 	var inYOPH by UnitDelegate(Multipliers.yotta)
 	var inZOPH by UnitDelegate(Multipliers.zetta)
 	var inEOPH by UnitDelegate(Multipliers.exa)
@@ -36,18 +38,12 @@ data class OperationSpeed(
 	var inGOPS by UnitDelegate(Multipliers.giga)
 	var inMOPS by UnitDelegate(Multipliers.mega)
 	var inKOPS by UnitDelegate(Multipliers.kilo)
+	var inOPS by UnitDelegate(BigDecimal.ONE)
 
 	operator fun times(time: Time) =
 		Operations(inOPS * time.inSeconds)
 
 	override fun getInstance(value: BigDecimal): OperationSpeed = OperationSpeed(value)
-
-	override fun setComponent1(value: BigDecimal)
-	{
-		inOPS = value
-	}
-
-	override val defaultUnit get() = OperationSpeedUnits.OPS
 
 	constructor(
 		value: Number,
@@ -58,4 +54,6 @@ data class OperationSpeed(
 		value: BigDecimal,
 		unit: OperationSpeedUnits = OperationSpeedUnits.OPS
 	): this(value * unit.multiplier)
+
+	override val enums get() = OperationSpeedUnits.values()
 }

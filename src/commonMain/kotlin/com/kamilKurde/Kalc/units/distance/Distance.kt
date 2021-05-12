@@ -9,12 +9,15 @@ import com.kamilKurde.kalc.units.area.Area
 import com.kamilKurde.kalc.units.speed.Speed
 import com.kamilKurde.kalc.units.time.Time
 
-data class Distance(
-	var inMeters: BigDecimal,
+class Distance internal constructor(
+	override var value: BigDecimal
 ): KalcType<Distance, DistanceUnits>()
 {
+	override val defaultUnit get() = DistanceUnits.Meters
+
 	var inMiles by UnitDelegate(Multipliers.mile)
 	var inKilometers by UnitDelegate(Multipliers.kilo)
+	var inMeters by UnitDelegate(BigDecimal.ONE)
 	var inYards by UnitDelegate(Multipliers.yard)
 	var inFeet by UnitDelegate(Multipliers.foot)
 	var inDecimeters by UnitDelegate(Multipliers.deci)
@@ -38,13 +41,6 @@ data class Distance(
 
 	override fun getInstance(value: BigDecimal): Distance = Distance(value)
 
-	override fun setComponent1(value: BigDecimal)
-	{
-		inMeters = value
-	}
-
-	override val defaultUnit get() = DistanceUnits.Meters
-
 	constructor(
 		value: Number,
 		unit: DistanceUnits = DistanceUnits.Meters
@@ -54,4 +50,6 @@ data class Distance(
 		value: BigDecimal,
 		unit: DistanceUnits = DistanceUnits.Meters
 	): this(value * unit.multiplier)
+
+	override val enums get() = DistanceUnits.values()
 }

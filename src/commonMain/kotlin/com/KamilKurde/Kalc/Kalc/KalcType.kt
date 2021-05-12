@@ -1,24 +1,24 @@
 package com.kamilKurde.kalc.Kalc
 
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.ionspin.kotlin.bignum.decimal.toBigDecimal
 import com.kamilKurde.kalc.functions.parseNumber
 
 @Suppress("UNCHECKED_CAST")
 abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 {
-	protected abstract fun component1(): BigDecimal
-	protected abstract fun setComponent1(value: BigDecimal)
-	var value: BigDecimal
-		get() = component1()
-		set(value) = setComponent1(value)
+	internal abstract var value: BigDecimal
 
-	protected abstract val defaultUnit: E
+	internal abstract val defaultUnit: E
+
+	internal abstract val enums: Array<E>
 
 	abstract fun getInstance(value: BigDecimal): T
 
 	fun getInstance(value: BigDecimal, unit: E) = getInstance(value * unit.multiplier)
 
-	fun asUnit(unit: E): BigDecimal = value * unit.multiplier
+	// It just throws an exception if you use value / unit.multiplier
+	fun asUnit(unit: E): BigDecimal = (value.toStringExpanded().toDouble() / unit.multiplier.toStringExpanded().toDouble()).toBigDecimal()
 
 	operator fun compareTo(other: T) = value.compareTo(other.value)
 
@@ -81,5 +81,29 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 	operator fun set(inUnit: E, value: BigDecimal)
 	{
 		this.value = value * inUnit.multiplier
+	}
+
+	fun toString(inUnit: E) = "${asUnit(inUnit).toStringExpanded()} ${inUnit.name}"
+
+	private fun bestUnit(): E
+	{
+		// First element of pair is enum value, second is the number of characters it needs to display readable text
+		val array = Array(enums.size)
+		{
+			enums[it] to asUnit(enums[it]).toStringExpanded().length
+		}
+		val min = array.minByOrNull { it.second }?.first
+		return min ?: defaultUnit
+	}
+
+	override fun toString(): String = toString(bestUnit())
+
+	override fun equals(other: Any?) = try
+	{
+		value == (other as T).value
+	}
+	catch (e: Exception)
+	{
+		false
 	}
 }

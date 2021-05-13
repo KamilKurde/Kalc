@@ -3,7 +3,6 @@ package com.kamilKurde.kalc.units.operationspeed
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
@@ -14,31 +13,31 @@ class OperationSpeed internal constructor(
 {
 	override val defaultUnit get() = OperationSpeedUnits.OPS
 
-	var inYOPH by UnitDelegate(Multipliers.yotta)
-	var inZOPH by UnitDelegate(Multipliers.zetta)
-	var inEOPH by UnitDelegate(Multipliers.exa)
-	var inPOPH by UnitDelegate(Multipliers.peta)
-	var inTOPH by UnitDelegate(Multipliers.tera)
-	var inGOPH by UnitDelegate(Multipliers.giga)
-	var inMOPH by UnitDelegate(Multipliers.mega)
-	var inKOPH by UnitDelegate(Multipliers.kilo)
-	var inYOPM by UnitDelegate(Multipliers.yotta)
-	var inZOPM by UnitDelegate(Multipliers.zetta)
-	var inEOPM by UnitDelegate(Multipliers.exa)
-	var inPOPM by UnitDelegate(Multipliers.peta)
-	var inTOPM by UnitDelegate(Multipliers.tera)
-	var inGOPM by UnitDelegate(Multipliers.giga)
-	var inMOPM by UnitDelegate(Multipliers.mega)
-	var inKOPM by UnitDelegate(Multipliers.kilo)
-	var inYOPS by UnitDelegate(Multipliers.yotta)
-	var inZOPS by UnitDelegate(Multipliers.zetta)
-	var inEOPS by UnitDelegate(Multipliers.exa)
-	var inPOPS by UnitDelegate(Multipliers.peta)
-	var inTOPS by UnitDelegate(Multipliers.tera)
-	var inGOPS by UnitDelegate(Multipliers.giga)
-	var inMOPS by UnitDelegate(Multipliers.mega)
-	var inKOPS by UnitDelegate(Multipliers.kilo)
-	var inOPS by UnitDelegate(BigDecimal.ONE)
+	var inYOPH by UnitDelegate(OperationSpeedUnits.YOPH)
+	var inZOPH by UnitDelegate(OperationSpeedUnits.ZOPH)
+	var inEOPH by UnitDelegate(OperationSpeedUnits.EOPH)
+	var inPOPH by UnitDelegate(OperationSpeedUnits.POPH)
+	var inTOPH by UnitDelegate(OperationSpeedUnits.TOPH)
+	var inGOPH by UnitDelegate(OperationSpeedUnits.GOPH)
+	var inMOPH by UnitDelegate(OperationSpeedUnits.MOPH)
+	var inKOPH by UnitDelegate(OperationSpeedUnits.KOPH)
+	var inYOPM by UnitDelegate(OperationSpeedUnits.TOPM)
+	var inZOPM by UnitDelegate(OperationSpeedUnits.ZOPM)
+	var inEOPM by UnitDelegate(OperationSpeedUnits.EOPM)
+	var inPOPM by UnitDelegate(OperationSpeedUnits.POPM)
+	var inTOPM by UnitDelegate(OperationSpeedUnits.TOPM)
+	var inGOPM by UnitDelegate(OperationSpeedUnits.GOPM)
+	var inMOPM by UnitDelegate(OperationSpeedUnits.MOPM)
+	var inKOPM by UnitDelegate(OperationSpeedUnits.KOPM)
+	var inYOPS by UnitDelegate(OperationSpeedUnits.YOPS)
+	var inZOPS by UnitDelegate(OperationSpeedUnits.ZOPS)
+	var inEOPS by UnitDelegate(OperationSpeedUnits.EOPS)
+	var inPOPS by UnitDelegate(OperationSpeedUnits.POPS)
+	var inTOPS by UnitDelegate(OperationSpeedUnits.TOPS)
+	var inGOPS by UnitDelegate(OperationSpeedUnits.GOPS)
+	var inMOPS by UnitDelegate(OperationSpeedUnits.MOPS)
+	var inKOPS by UnitDelegate(OperationSpeedUnits.KOPS)
+	var inOPS by UnitDelegate(OperationSpeedUnits.OPS)
 
 	operator fun times(time: Time) =
 		Operations(inOPS * time.inSeconds)

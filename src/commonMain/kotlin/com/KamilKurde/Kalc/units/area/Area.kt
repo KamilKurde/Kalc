@@ -14,13 +14,13 @@ class Area internal constructor(
 {
 	override val defaultUnit get() = AreaUnits.Meters2
 
-	var inKilometers2 by UnitDelegate(Multipliers.kilo2)
-	var inMeters2 by UnitDelegate(BigDecimal.ONE)
-	var inDecimeters2 by UnitDelegate(Multipliers.deci2)
-	var inCentimeters2 by UnitDelegate(Multipliers.centi2)
-	var inMillimeters2 by UnitDelegate(Multipliers.milli2)
-	var inNanometers2 by UnitDelegate(Multipliers.nano2)
-	var inPicometers2 by UnitDelegate(Multipliers.pico2)
+	var inKilometers2 by UnitDelegate(AreaUnits.Kilometers2)
+	var inMeters2 by UnitDelegate(AreaUnits.Meters2)
+	var inDecimeters2 by UnitDelegate(AreaUnits.Decimeters2)
+	var inCentimeters2 by UnitDelegate(AreaUnits.Centimeters2)
+	var inMillimeters2 by UnitDelegate(AreaUnits.Millimeters2)
+	var inNanometers2 by UnitDelegate(AreaUnits.Nanometers2)
+	var inPicometers2 by UnitDelegate(AreaUnits.Picometers2)
 
 	operator fun times(distance: Distance) =
 		Volume(inMeters2 * distance.inMeters)

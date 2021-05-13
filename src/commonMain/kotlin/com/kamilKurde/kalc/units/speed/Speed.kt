@@ -14,11 +14,11 @@ class Speed internal constructor(
 {
 	override val defaultUnit get() = SpeedUnits.MetersPerSecond
 
-	var inMetersPerSecond by UnitDelegate(BigDecimal.ONE)
-	var inKilometersPerHour by UnitDelegate(Multipliers.kmph)
-	var inMilesPerHour by UnitDelegate(Multipliers.mph)
-	var inKnots by UnitDelegate(Multipliers.knot)
-	var inFeetPerSecond by UnitDelegate(Multipliers.fps)
+	var inMetersPerSecond by UnitDelegate(SpeedUnits.MetersPerSecond)
+	var inKilometersPerHour by UnitDelegate(SpeedUnits.KilometersPerHour)
+	var inMilesPerHour by UnitDelegate(SpeedUnits.MilesPerHour)
+	var inKnots by UnitDelegate(SpeedUnits.Knots)
+	var inFeetPerSecond by UnitDelegate(SpeedUnits.FeetPerSecond)
 
 	operator fun times(time: Time) =
 		Distance(inMetersPerSecond * time.inSeconds)

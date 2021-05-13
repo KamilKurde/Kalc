@@ -12,42 +12,42 @@ class Data internal constructor(
 	override var value: BigDecimal
 ): KalcType<Data, DataUnits>()
 {
-	override val defaultUnit get() = DataUnits.Byte
+	override val defaultUnit get() = DataUnits.Bytes
 
-	var inYobibytes by UnitDelegate(Multipliers.yobi)
-	var inYottabytes by UnitDelegate(Multipliers.yotta)
-	var inZebibytes by UnitDelegate(Multipliers.zebi)
-	var inZettabytes by UnitDelegate(Multipliers.zetta)
-	var inExbibytes by UnitDelegate(Multipliers.exbi)
-	var inExabytes by UnitDelegate(Multipliers.exa)
-	var inPebibytes by UnitDelegate(Multipliers.pebi)
-	var inPetabytes by UnitDelegate(Multipliers.peta)
-	var inTebibytes by UnitDelegate(Multipliers.tebi)
-	var inTerabytes by UnitDelegate(Multipliers.tera)
-	var inGibibytes by UnitDelegate(Multipliers.gibi)
-	var inGigabytes by UnitDelegate(Multipliers.giga)
-	var inMebibytes by UnitDelegate(Multipliers.mebi)
-	var inMegabytes by UnitDelegate(Multipliers.mega)
-	var inKibibytes by UnitDelegate(Multipliers.kibi)
-	var inKilobytes by UnitDelegate(Multipliers.kilo)
-	var inBytes by UnitDelegate(BigDecimal.ONE)
-	var inBits by UnitDelegate(Multipliers.bit * Multipliers.bit)
-	var inYobibits by UnitDelegate(Multipliers.yobi * Multipliers.bit)
-	var inYottabits by UnitDelegate(Multipliers.yotta * Multipliers.bit)
-	var inZebibits by UnitDelegate(Multipliers.zebi * Multipliers.bit)
-	var inZettabits by UnitDelegate(Multipliers.zetta * Multipliers.bit)
-	var inEksbibits by UnitDelegate(Multipliers.exbi * Multipliers.bit)
-	var inEksabits by UnitDelegate(Multipliers.exa * Multipliers.bit)
-	var inPebibits by UnitDelegate(Multipliers.pebi * Multipliers.bit)
-	var inPetabits by UnitDelegate(Multipliers.peta * Multipliers.bit)
-	var inTebibits by UnitDelegate(Multipliers.tebi * Multipliers.bit)
-	var inTerabits by UnitDelegate(Multipliers.tera * Multipliers.bit)
-	var inGibibits by UnitDelegate(Multipliers.gibi * Multipliers.bit)
-	var inGigabits by UnitDelegate(Multipliers.giga * Multipliers.bit)
-	var inMebibits by UnitDelegate(Multipliers.mebi * Multipliers.bit)
-	var inMegabits by UnitDelegate(Multipliers.mega * Multipliers.bit)
-	var inKibibits by UnitDelegate(Multipliers.kibi * Multipliers.bit)
-	var inKilobits by UnitDelegate(Multipliers.kilo * Multipliers.bit)
+	var inYobibytes by UnitDelegate(DataUnits.Yobibytes)
+	var inYottabytes by UnitDelegate(DataUnits.Yottabytes)
+	var inZebibytes by UnitDelegate(DataUnits.Zebibytes)
+	var inZettabytes by UnitDelegate(DataUnits.Zettabytes)
+	var inExbibytes by UnitDelegate(DataUnits.Exbibytes)
+	var inExabytes by UnitDelegate(DataUnits.Exabytes)
+	var inPebibytes by UnitDelegate(DataUnits.Pebibytes)
+	var inPetabytes by UnitDelegate(DataUnits.Petabytes)
+	var inTebibytes by UnitDelegate(DataUnits.Tebibytes)
+	var inTerabytes by UnitDelegate(DataUnits.Terabytes)
+	var inGibibytes by UnitDelegate(DataUnits.Gibibytes)
+	var inGigabytes by UnitDelegate(DataUnits.Gigabytes)
+	var inMebibytes by UnitDelegate(DataUnits.Mebibytes)
+	var inMegabytes by UnitDelegate(DataUnits.Megabytes)
+	var inKibibytes by UnitDelegate(DataUnits.Kibibytes)
+	var inKilobytes by UnitDelegate(DataUnits.Kilobytes)
+	var inBytes by UnitDelegate(DataUnits.Bytes)
+	var inYobibits by UnitDelegate(DataUnits.Yobibits)
+	var inYottabits by UnitDelegate(DataUnits.Yottabits)
+	var inZebibits by UnitDelegate(DataUnits.Zebibits)
+	var inZettabits by UnitDelegate(DataUnits.Zettabits)
+	var inExbibits by UnitDelegate(DataUnits.Exbibits)
+	var inExabits by UnitDelegate(DataUnits.Exabits)
+	var inPebibits by UnitDelegate(DataUnits.Pebibits)
+	var inPetabits by UnitDelegate(DataUnits.Petabits)
+	var inTebibits by UnitDelegate(DataUnits.Tebibits)
+	var inTerabits by UnitDelegate(DataUnits.Terabits)
+	var inGibibits by UnitDelegate(DataUnits.Gibibits)
+	var inGigabits by UnitDelegate(DataUnits.Gigabits)
+	var inMebibits by UnitDelegate(DataUnits.Mebibits)
+	var inMegabits by UnitDelegate(DataUnits.Megabits)
+	var inKibibits by UnitDelegate(DataUnits.Kibibits)
+	var inKilobits by UnitDelegate(DataUnits.Kilobits)
+	var inbits by UnitDelegate(DataUnits.Bits)
 
 	operator fun div(time: Time) =
 		Transfer(inBytes / time.inSeconds)
@@ -56,12 +56,12 @@ class Data internal constructor(
 
 	constructor(
 		value: Number,
-		unit: DataUnits = DataUnits.Bit
+		unit: DataUnits = DataUnits.Bits
 	): this(BigDecimal.parseNumber(value), unit)
 
 	constructor(
 		value: BigDecimal,
-		unit: DataUnits = DataUnits.Bit
+		unit: DataUnits = DataUnits.Bits
 	): this(value * unit.multiplier)
 
 	override val enums get() = DataUnits.values()

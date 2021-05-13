@@ -3,7 +3,6 @@ package com.kamilKurde.kalc.units.volume
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
 
@@ -13,14 +12,14 @@ class Volume internal constructor(
 {
 	override val defaultUnit get() = VolumeUnits.Meters3
 
-	var inKilometers3 by UnitDelegate(Multipliers.kilo3)
-	var inMegalitres by UnitDelegate(Multipliers.mega)
-	var inBarrels by UnitDelegate(Multipliers.barrel)
-	var inMeters3 by UnitDelegate(BigDecimal.ONE)
-	var inLiters by UnitDelegate(Multipliers.liter)
-	var inDecimeters3 by UnitDelegate(Multipliers.liter)
-	var inCentimeters3 by UnitDelegate(Multipliers.centi3)
-	var inMilliliters by UnitDelegate(Multipliers.milli)
+	var inKilometers3 by UnitDelegate(VolumeUnits.Kilometers3)
+	var inMegalitres by UnitDelegate(VolumeUnits.Megalitres)
+	var inBarrels by UnitDelegate(VolumeUnits.Barrels)
+	var inMeters3 by UnitDelegate(VolumeUnits.Meters3)
+	var inLiters by UnitDelegate(VolumeUnits.Liters)
+	var inDecimeters3 by UnitDelegate(VolumeUnits.Liters)
+	var inCentimeters3 by UnitDelegate(VolumeUnits.Centimeters3)
+	var inMilliliters3 by UnitDelegate(VolumeUnits.Milliliters3)
 
 	operator fun times(density: Density) = density.times(this)
 

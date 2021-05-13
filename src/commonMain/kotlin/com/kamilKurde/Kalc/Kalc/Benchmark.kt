@@ -8,14 +8,22 @@ data class Benchmark(val duration: Time, val operations: Operations)
 {
 	companion object
 	{
-		fun test(operationsNumber: Operations, exec: () -> Unit): Benchmark
+		private fun test(exec: () -> Unit): Time
 		{
 			val start = getTime()
 			exec()
 			val stop = getTime()
-			return Benchmark(stop - start, operationsNumber)
+			return stop - start
 		}
 	}
+
+	constructor(
+		operationsNumber: Operations,
+		exec: () -> Unit
+	): this(
+		test(exec),
+		operationsNumber
+	)
 
 	val operationSpeed get() = operations / duration
 }

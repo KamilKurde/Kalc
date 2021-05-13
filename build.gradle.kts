@@ -24,7 +24,6 @@ kotlin {
 	js(IR) {
 		browser {
 			testTask {
-				//enabled = false
 				useKarma {
 					useIe()
 				}

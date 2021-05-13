@@ -12,5 +12,5 @@ enum class VolumeUnits(override val multiplier: BigDecimal): KalcEnum
 	Barrels(Multipliers.barrel),
 	Liters(Multipliers.liter),
 	Centimeters3(Multipliers.centi3),
-	Milliliters(Multipliers.milli * Multipliers.liter)
+	Milliliters3(Multipliers.milli * Multipliers.liter)
 }

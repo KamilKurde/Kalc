@@ -92,8 +92,7 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 		{
 			enums[it] to asUnit(enums[it]).toStringExpanded().length
 		}
-		val min = array.minByOrNull { it.second }?.first
-		return min ?: defaultUnit
+		return array.minByOrNull { it.second }?.first ?: defaultUnit
 	}
 
 	override fun toString(): String = toString(bestUnit())

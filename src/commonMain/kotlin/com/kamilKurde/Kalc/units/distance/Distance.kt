@@ -15,17 +15,17 @@ class Distance internal constructor(
 {
 	override val defaultUnit get() = DistanceUnits.Meters
 
-	var inMiles by UnitDelegate(Multipliers.mile)
-	var inKilometers by UnitDelegate(Multipliers.kilo)
-	var inMeters by UnitDelegate(BigDecimal.ONE)
-	var inYards by UnitDelegate(Multipliers.yard)
-	var inFeet by UnitDelegate(Multipliers.foot)
-	var inDecimeters by UnitDelegate(Multipliers.deci)
-	var inInches by UnitDelegate(Multipliers.inch)
-	var inCentimeters by UnitDelegate(Multipliers.centi)
-	var inMillimeters by UnitDelegate(Multipliers.milli)
-	var inNanometers by UnitDelegate(Multipliers.nano)
-	var inPicometers by UnitDelegate(Multipliers.pico)
+	var inMiles by UnitDelegate(DistanceUnits.Miles)
+	var inKilometers by UnitDelegate(DistanceUnits.Kilometers)
+	var inMeters by UnitDelegate(DistanceUnits.Meters)
+	var inYards by UnitDelegate(DistanceUnits.Yards)
+	var inFeet by UnitDelegate(DistanceUnits.Feet)
+	var inDecimeters by UnitDelegate(DistanceUnits.Decimeters)
+	var inInches by UnitDelegate(DistanceUnits.Inches)
+	var inCentimeters by UnitDelegate(DistanceUnits.Centimeters)
+	var inMillimeters by UnitDelegate(DistanceUnits.Millimeters)
+	var inNanometers by UnitDelegate(DistanceUnits.Nanometers)
+	var inPicometers by UnitDelegate(DistanceUnits.Picometers)
 
 	operator fun times(area: Area) =
 		area * this

@@ -3,7 +3,6 @@ package com.kamilKurde.kalc.units.time
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.speed.Speed
 
@@ -13,12 +12,12 @@ class Time internal constructor(
 {
 	override val defaultUnit get() = TimeUnits.Seconds
 
-	var inHours by UnitDelegate(Multipliers.hour)
-	var inMinutes by UnitDelegate(Multipliers.minute)
-	var inSeconds by UnitDelegate(BigDecimal.ONE)
-	var inMilliseconds by UnitDelegate(Multipliers.milli)
-	var inNanoseconds by UnitDelegate(Multipliers.nano)
-	var inPicoseconds by UnitDelegate(Multipliers.pico)
+	var inHours by UnitDelegate(TimeUnits.Hours)
+	var inMinutes by UnitDelegate(TimeUnits.Minutes)
+	var inSeconds by UnitDelegate(TimeUnits.Seconds)
+	var inMilliseconds by UnitDelegate(TimeUnits.Milliseconds)
+	var inNanoseconds by UnitDelegate(TimeUnits.Nanoseconds)
+	var inPicoseconds by UnitDelegate(TimeUnits.Picoseconds)
 
 	operator fun times(speed: Speed) =
 		speed * this

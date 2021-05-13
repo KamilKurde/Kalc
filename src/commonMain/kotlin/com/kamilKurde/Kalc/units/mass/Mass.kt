@@ -14,15 +14,14 @@ class Mass internal constructor(
 {
 	override val defaultUnit get() = MassUnits.Grams
 
-	var inTones by UnitDelegate(Multipliers.mega)
-	var inSlugs by UnitDelegate(Multipliers.slug)
-	var inYards by UnitDelegate(Multipliers.yard)
-	var inKilograms by UnitDelegate(Multipliers.kilo)
-	var inPounds by UnitDelegate(Multipliers.pound)
-	var inOunces by UnitDelegate(Multipliers.ounce)
-	var inDecagrams by UnitDelegate(Multipliers.deca)
-	var inGrams by UnitDelegate(BigDecimal.ONE)
-	var inMilligrams by UnitDelegate(Multipliers.milli)
+	var inTones by UnitDelegate(MassUnits.Tons)
+	var inSlugs by UnitDelegate(MassUnits.Slugs)
+	var inKilograms by UnitDelegate(MassUnits.Kilograms)
+	var inPounds by UnitDelegate(MassUnits.Pounds)
+	var inOunces by UnitDelegate(MassUnits.Ounces)
+	var inDecagrams by UnitDelegate(MassUnits.Decagrams)
+	var inGrams by UnitDelegate(MassUnits.Grams)
+	var inMilligrams by UnitDelegate(MassUnits.Milligrams)
 
 	operator fun div(volume: Volume) = Density(inGrams / volume.inCentimeters3)
 

@@ -14,10 +14,10 @@ class Density internal constructor(
 {
 	override val defaultUnit get() = DensityUnits.GramPerCentimeter3
 
-	var inKilogramsPerMeter3 by UnitDelegate(Multipliers.kilo)
-	var inKilogramPerLitre by UnitDelegate(BigDecimal.ONE)
-	var inTonesPerMeter3 by UnitDelegate(BigDecimal.ONE)
-	var inGramsPerCentimeter3 by UnitDelegate(BigDecimal.ONE)
+	var inKilogramsPerMeter3 by UnitDelegate(DensityUnits.KilogramPerMeter3)
+	var inKilogramPerLitre by UnitDelegate(DensityUnits.KilogramPerLitre)
+	var inTonesPerMeter3 by UnitDelegate(DensityUnits.TonePerMeter3)
+	var inGramsPerCentimeter3 by UnitDelegate(DensityUnits.GramPerCentimeter3)
 
 	operator fun times(volume: Volume) = Mass(inGramsPerCentimeter3 * volume.inCentimeters3)
 

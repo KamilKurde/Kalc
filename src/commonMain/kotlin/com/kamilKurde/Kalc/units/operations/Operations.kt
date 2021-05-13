@@ -3,7 +3,6 @@ package com.kamilKurde.kalc.units.operations
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operationspeed.OperationSpeed
 import com.kamilKurde.kalc.units.time.Time
@@ -14,15 +13,15 @@ class Operations internal constructor(
 {
 	override val defaultUnit get() = OperationsUnits.Operations
 
-	var inYottaOperations by UnitDelegate(Multipliers.yotta)
-	var inZettaOperations by UnitDelegate(Multipliers.zetta)
-	var inExaOperations by UnitDelegate(Multipliers.exa)
-	var inPetaOperations by UnitDelegate(Multipliers.peta)
-	var inTeraOperations by UnitDelegate(Multipliers.tera)
-	var inGigaOperations by UnitDelegate(Multipliers.giga)
-	var inMegaOperations by UnitDelegate(Multipliers.mega)
-	var inKiloOperations by UnitDelegate(Multipliers.kilo)
-	var inOperations by UnitDelegate(BigDecimal.ONE)
+	var inYottaOperations by UnitDelegate(OperationsUnits.YottaOperations)
+	var inZettaOperations by UnitDelegate(OperationsUnits.ZettaOperations)
+	var inExaOperations by UnitDelegate(OperationsUnits.ExaOperations)
+	var inPetaOperations by UnitDelegate(OperationsUnits.PetaOperations)
+	var inTeraOperations by UnitDelegate(OperationsUnits.TeraOperations)
+	var inGigaOperations by UnitDelegate(OperationsUnits.GigaOperations)
+	var inMegaOperations by UnitDelegate(OperationsUnits.MegaOperations)
+	var inKiloOperations by UnitDelegate(OperationsUnits.KiloOperationse)
+	var inOperations by UnitDelegate(OperationsUnits.Operations)
 
 	operator fun div(time: Time) =
 		OperationSpeed(inOperations / time.inSeconds)

@@ -7,10 +7,8 @@ import com.kamilKurde.kalc.functions.parseNumber
 
 class Transfer internal constructor(
 	override var value: BigDecimal
-): KalcType<Transfer, TransferUnits>()
+): KalcType<Transfer, TransferUnits>(TransferUnits.BytesPerSecond, TransferUnits.values())
 {
-	override val defaultUnit get() = TransferUnits.BytesPerSecond
-
 	val inJobibytesPerSecond by UnitDelegate(TransferUnits.JobibytesPerSecond)
 	val inJobibytesPerMinute by UnitDelegate(TransferUnits.JobibytesPerMinute)
 	val inJobibytesPerHour by UnitDelegate(TransferUnits.JobibytesPerHour)
@@ -158,6 +156,4 @@ class Transfer internal constructor(
 		value: BigDecimal,
 		unit: TransferUnits = TransferUnits.BytesPerSecond
 	): this(value * unit.multiplier)
-
-	override val enums get() = TransferUnits.values()
 }

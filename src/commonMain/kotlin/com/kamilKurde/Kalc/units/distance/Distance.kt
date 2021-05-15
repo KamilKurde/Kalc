@@ -3,7 +3,6 @@ package com.kamilKurde.kalc.units.distance
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.area.Area
 import com.kamilKurde.kalc.units.speed.Speed
@@ -11,10 +10,8 @@ import com.kamilKurde.kalc.units.time.Time
 
 class Distance internal constructor(
 	override var value: BigDecimal
-): KalcType<Distance, DistanceUnits>()
+): KalcType<Distance, DistanceUnits>(DistanceUnits.Meters, DistanceUnits.values())
 {
-	override val defaultUnit get() = DistanceUnits.Meters
-
 	var inMiles by UnitDelegate(DistanceUnits.Miles)
 	var inKilometers by UnitDelegate(DistanceUnits.Kilometers)
 	var inMeters by UnitDelegate(DistanceUnits.Meters)
@@ -50,6 +47,4 @@ class Distance internal constructor(
 		value: BigDecimal,
 		unit: DistanceUnits = DistanceUnits.Meters
 	): this(value * unit.multiplier)
-
-	override val enums get() = DistanceUnits.values()
 }

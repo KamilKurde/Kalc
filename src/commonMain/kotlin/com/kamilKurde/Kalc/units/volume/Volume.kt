@@ -8,10 +8,8 @@ import com.kamilKurde.kalc.units.density.Density
 
 class Volume internal constructor(
 	override var value: BigDecimal
-): KalcType<Volume, VolumeUnits>()
+): KalcType<Volume, VolumeUnits>(VolumeUnits.Meters3, VolumeUnits.values())
 {
-	override val defaultUnit get() = VolumeUnits.Meters3
-
 	var inKilometers3 by UnitDelegate(VolumeUnits.Kilometers3)
 	var inMegalitres by UnitDelegate(VolumeUnits.Megalitres)
 	var inBarrels by UnitDelegate(VolumeUnits.Barrels)
@@ -34,6 +32,4 @@ class Volume internal constructor(
 		value: BigDecimal,
 		unit: VolumeUnits = VolumeUnits.Meters3
 	): this(value * unit.multiplier)
-
-	override val enums get() = VolumeUnits.values()
 }

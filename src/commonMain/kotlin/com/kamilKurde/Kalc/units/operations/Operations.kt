@@ -9,10 +9,8 @@ import com.kamilKurde.kalc.units.time.Time
 
 class Operations internal constructor(
 	override var value: BigDecimal
-): KalcType<Operations, OperationsUnits>()
+): KalcType<Operations, OperationsUnits>(OperationsUnits.Operations, OperationsUnits.values())
 {
-	override val defaultUnit get() = OperationsUnits.Operations
-
 	var inYottaOperations by UnitDelegate(OperationsUnits.YottaOperations)
 	var inZettaOperations by UnitDelegate(OperationsUnits.ZettaOperations)
 	var inExaOperations by UnitDelegate(OperationsUnits.ExaOperations)
@@ -40,6 +38,4 @@ class Operations internal constructor(
 		value: BigDecimal,
 		unit: OperationsUnits = OperationsUnits.Operations
 	): this(value * unit.multiplier)
-
-	override val enums get() = OperationsUnits.values()
 }

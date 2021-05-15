@@ -8,10 +8,8 @@ import com.kamilKurde.kalc.units.speed.Speed
 
 class Time internal constructor(
 	override var value: BigDecimal
-): KalcType<Time, TimeUnits>()
+): KalcType<Time, TimeUnits>(TimeUnits.Seconds, TimeUnits.values())
 {
-	override val defaultUnit get() = TimeUnits.Seconds
-
 	var inHours by UnitDelegate(TimeUnits.Hours)
 	var inMinutes by UnitDelegate(TimeUnits.Minutes)
 	var inSeconds by UnitDelegate(TimeUnits.Seconds)
@@ -33,6 +31,4 @@ class Time internal constructor(
 		value: BigDecimal,
 		unit: TimeUnits = TimeUnits.Seconds
 	): this(value * unit.multiplier)
-
-	override val enums get() = TimeUnits.values()
 }

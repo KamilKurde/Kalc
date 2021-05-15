@@ -3,17 +3,14 @@ package com.kamilKurde.kalc.units.area
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.volume.Volume
 
 class Area internal constructor(
 	override var value: BigDecimal,
-): KalcType<Area, AreaUnits>()
+): KalcType<Area, AreaUnits>(AreaUnits.Meters2, AreaUnits.values())
 {
-	override val defaultUnit get() = AreaUnits.Meters2
-
 	var inKilometers2 by UnitDelegate(AreaUnits.Kilometers2)
 	var inMeters2 by UnitDelegate(AreaUnits.Meters2)
 	var inDecimeters2 by UnitDelegate(AreaUnits.Decimeters2)
@@ -36,6 +33,4 @@ class Area internal constructor(
 		value: BigDecimal,
 		unit: AreaUnits = AreaUnits.Meters2
 	): this(value * unit.multiplier)
-
-	override val enums get() = AreaUnits.values()
 }

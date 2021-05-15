@@ -3,17 +3,14 @@ package com.kamilKurde.kalc.units.mass
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
 import com.kamilKurde.kalc.units.volume.Volume
 
 class Mass internal constructor(
 	override var value: BigDecimal
-): KalcType<Mass, MassUnits>()
+): KalcType<Mass, MassUnits>(MassUnits.Grams, MassUnits.values())
 {
-	override val defaultUnit get() = MassUnits.Grams
-
 	var inTones by UnitDelegate(MassUnits.Tons)
 	var inSlugs by UnitDelegate(MassUnits.Slugs)
 	var inKilograms by UnitDelegate(MassUnits.Kilograms)
@@ -38,6 +35,4 @@ class Mass internal constructor(
 		value: BigDecimal,
 		unit: MassUnits = MassUnits.Grams
 	): this(value * unit.multiplier)
-
-	override val enums get() = MassUnits.values()
 }

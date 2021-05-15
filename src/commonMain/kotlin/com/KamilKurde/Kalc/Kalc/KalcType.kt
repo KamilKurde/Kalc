@@ -5,13 +5,9 @@ import com.ionspin.kotlin.bignum.decimal.toBigDecimal
 import com.kamilKurde.kalc.functions.parseNumber
 
 @Suppress("UNCHECKED_CAST")
-abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
+abstract class KalcType<T, E>(private val defaultUnit: E, private val enums: Array<E>) where T: KalcType<T, E>, E: KalcEnum
 {
 	internal abstract var value: BigDecimal
-
-	internal abstract val defaultUnit: E
-
-	internal abstract val enums: Array<E>
 
 	abstract fun getInstance(value: BigDecimal): T
 
@@ -51,31 +47,6 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 
 	operator fun rem(number: Number): T = getInstance(value % BigDecimal.parseNumber(number))
 
-	operator fun plusAssign(other: T)
-	{
-		value += other.value
-	}
-
-	operator fun minusAssign(other: T)
-	{
-		value += other.value
-	}
-
-	operator fun timesAssign(number: Number)
-	{
-		value *= BigDecimal.parseNumber(number)
-	}
-
-	operator fun divAssign(number: Number)
-	{
-		value /= BigDecimal.parseNumber(number)
-	}
-
-	operator fun remAssign(number: Number)
-	{
-		value %= BigDecimal.parseNumber(number)
-	}
-
 	operator fun get(asUnit: E) = asUnit(asUnit)
 
 	operator fun set(inUnit: E, value: BigDecimal)
@@ -85,7 +56,8 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 
 	fun toString(inUnit: E) = "${asUnit(inUnit).toStringExpanded()} ${inUnit.name}"
 
-	private fun bestUnit(): E
+	// Returns unit in which numeric part of toString() will be shortest possible
+	fun shortestUnit(): E
 	{
 		// First element of pair is enum value, second is the number of characters it needs to display readable text
 		val array = Array(enums.size)
@@ -95,7 +67,7 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 		return array.minByOrNull { it.second }?.first ?: defaultUnit
 	}
 
-	override fun toString(): String = toString(bestUnit())
+	override fun toString(): String = toString(shortestUnit())
 
 	override fun equals(other: Any?) = try
 	{
@@ -105,4 +77,6 @@ abstract class KalcType<T, E> where T: KalcType<T, E>, E: KalcEnum
 	{
 		false
 	}
+
+	fun copy() = getInstance(value)
 }

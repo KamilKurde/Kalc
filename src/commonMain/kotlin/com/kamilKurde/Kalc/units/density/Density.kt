@@ -3,17 +3,14 @@ package com.kamilKurde.kalc.units.density
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.mass.Mass
 import com.kamilKurde.kalc.units.volume.Volume
 
 class Density internal constructor(
 	override var value: BigDecimal
-): KalcType<Density, DensityUnits>()
+): KalcType<Density, DensityUnits>(DensityUnits.GramPerCentimeter3, DensityUnits.values())
 {
-	override val defaultUnit get() = DensityUnits.GramPerCentimeter3
-
 	var inKilogramsPerMeter3 by UnitDelegate(DensityUnits.KilogramPerMeter3)
 	var inKilogramPerLitre by UnitDelegate(DensityUnits.KilogramPerLitre)
 	var inTonesPerMeter3 by UnitDelegate(DensityUnits.TonePerMeter3)
@@ -32,6 +29,4 @@ class Density internal constructor(
 		value: BigDecimal,
 		unit: DensityUnits = DensityUnits.GramPerCentimeter3
 	): this(value * unit.multiplier)
-
-	override val enums get() = DensityUnits.values()
 }

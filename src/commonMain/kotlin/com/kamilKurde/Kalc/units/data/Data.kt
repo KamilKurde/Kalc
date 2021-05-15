@@ -3,17 +3,14 @@ package com.kamilKurde.kalc.units.data
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.Multipliers
 import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Transfer
 import com.kamilKurde.kalc.units.time.Time
 
 class Data internal constructor(
 	override var value: BigDecimal
-): KalcType<Data, DataUnits>()
+): KalcType<Data, DataUnits>(DataUnits.Bytes, DataUnits.values())
 {
-	override val defaultUnit get() = DataUnits.Bytes
-
 	var inYobibytes by UnitDelegate(DataUnits.Yobibytes)
 	var inYottabytes by UnitDelegate(DataUnits.Yottabytes)
 	var inZebibytes by UnitDelegate(DataUnits.Zebibytes)
@@ -63,6 +60,4 @@ class Data internal constructor(
 		value: BigDecimal,
 		unit: DataUnits = DataUnits.Bits
 	): this(value * unit.multiplier)
-
-	override val enums get() = DataUnits.values()
 }

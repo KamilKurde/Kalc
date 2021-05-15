@@ -9,10 +9,8 @@ import com.kamilKurde.kalc.units.time.Time
 
 class OperationSpeed internal constructor(
 	override var value: BigDecimal
-): KalcType<OperationSpeed, OperationSpeedUnits>()
+): KalcType<OperationSpeed, OperationSpeedUnits>(OperationSpeedUnits.OPS, OperationSpeedUnits.values())
 {
-	override val defaultUnit get() = OperationSpeedUnits.OPS
-
 	var inYOPH by UnitDelegate(OperationSpeedUnits.YOPH)
 	var inZOPH by UnitDelegate(OperationSpeedUnits.ZOPH)
 	var inEOPH by UnitDelegate(OperationSpeedUnits.EOPH)
@@ -53,6 +51,4 @@ class OperationSpeed internal constructor(
 		value: BigDecimal,
 		unit: OperationSpeedUnits = OperationSpeedUnits.OPS
 	): this(value * unit.multiplier)
-
-	override val enums get() = OperationSpeedUnits.values()
 }

@@ -5,17 +5,26 @@ Lightweight Kotlin library for operations on various units
 ## Installation
 
 1. Add following lines to your settings.gradle.kts
-   ``kotlin sourceControl{ gitRepository(uri("https://github.com/KamilKurde/Kalc.git"))
-   { producesModule("com.KamilKurde:Kalc")
-   } }
-   ``
+   ```kotlin
+    sourceControl{ 
+        gitRepository(uri("https://github.com/KamilKurde/Kalc.git"))
+           {
+                producesModule("com.KamilKurde:Kalc")
+           }
+    }
+   ```
 2. Run gradle assemble task
 3. Add following lines to your build.gradle.kts dependencies
-   ``kotlin implementation("com.ionspin.kotlin:bignum:0.2.8")
-   implementation("com.KamilKurde:Kalc")
-   { version { branch = "main"
-   } }
-   ``
+   ```kotlin
+    implementation("com.ionspin.kotlin:bignum:0.2.8")
+    implementation("com.KamilKurde:Kalc")
+    { 
+        version 
+        {
+            branch = "main"
+        }
+    }
+   ```
 4. Sync gradle
 
 ## Supported operations

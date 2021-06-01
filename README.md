@@ -4,11 +4,18 @@ Lightweight Kotlin library for operations on various units
 
 ## Installation
 
-1. Clone this repository, and run publishToMavenLocal task
-2. In your target project add mavenLocal to repositories
-3. Add these dependencies to your target project:
-    * "com.KamilKurde:Kalc:0.1"
-    * "com.ionspin.kotlin:bignum:0.2.8"
+1. Add following lines to your settings.gradle.kts
+   ``kotlin sourceControl{ gitRepository(uri("https://github.com/KamilKurde/Kalc.git"))
+   { producesModule("com.KamilKurde:Kalc")
+   } }
+   ``
+2. Run gradle assemble task
+3. Add following lines to your build.gradle.kts dependencies
+   ``kotlin implementation("com.ionspin.kotlin:bignum:0.2.8")
+   implementation("com.KamilKurde:Kalc")
+   { version { branch = "main"
+   } }
+   ``
 4. Sync gradle
 
 ## Supported operations

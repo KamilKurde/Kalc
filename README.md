@@ -13,18 +13,18 @@ Lightweight Kotlin library for operations on various units
            }
     }
    ```
-2. Run gradle assemble task
-3. Add following lines to your build.gradle.kts dependencies
+2. Add following lines to your build.gradle.kts dependencies
    ```kotlin
-    implementation("com.ionspin.kotlin:bignum:0.2.8")
-    implementation("com.KamilKurde:Kalc")
-    { 
-        version 
-        {
-            branch = "main"
-        }
-    }
+       implementation("com.ionspin.kotlin:bignum:0.2.8")
+       implementation("com.KamilKurde:Kalc")
+       { 
+           version 
+           {
+               branch = "main"
+           }
+       }
    ```
+3. Run gradle assemble task
 4. Sync gradle
 
 ## Supported operations

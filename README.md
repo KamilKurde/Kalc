@@ -15,7 +15,7 @@ Lightweight Kotlin library for operations on various units
    ```
 2. Add following lines to your build.gradle.kts dependencies
    ```kotlin
-       implementation("com.ionspin.kotlin:bignum:0.2.8")
+       implementation("com.soywiz.korlibs.kbignum:kbignum:2.0.6")
        implementation("com.KamilKurde:Kalc")
        { 
            version 

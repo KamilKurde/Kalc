@@ -6,7 +6,8 @@ import com.kamilKurde.kalc.units.time.Time
 
 data class Benchmark(val duration: Time, val operations: Operations)
 {
-	companion object{
+	companion object
+	{
 		// Works like constructor
 		// First argument is the number of operations (runs)
 		// Second argument is the operation to execute
@@ -16,7 +17,7 @@ data class Benchmark(val duration: Time, val operations: Operations)
 		): Benchmark
 		{
 			val start = getTime()
-			repeat(operationsNumber.inOperations.toStringExpanded().toInt()){
+			repeat(operationsNumber.inOperations.toString().toInt()) {
 				exec()
 			}
 			val stop = getTime()

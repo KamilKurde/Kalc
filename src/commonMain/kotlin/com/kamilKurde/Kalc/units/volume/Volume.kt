@@ -1,13 +1,12 @@
 package com.kamilKurde.kalc.units.volume
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
+import com.soywiz.kbignum.BigNum
 
 class Volume internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Volume, VolumeUnits>(VolumeUnits.Meters3, VolumeUnits.values())
 {
 	var inKilometers3 by UnitDelegate(VolumeUnits.Kilometers3)
@@ -21,15 +20,15 @@ class Volume internal constructor(
 
 	operator fun times(density: Density) = density.times(this)
 
-	override fun getInstance(value: BigDecimal): Volume = Volume(value)
+	override fun getInstance(value: BigNum): Volume = Volume(value)
 
 	constructor(
 		value: Number,
 		unit: VolumeUnits = VolumeUnits.Meters3
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: VolumeUnits = VolumeUnits.Meters3
 	): this(value * unit.multiplier)
 }

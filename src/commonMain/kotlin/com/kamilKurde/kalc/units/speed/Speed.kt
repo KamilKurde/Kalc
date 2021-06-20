@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.speed
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.time.Time
+import com.soywiz.kbignum.BigNum
 
 class Speed internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Speed, SpeedUnits>(SpeedUnits.MetersPerSecond, SpeedUnits.values())
 {
 	var inMetersPerSecond by UnitDelegate(SpeedUnits.MetersPerSecond)
@@ -20,15 +19,15 @@ class Speed internal constructor(
 	operator fun times(time: Time) =
 		Distance(inMetersPerSecond * time.inSeconds)
 
-	override fun getInstance(value: BigDecimal): Speed = Speed(value)
+	override fun getInstance(value: BigNum): Speed = Speed(value)
 
 	constructor(
 		value: Number,
 		unit: SpeedUnits = SpeedUnits.MetersPerSecond
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: SpeedUnits = SpeedUnits.MetersPerSecond
 	): this(value * unit.multiplier)
 }

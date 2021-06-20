@@ -1,13 +1,13 @@
 package com.kamilKurde.kalc.units.area
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class AreaUnits(override val multiplier: BigDecimal): KalcEnum
+enum class AreaUnits(override val multiplier: BigNum): KalcEnum
 {
 	Kilometers2(Multipliers.kilo2),
-	Meters2(BigDecimal.ONE),
+	Meters2(BigNum.ONE),
 	Decimeters2(Multipliers.deci2),
 	Centimeters2(Multipliers.centi2),
 	Millimeters2(Multipliers.milli2),

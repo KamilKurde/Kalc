@@ -1,10 +1,10 @@
 package com.kamilKurde.kalc.units.data
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class DataUnits(override val multiplier: BigDecimal): KalcEnum
+enum class DataUnits(override val multiplier: BigNum): KalcEnum
 {
 	Yobibytes(Multipliers.yobi),
 	Yottabytes(Multipliers.yotta),
@@ -22,7 +22,7 @@ enum class DataUnits(override val multiplier: BigDecimal): KalcEnum
 	Megabytes(Multipliers.mega),
 	Kibibytes(Multipliers.kibi),
 	Kilobytes(Multipliers.kilo),
-	Bytes(BigDecimal.ONE),
+	Bytes(BigNum.ONE),
 	Yobibits(Multipliers.yobi * Multipliers.bit),
 	Yottabits(Multipliers.yotta * Multipliers.bit),
 	Zebibits(Multipliers.zebi * Multipliers.bit),

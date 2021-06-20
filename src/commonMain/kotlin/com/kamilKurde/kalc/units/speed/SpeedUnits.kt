@@ -1,12 +1,12 @@
 package com.kamilKurde.kalc.units.speed
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class SpeedUnits(override val multiplier: BigDecimal): KalcEnum
+enum class SpeedUnits(override val multiplier: BigNum): KalcEnum
 {
-	MetersPerSecond(BigDecimal.ONE),
+	MetersPerSecond(BigNum.ONE),
 	KilometersPerHour(Multipliers.kmph),
 	MilesPerHour(Multipliers.mph),
 	Knots(Multipliers.knot),

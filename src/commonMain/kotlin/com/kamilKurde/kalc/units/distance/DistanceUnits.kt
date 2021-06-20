@@ -1,14 +1,14 @@
 package com.kamilKurde.kalc.units.distance
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class DistanceUnits(override val multiplier: BigDecimal): KalcEnum
+enum class DistanceUnits(override val multiplier: BigNum): KalcEnum
 {
 	Miles(Multipliers.mile),
 	Kilometers(Multipliers.kilo),
-	Meters(BigDecimal.ONE),
+	Meters(BigNum.ONE),
 	Yards(Multipliers.yard),
 	Feet(Multipliers.foot),
 	Decimeters(Multipliers.deci),

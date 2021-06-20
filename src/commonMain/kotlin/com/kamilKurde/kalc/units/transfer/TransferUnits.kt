@@ -1,10 +1,10 @@
 package com.kamilKurde.kalc.units.distance
 
 import com.kamilKurde.kalc.Multipliers
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 
-enum class TransferUnits(override val multiplier: BigDecimal): KalcEnum
+enum class TransferUnits(override val multiplier: BigNum): KalcEnum
 {
 	JobibytesPerSecond(Multipliers.yobi),
 	JobibytesPerMinute(JobibytesPerSecond.multiplier * Multipliers.minute),
@@ -70,7 +70,7 @@ enum class TransferUnits(override val multiplier: BigDecimal): KalcEnum
 	KilobytesPerMinute(KilobytesPerSecond.multiplier * Multipliers.minute),
 	KilobytesPerHour(KilobytesPerSecond.multiplier * Multipliers.hour),
 
-	BytesPerSecond(BigDecimal.ONE),
+	BytesPerSecond(BigNum.ONE),
 	BytesPerMinute(BytesPerSecond.multiplier * Multipliers.minute),
 	BytesPerHour(BytesPerSecond.multiplier * Multipliers.hour),
 

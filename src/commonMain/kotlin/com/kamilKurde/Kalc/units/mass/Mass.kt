@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.mass
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.density.Density
 import com.kamilKurde.kalc.units.volume.Volume
+import com.soywiz.kbignum.BigNum
 
 class Mass internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Mass, MassUnits>(MassUnits.Grams, MassUnits.values())
 {
 	var inTones by UnitDelegate(MassUnits.Tons)
@@ -24,15 +23,15 @@ class Mass internal constructor(
 
 	operator fun div(density: Density) = Volume(inKilograms / density.inKilogramsPerMeter3)
 
-	override fun getInstance(value: BigDecimal): Mass = Mass(value)
+	override fun getInstance(value: BigNum): Mass = Mass(value)
 
 	constructor(
 		value: Number,
 		unit: MassUnits = MassUnits.Grams
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: MassUnits = MassUnits.Grams
 	): this(value * unit.multiplier)
 }

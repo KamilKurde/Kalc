@@ -1,10 +1,10 @@
 package com.kamilKurde.kalc.units.mass
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class MassUnits(override val multiplier: BigDecimal): KalcEnum
+enum class MassUnits(override val multiplier: BigNum): KalcEnum
 {
 	Tons(Multipliers.mega),
 	Slugs(Multipliers.slug),
@@ -12,6 +12,6 @@ enum class MassUnits(override val multiplier: BigDecimal): KalcEnum
 	Pounds(Multipliers.pound),
 	Ounces(Multipliers.ounce),
 	Decagrams(Multipliers.deca),
-	Grams(BigDecimal.ONE),
+	Grams(BigNum.ONE),
 	Milligrams(Multipliers.milli),
 }

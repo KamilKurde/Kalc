@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.operationspeed
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operations.Operations
 import com.kamilKurde.kalc.units.time.Time
+import com.soywiz.kbignum.BigNum
 
 class OperationSpeed internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<OperationSpeed, OperationSpeedUnits>(OperationSpeedUnits.OPS, OperationSpeedUnits.values())
 {
 	var inYOPH by UnitDelegate(OperationSpeedUnits.YOPH)
@@ -40,15 +39,15 @@ class OperationSpeed internal constructor(
 	operator fun times(time: Time) =
 		Operations(inOPS * time.inSeconds)
 
-	override fun getInstance(value: BigDecimal): OperationSpeed = OperationSpeed(value)
+	override fun getInstance(value: BigNum): OperationSpeed = OperationSpeed(value)
 
 	constructor(
 		value: Number,
 		unit: OperationSpeedUnits = OperationSpeedUnits.OPS
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: OperationSpeedUnits = OperationSpeedUnits.OPS
 	): this(value * unit.multiplier)
 }

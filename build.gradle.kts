@@ -5,14 +5,10 @@ plugins {
 }
 
 group = "com.KamilKurde"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
 	mavenCentral()
-}
-
-dependencies {
-	implementation(kotlin("stdlib"))
 }
 
 kotlin {
@@ -47,7 +43,7 @@ kotlin {
 		val commonMain by getting {
 			dependencies {
 				implementation(kotlin("stdlib"))
-				implementation("com.ionspin.kotlin:bignum:0.2.8")
+				implementation("com.soywiz.korlibs.kbignum:kbignum:2.0.6")
 			}
 		}
 		val commonTest by getting {

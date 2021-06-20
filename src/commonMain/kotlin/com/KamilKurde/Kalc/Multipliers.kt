@@ -1,18 +1,18 @@
 package com.kamilKurde.kalc
 
-import com.kamilKurde.kalc.functions.parseNumber
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
+import com.soywiz.kbignum.bn
 
 object Multipliers
 {
 	// Standard
-	val pico by lazy { BigDecimal.parseString("0.000000000001") }
-	val nano by lazy { BigDecimal.parseString("0.000000001") }
-	val milli by lazy { BigDecimal.fromFloat(0.001f) }
-	val centi by lazy { BigDecimal.fromFloat(0.01f) }
-	val deci by lazy { BigDecimal.fromFloat(0.1f) }
-	val deca by lazy { BigDecimal.fromInt(10) }
-	val kilo by lazy { BigDecimal.fromInt(1_000) }
+	val pico by lazy { "0.000000000001".bn }
+	val nano by lazy { "0.000000001".bn }
+	val milli by lazy { 0.001.bn }
+	val centi by lazy { 0.01.bn }
+	val deci by lazy { 0.1.bn }
+	val deca by lazy { 10.bn }
+	val kilo by lazy { 1_000.bn }
 	val mega by lazy { kilo * kilo }
 	val giga by lazy { mega * kilo }
 	val tera by lazy { giga * kilo }
@@ -22,16 +22,16 @@ object Multipliers
 	val yotta by lazy { zetta * kilo }
 
 	// Distance
-	val inch by lazy { BigDecimal.parseNumber(25.4) * milli }
-	val foot by lazy { inch * 12 }
-	val yard by lazy { foot * 3 }
-	val mile by lazy { foot * 5280 }
+	val inch by lazy { "25.4".bn * milli }
+	val foot by lazy { inch * 12.bn }
+	val yard by lazy { foot * 3.bn }
+	val mile by lazy { foot * 5280.bn }
 
 	// Area
-	val inch2 by lazy { BigDecimal.parseString("0.00064516") }
-	val foot2 by lazy { inch2 * 144 }
-	val yard2 by lazy { foot2 * 9 }
-	val mile2 by lazy { yard2 * 3_097_600 }
+	val inch2 by lazy { "0.00064516".bn }
+	val foot2 by lazy { inch2 * 144.bn }
+	val yard2 by lazy { foot2 * 9.bn }
+	val mile2 by lazy { yard2 * 3_097_600.bn }
 	val kilo2 by lazy { kilo * kilo }
 	val deci2 by lazy { deci * deci }
 	val centi2 by lazy { centi * centi }
@@ -41,33 +41,33 @@ object Multipliers
 
 	// Volume
 	val kilo3 by lazy { kilo2 * kilo }
-	val barrel by lazy { BigDecimal.parseString("0.158987294928") }
+	val barrel by lazy { "0.158987294928".bn }
 	val deci3 by lazy { deci2 * deci }
 	val liter by lazy { deci3 }
 	val centi3 by lazy { centi2 * centi }
 	val megalitre by lazy { liter * mega }
 
 	// Time
-	val minute by lazy { BigDecimal.fromInt(60) }
-	val hour by lazy { BigDecimal.fromInt(60) * minute }
-	val day by lazy { hour * 24 }
-	val week by lazy { day * 7 }
-	val year by lazy { day * 365 }
+	val minute by lazy { 60.bn }
+	val hour by lazy { 60.bn * minute }
+	val day by lazy { hour * 24.bn }
+	val week by lazy { day * 7.bn }
+	val year by lazy { day * 365.bn }
 
 	// Speed
-	val knot by lazy { BigDecimal.parseString("0.514444") }
-	val mph by lazy { BigDecimal.parseString("0.44704") }
-	val fps by lazy { BigDecimal.parseString("0.3048") }
-	val kmph by lazy { BigDecimal.parseNumber(1 / 3.6) }
+	val knot by lazy { "0.514444".bn }
+	val mph by lazy { "0.44704".bn }
+	val fps by lazy { "0.3048".bn }
+	val kmph by lazy { 1.bn / 3.6.bn }
 
 	// Mass
-	val ounce by lazy { BigDecimal.parseString("28.3495231") }
-	val pound by lazy { ounce * 16 }
-	val slug by lazy { BigDecimal.parseString("14.5939029") * kilo }
+	val ounce by lazy { "28.3495231".bn }
+	val pound by lazy { ounce * 16.bn }
+	val slug by lazy { "14.5939029".bn * kilo }
 
 	// Data
-	val bit by lazy { BigDecimal.ONE / BigDecimal.parseNumber(8) }
-	val kibi by lazy { BigDecimal.parseNumber(1024) }
+	val bit by lazy { BigNum.ONE / 8.bn }
+	val kibi by lazy { 1024.bn }
 	val mebi by lazy { kibi * kibi }
 	val gibi by lazy { mebi * kibi }
 	val tebi by lazy { gibi * kibi }

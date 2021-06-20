@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.data
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Transfer
 import com.kamilKurde.kalc.units.time.Time
+import com.soywiz.kbignum.BigNum
 
 class Data internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Data, DataUnits>(DataUnits.Bytes, DataUnits.values())
 {
 	var inYobibytes by UnitDelegate(DataUnits.Yobibytes)
@@ -49,15 +48,15 @@ class Data internal constructor(
 	operator fun div(time: Time) =
 		Transfer(inBytes / time.inSeconds)
 
-	override fun getInstance(value: BigDecimal): Data = Data(value)
+	override fun getInstance(value: BigNum): Data = Data(value)
 
 	constructor(
 		value: Number,
 		unit: DataUnits = DataUnits.Bits
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: DataUnits = DataUnits.Bits
 	): this(value * unit.multiplier)
 }

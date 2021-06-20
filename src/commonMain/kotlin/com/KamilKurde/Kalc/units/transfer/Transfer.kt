@@ -1,12 +1,11 @@
 package com.kamilKurde.kalc.units.distance
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
+import com.soywiz.kbignum.BigNum
 
 class Transfer internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Transfer, TransferUnits>(TransferUnits.BytesPerSecond, TransferUnits.values())
 {
 	val inJobibytesPerSecond by UnitDelegate(TransferUnits.JobibytesPerSecond)
@@ -145,15 +144,15 @@ class Transfer internal constructor(
 	val inBitsPerMinute by UnitDelegate(TransferUnits.BitsPerMinute)
 	val inBitsPerHour by UnitDelegate(TransferUnits.BitsPerHour)
 
-	override fun getInstance(value: BigDecimal): Transfer = Transfer(value)
+	override fun getInstance(value: BigNum): Transfer = Transfer(value)
 
 	constructor(
 		value: Number,
 		unit: TransferUnits = TransferUnits.BytesPerSecond
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: TransferUnits = TransferUnits.BytesPerSecond
 	): this(value * unit.multiplier)
 }

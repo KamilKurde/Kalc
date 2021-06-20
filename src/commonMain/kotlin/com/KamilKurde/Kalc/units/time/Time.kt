@@ -1,13 +1,12 @@
 package com.kamilKurde.kalc.units.time
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.speed.Speed
+import com.soywiz.kbignum.BigNum
 
 class Time internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Time, TimeUnits>(TimeUnits.Seconds, TimeUnits.values())
 {
 	var inHours by UnitDelegate(TimeUnits.Hours)
@@ -20,15 +19,15 @@ class Time internal constructor(
 	operator fun times(speed: Speed) =
 		speed * this
 
-	override fun getInstance(value: BigDecimal): Time = Time(value)
+	override fun getInstance(value: BigNum): Time = Time(value)
 
 	constructor(
 		value: Number,
 		unit: TimeUnits = TimeUnits.Seconds
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: TimeUnits = TimeUnits.Seconds
 	): this(value * unit.multiplier)
 }

@@ -1,26 +1,25 @@
 package com.kamilKurde.kalc.Kalc
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
-import com.ionspin.kotlin.bignum.decimal.toBigDecimal
-import com.kamilKurde.kalc.functions.parseNumber
+import com.kamilKurde.kalc.functions.unaryMinus
+import com.soywiz.kbignum.BigNum
+import com.soywiz.kbignum.bn
 
 @Suppress("UNCHECKED_CAST")
 abstract class KalcType<T, E>(private val defaultUnit: E, private val enums: Array<E>) where T: KalcType<T, E>, E: KalcEnum
 {
-	internal abstract var value: BigDecimal
+	internal abstract var value: BigNum
 
-	abstract fun getInstance(value: BigDecimal): T
+	abstract fun getInstance(value: BigNum): T
 
-	fun getInstance(value: BigDecimal, unit: E) = getInstance(value * unit.multiplier)
+	fun getInstance(value: BigNum, unit: E) = getInstance(value * unit.multiplier)
 
-	// It just throws an exception if you use value / unit.multiplier
-	fun asUnit(unit: E): BigDecimal = (value.toStringExpanded().toDouble() / unit.multiplier.toStringExpanded().toDouble()).toBigDecimal()
+	fun asUnit(unit: E): BigNum = value / unit.multiplier
 
 	operator fun compareTo(other: T) = value.compareTo(other.value)
 
-	val isPositive get() = this.value >= BigDecimal.ZERO
+	val isPositive get() = this.value >= BigNum.ZERO
 
-	fun defaultStep(): T = getInstance(BigDecimal.ONE)
+	fun defaultStep(): T = getInstance(BigNum.ONE)
 
 	operator fun rangeTo(other: T) =
 		KalcRange(this as T, other, true)
@@ -37,24 +36,20 @@ abstract class KalcType<T, E>(private val defaultUnit: E, private val enums: Arr
 
 	operator fun minus(other: T): T = getInstance(value - other.value)
 
-	operator fun times(number: Number): T = getInstance(value * BigDecimal.parseNumber(number))
+	operator fun times(number: Number): T = getInstance(value * number.toString().bn)
 
 	operator fun div(other: T) = value / other.value
 
-	operator fun div(number: Number): T = getInstance(value / BigDecimal.parseNumber(number))
-
-	operator fun rem(other: T): BigDecimal = value % other.value
-
-	operator fun rem(number: Number): T = getInstance(value % BigDecimal.parseNumber(number))
+	operator fun div(number: Number): T = getInstance(value / number.toString().bn)
 
 	operator fun get(asUnit: E) = asUnit(asUnit)
 
-	operator fun set(inUnit: E, value: BigDecimal)
+	operator fun set(inUnit: E, value: BigNum)
 	{
 		this.value = value * inUnit.multiplier
 	}
 
-	fun toString(inUnit: E) = "${asUnit(inUnit).toStringExpanded()} ${inUnit.name}"
+	fun toString(inUnit: E) = "${asUnit(inUnit)} ${inUnit.name}"
 
 	// Returns unit in which numeric part of toString() will be shortest possible
 	fun shortestUnit(): E
@@ -62,7 +57,7 @@ abstract class KalcType<T, E>(private val defaultUnit: E, private val enums: Arr
 		// First element of pair is enum value, second is the number of characters it needs to display readable text
 		val array = Array(enums.size)
 		{
-			enums[it] to asUnit(enums[it]).toStringExpanded().length
+			enums[it] to asUnit(enums[it]).toString().length
 		}
 		return array.minByOrNull { it.second }?.first ?: defaultUnit
 	}

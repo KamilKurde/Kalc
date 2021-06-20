@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.area
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.distance.Distance
 import com.kamilKurde.kalc.units.volume.Volume
+import com.soywiz.kbignum.BigNum
 
 class Area internal constructor(
-	override var value: BigDecimal,
+	override var value: BigNum,
 ): KalcType<Area, AreaUnits>(AreaUnits.Meters2, AreaUnits.values())
 {
 	var inKilometers2 by UnitDelegate(AreaUnits.Kilometers2)
@@ -22,15 +21,15 @@ class Area internal constructor(
 	operator fun times(distance: Distance) =
 		Volume(inMeters2 * distance.inMeters)
 
-	override fun getInstance(value: BigDecimal): Area = Area(value)
+	override fun getInstance(value: BigNum): Area = Area(value)
 
 	constructor(
 		value: Number,
 		unit: AreaUnits = AreaUnits.Meters2
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: AreaUnits = AreaUnits.Meters2
 	): this(value * unit.multiplier)
 }

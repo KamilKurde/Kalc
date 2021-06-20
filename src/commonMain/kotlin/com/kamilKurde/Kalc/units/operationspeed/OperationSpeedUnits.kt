@@ -1,10 +1,10 @@
 package com.kamilKurde.kalc.units.operationspeed
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.soywiz.kbignum.BigNum
 import com.kamilKurde.kalc.Kalc.KalcEnum
 import com.kamilKurde.kalc.Multipliers
 
-enum class OperationSpeedUnits(override val multiplier: BigDecimal): KalcEnum
+enum class OperationSpeedUnits(override val multiplier: BigNum): KalcEnum
 {
 	YOPH(Multipliers.yotta * Multipliers.hour),
 	ZOPH(Multipliers.zetta * Multipliers.hour),
@@ -14,7 +14,7 @@ enum class OperationSpeedUnits(override val multiplier: BigDecimal): KalcEnum
 	GOPH(Multipliers.giga * Multipliers.hour),
 	MOPH(Multipliers.mega * Multipliers.hour),
 	KOPH(Multipliers.kilo * Multipliers.hour),
-	OPH(BigDecimal.ONE * Multipliers.hour),
+	OPH(BigNum.ONE * Multipliers.hour),
 	YOPM(Multipliers.yotta * Multipliers.minute),
 	ZOPM(Multipliers.zetta * Multipliers.minute),
 	EOPM(Multipliers.exa * Multipliers.minute),
@@ -23,7 +23,7 @@ enum class OperationSpeedUnits(override val multiplier: BigDecimal): KalcEnum
 	GOPM(Multipliers.giga * Multipliers.minute),
 	MOPM(Multipliers.mega * Multipliers.minute),
 	KOPM(Multipliers.kilo * Multipliers.minute),
-	OPM(BigDecimal.ONE * Multipliers.minute),
+	OPM(BigNum.ONE * Multipliers.minute),
 	YOPS(Multipliers.yotta),
 	ZOPS(Multipliers.zetta),
 	EOPS(Multipliers.exa),
@@ -32,5 +32,5 @@ enum class OperationSpeedUnits(override val multiplier: BigDecimal): KalcEnum
 	GOPS(Multipliers.giga),
 	MOPS(Multipliers.mega),
 	KOPS(Multipliers.kilo),
-	OPS(BigDecimal.ONE),
+	OPS(BigNum.ONE),
 }

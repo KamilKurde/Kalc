@@ -1,14 +1,13 @@
 package com.kamilKurde.kalc.units.operations
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.kamilKurde.kalc.Kalc.KalcType
 import com.kamilKurde.kalc.Kalc.UnitDelegate
-import com.kamilKurde.kalc.functions.parseNumber
 import com.kamilKurde.kalc.units.operationspeed.OperationSpeed
 import com.kamilKurde.kalc.units.time.Time
+import com.soywiz.kbignum.BigNum
 
 class Operations internal constructor(
-	override var value: BigDecimal
+	override var value: BigNum
 ): KalcType<Operations, OperationsUnits>(OperationsUnits.Operations, OperationsUnits.values())
 {
 	var inYottaOperations by UnitDelegate(OperationsUnits.YottaOperations)
@@ -27,15 +26,15 @@ class Operations internal constructor(
 	operator fun div(operationSpeed: OperationSpeed) =
 		Time(inOperations / operationSpeed.inOPS)
 
-	override fun getInstance(value: BigDecimal): Operations = Operations(value)
+	override fun getInstance(value: BigNum): Operations = Operations(value)
 
 	constructor(
 		value: Number,
 		unit: OperationsUnits = OperationsUnits.Operations
-	): this(BigDecimal.parseNumber(value), unit)
+	): this(BigNum(value.toString()), unit)
 
 	constructor(
-		value: BigDecimal,
+		value: BigNum,
 		unit: OperationsUnits = OperationsUnits.Operations
 	): this(value * unit.multiplier)
 }
